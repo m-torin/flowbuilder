@@ -10,7 +10,6 @@ import {
   useMantineColorScheme,
   MantineColorScheme,
   useComputedColorScheme,
-  Anchor,
   UnstyledButton,
 } from '@mantine/core';
 import { useMediaQuery } from '@mantine/hooks';
@@ -209,9 +208,9 @@ export const AppHeaderUserMenu: React.FC = () => {
     >
       <Menu.Target>
         <UserButton
-          image="https://revealgc.com/wp-content/uploads/2019/04/Dr.-Naveen-Kapoor.jpg"
-          name="Dr. Naveen Kapoor"
-          email="Role: Project Leader"
+          image="https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-5.png"
+          name="Sydney Bristow"
+          email="Role: Analyst"
           animate={animate}
         />
       </Menu.Target>
