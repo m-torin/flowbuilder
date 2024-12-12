@@ -1,0 +1,28 @@
+{
+  "name": "flowbuilder",
+  "private": true,
+  "license": "MIT",
+  "scripts": {
+    "dev": "pnpm dev:flows",
+    "dev:flows": "pnpm run --filter @flowbuilder/flows dev",
+    "build": "turbo run build",
+    "clean": "turbo run clean",
+    "dev:turbo": "turbo run dev",
+    "lint": "pnpm lint:prettier",
+    "lint:prettier": "pnpm --filter @flowbuilder/prettier-config format",
+    "start": "turbo run start",
+    "test": "turbo run test",
+    "typecheck": "turbo run typecheck"
+  },
+  "dependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "devDependencies": {
+    "@flowbuilder/prettier-config": "workspace:*",
+    "turbo": "^2.3.0"
+  },
+  "packageManager": "pnpm@9.15.0",
+  "engines": {
+    "node": ">=20"
+  }
+}

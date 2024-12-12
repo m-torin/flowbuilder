@@ -1,0 +1,10 @@
+{
+  "name": "@flowbuilder/typescript-config",
+  "private": true,
+  "devDependencies": {
+    "@vercel/style-guide": "^6.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

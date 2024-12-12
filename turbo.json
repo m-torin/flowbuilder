@@ -1,0 +1,46 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "globalDependencies": ["**/.env.*local"],
+  "globalEnv": [
+    "PORT",
+    "DOPPLER_CONFIG",
+    "DOPPLER_ENVIRONMENT",
+    "DOPPLER_PROJECT",
+    "PRISMA_DB_URL",
+    "NEXTAUTH_URL",
+    "AUTH_SECRET"
+  ],
+  "tasks": {
+    "build": {
+      "dependsOn": ["^build"]
+    },
+    "test": {
+      "outputs": ["coverage/**"],
+      "dependsOn": []
+    },
+    "lint": {
+      "dependsOn": ["^build"]
+    },
+    "typecheck": {
+      "dependsOn": ["^build"]
+    },
+    "dev": {
+      "dependsOn": ["^build"],
+      "cache": false,
+      "persistent": true
+    },
+    "dev:flows": {
+      "dependsOn": ["build"],
+      "cache": false,
+      "persistent": true
+    },
+    "dev:cms": {
+      "dependsOn": ["build"],
+      "cache": false,
+      "persistent": true
+    },
+    "clean": {
+      "cache": false
+    }
+  }
+}

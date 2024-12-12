@@ -1,0 +1,14 @@
+{
+  "name": "@flowbuilder/prettier-config",
+  "private": true,
+  "type": "module",
+  "main": "index.mjs",
+  "scripts": {
+    "format": "prettier --write \"../../**/*.{ts,tsx,json,md,js,jsx,css,scss,html,yaml,yml,graphql,gql}\" "
+  },
+  "devDependencies": {
+    "@vercel/style-guide": "^6.0.0",
+    "prettier": "^3.3.3",
+    "prettier-plugin-packagejson": "^2.5.3"
+  }
+}

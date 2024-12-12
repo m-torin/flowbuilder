@@ -1,0 +1,80 @@
+{
+  "packageRules": [
+    {
+      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
+      "groupName": "All Non-Major Updates",
+      "excludePackageNames": [
+        "mantine-*",
+        "@mantine/*",
+        "*zod*",
+        "react",
+        "react-dom",
+        "@types/react",
+        "@types/react-dom",
+        "next",
+        "@types/next",
+        "next-auth",
+        "@types/next-auth"
+      ],
+      "automerge": true,
+      "automergeType": "squash",
+      "prPriority": 10
+    },
+    {
+      "description": "Group Mantine and Zod-related updates",
+      "matchPackageNames": ["mantine-*", "@mantine/*", "*zod*"],
+      "groupName": "Mantine and Zod ecosystem",
+      "prPriority": 8
+    },
+    {
+      "description": "Group React-related updates",
+      "matchPackageNames": [
+        "react",
+        "react-dom",
+        "@types/react",
+        "@types/react-dom"
+      ],
+      "groupName": "React ecosystem",
+      "prPriority": 6
+    },
+    {
+      "description": "Group Next.js updates",
+      "matchPackageNames": [
+        "next",
+        "@types/next",
+        "next-auth",
+        "@types/next-auth"
+      ],
+      "groupName": "Next.js ecosystem",
+      "prPriority": 5
+    },
+    {
+      "description": "Major updates require approval from the dashboard",
+      "matchUpdateTypes": ["major"],
+      "dependencyDashboardApproval": true,
+      "prPriority": 4
+    },
+    {
+      "matchManagers": ["dockerfile"],
+      "groupName": "Dockerfile Image Updates",
+      "automerge": true,
+      "automergeType": "squash",
+      "prPriority": 2
+    },
+    {
+      "matchManagers": ["docker-compose"],
+      "groupName": "Docker Compose Image Updates",
+      "automerge": true,
+      "automergeType": "squash",
+      "prPriority": 1
+    },
+    {
+      "matchPackageNames": ["sass"],
+      "enabled": false
+    },
+    {
+      "matchManagers": ["npm"],
+      "postUpdateOptions": ["pnpmDedupe"]
+    }
+  ]
+}
