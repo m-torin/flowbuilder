@@ -1,0 +1,14 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "extends": ["//"],
+  "tasks": {
+    "build": {
+      "outputs": [".next/**", "!.next/cache/**"],
+      "env": ["NEXT_PUBLIC_*", "PRISMA_DB_URL", "NEXTAUTH_URL", "AUTH_SECRET"]
+    },
+    "dev": {
+      "cache": false,
+      "persistent": true
+    }
+  }
+}

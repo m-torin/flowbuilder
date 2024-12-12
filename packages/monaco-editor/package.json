@@ -1,0 +1,59 @@
+{
+  "name": "@flowbuilder/monaco-editor",
+  "private": true,
+  "sideEffects": [
+    "src/core/MonacoEditor.tsx"
+  ],
+  "main": "./dist/index.mjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.mts",
+      "default": "./dist/index.mjs"
+    }
+  },
+  "files": [
+    "dist/**"
+  ],
+  "scripts": {
+    "build": "tsup src/index.ts --format esm --dts --external react",
+    "dev": "tsup src/index.ts --format esm --watch --dts --external react",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf dist",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
+  },
+  "peerDependencies": {
+    "@mantine/core": "^7.0.0",
+    "@mantine/hooks": "^7.0.0",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
+  },
+  "dependencies": {
+    "monaco-editor": "^0.52.0",
+    "sql-formatter": "^15.0.0"
+  },
+  "devDependencies": {
+    "@flowbuilder/typescript-config": "workspace:*",
+    "@storybook/addon-essentials": "^8.4.4",
+    "@storybook/addon-interactions": "^8.4.4",
+    "@storybook/addon-links": "^8.4.4",
+    "@storybook/blocks": "^8.4.4",
+    "@storybook/react": "^8.4.4",
+    "@storybook/react-vite": "^8.4.4",
+    "@storybook/test": "^8.4.4",
+    "@types/node": "^20.17.6",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "storybook": "^8.4.4",
+    "storybook-addon-mantine": "^4.0.2",
+    "storybook-dark-mode": "^4.0.2",
+    "typescript": "^5.6.3",
+    "tsup": "^8.3.5",
+    "typescript-plugin-css-modules": "^5.1.0"
+  },
+  "publishConfig": {
+    "access": "restricted"
+  }
+}
