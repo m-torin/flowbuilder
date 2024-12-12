@@ -57,6 +57,9 @@ importers:
       sql-formatter:
         specifier: ^15.0.0
         version: 15.4.6
+      tsup:
+        specifier: ^8.3.5
+        version: 8.3.5(jiti@2.4.1)(postcss@8.4.49)(typescript@5.7.2)(yaml@2.6.1)
     devDependencies:
       '@flowbuilder/typescript-config':
         specifier: workspace:*
@@ -100,9 +103,6 @@ importers:
       storybook-dark-mode:
         specifier: ^4.0.2
         version: 4.0.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.4.7(prettier@3.4.2))
-      tsup:
-        specifier: ^8.3.5
-        version: 8.3.5(jiti@2.4.1)(postcss@8.4.49)(typescript@5.7.2)(yaml@2.6.1)
       typescript:
         specifier: ^5.6.3
         version: 5.7.2
