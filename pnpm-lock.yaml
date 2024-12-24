@@ -96,7 +96,7 @@ importers:
         version: 8.4.7(prettier@3.4.2)
       storybook-addon-mantine:
         specifier: ^4.0.2
-        version: 4.0.2(@mantine/core@7.14.3(@mantine/hooks@7.14.3(react@18.3.1))(@types/react@18.3.16)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@mantine/hooks@7.14.3(react@18.3.1))(@storybook/blocks@8.4.7(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.4.7(prettier@3.4.2)))(@storybook/components@8.4.7(storybook@8.4.7(prettier@3.4.2)))(@storybook/core-events@8.4.7(storybook@8.4.7(prettier@3.4.2)))(@storybook/manager-api@8.4.7(storybook@8.4.7(prettier@3.4.2)))(@storybook/preview-api@8.4.7(storybook@8.4.7(prettier@3.4.2)))(@storybook/theming@8.4.7(storybook@8.4.7(prettier@3.4.2)))(@storybook/types@8.4.7(storybook@8.4.7(prettier@3.4.2)))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        version: 4.1.0(@mantine/core@7.14.3(@mantine/hooks@7.14.3(react@18.3.1))(@types/react@18.3.16)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@mantine/hooks@7.14.3(react@18.3.1))(@storybook/blocks@8.4.7(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.4.7(prettier@3.4.2)))(@storybook/components@8.4.7(storybook@8.4.7(prettier@3.4.2)))(@storybook/core-events@8.4.7(storybook@8.4.7(prettier@3.4.2)))(@storybook/manager-api@8.4.7(storybook@8.4.7(prettier@3.4.2)))(@storybook/preview-api@8.4.7(storybook@8.4.7(prettier@3.4.2)))(@storybook/theming@8.4.7(storybook@8.4.7(prettier@3.4.2)))(@storybook/types@8.4.7(storybook@8.4.7(prettier@3.4.2)))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       storybook-dark-mode:
         specifier: ^4.0.2
         version: 4.0.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.4.7(prettier@3.4.2))
@@ -5668,8 +5668,8 @@ packages:
   std-env@3.8.0:
     resolution: {integrity: sha512-Bc3YwwCB+OzldMxOXJIIvC6cPRWr/LxOp48CdQTOkPyk/t4JWWJbrilwBd7RJzKV8QW7tJkcgAmeuLLJugl5/w==}
 
-  storybook-addon-mantine@4.0.2:
-    resolution: {integrity: sha512-nOxaIDTuZ0+Fh3vgsn3JRyCW/uCYBe9m0JxIQyXjMCa0ecl8op6wWdewAQ6IoeMSw33l/gZWHL0BLyTuqqX+kg==}
+  storybook-addon-mantine@4.1.0:
+    resolution: {integrity: sha512-iEgDQLxyOK+UFrdzcPtcWUsuSCga/dqHIXf0iaGmKfva5DCcpGNhYASd0bqwPk28D0lnVQPs3ksUlFXOUUTQ7g==}
     peerDependencies:
       '@mantine/core': ^7.0.0
       '@mantine/hooks': ^7.0.0
@@ -5680,8 +5680,8 @@ packages:
       '@storybook/preview-api': ^8.0.0
       '@storybook/theming': ^8.0.0
       '@storybook/types': ^8.0.0
-      react: ^18.0.0
-      react-dom: ^18.0.0
+      react: ^19.0.0
+      react-dom: ^19.0.0
 
   storybook-dark-mode@4.0.2:
     resolution: {integrity: sha512-zjcwwQ01R5t1VsakA6alc2JDIRVtavryW8J3E3eKLDIlAMcvsgtpxlelWkZs2cuNspk6Z10XzhQVrUWtYc3F0w==}
@@ -13071,7 +13071,7 @@ snapshots:
 
   std-env@3.8.0: {}
 
-  storybook-addon-mantine@4.0.2(@mantine/core@7.14.3(@mantine/hooks@7.14.3(react@18.3.1))(@types/react@18.3.16)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@mantine/hooks@7.14.3(react@18.3.1))(@storybook/blocks@8.4.7(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.4.7(prettier@3.4.2)))(@storybook/components@8.4.7(storybook@8.4.7(prettier@3.4.2)))(@storybook/core-events@8.4.7(storybook@8.4.7(prettier@3.4.2)))(@storybook/manager-api@8.4.7(storybook@8.4.7(prettier@3.4.2)))(@storybook/preview-api@8.4.7(storybook@8.4.7(prettier@3.4.2)))(@storybook/theming@8.4.7(storybook@8.4.7(prettier@3.4.2)))(@storybook/types@8.4.7(storybook@8.4.7(prettier@3.4.2)))(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+  storybook-addon-mantine@4.1.0(@mantine/core@7.14.3(@mantine/hooks@7.14.3(react@18.3.1))(@types/react@18.3.16)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@mantine/hooks@7.14.3(react@18.3.1))(@storybook/blocks@8.4.7(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.4.7(prettier@3.4.2)))(@storybook/components@8.4.7(storybook@8.4.7(prettier@3.4.2)))(@storybook/core-events@8.4.7(storybook@8.4.7(prettier@3.4.2)))(@storybook/manager-api@8.4.7(storybook@8.4.7(prettier@3.4.2)))(@storybook/preview-api@8.4.7(storybook@8.4.7(prettier@3.4.2)))(@storybook/theming@8.4.7(storybook@8.4.7(prettier@3.4.2)))(@storybook/types@8.4.7(storybook@8.4.7(prettier@3.4.2)))(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
       '@mantine/core': 7.14.3(@mantine/hooks@7.14.3(react@18.3.1))(@types/react@18.3.16)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@mantine/hooks': 7.14.3(react@18.3.1)
