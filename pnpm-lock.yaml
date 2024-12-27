@@ -117,7 +117,7 @@ importers:
         version: 2.7.4(@prisma/client@5.22.0(prisma@5.22.0))(@simplewebauthn/server@11.0.0)
       '@auth/unstorage-adapter':
         specifier: ^2.7.4
-        version: 2.7.4(@simplewebauthn/server@11.0.0)(unstorage@1.14.2(@upstash/redis@1.34.3)(@vercel/kv@3.0.0))
+        version: 2.7.4(@simplewebauthn/server@11.0.0)(unstorage@1.14.4(@upstash/redis@1.34.3)(@vercel/kv@3.0.0))
       '@aws-sdk/client-api-gateway':
         specifier: ^3.709.0
         version: 3.716.0
@@ -309,7 +309,7 @@ importers:
         version: 1.0.7(tailwindcss@3.4.17)
       unstorage:
         specifier: ^1.13.1
-        version: 1.14.2(@upstash/redis@1.34.3)(@vercel/kv@3.0.0)
+        version: 1.14.4(@upstash/redis@1.34.3)(@vercel/kv@3.0.0)
       zod:
         specifier: ^3.23.8
         version: 3.24.1
@@ -3342,8 +3342,8 @@ packages:
     resolution: {integrity: sha512-D4xsUjSoE8m/B5yMOvCIHY+2ME6FIZhCq0NzBBT57Q8BuL7ArFhBK04osOfReoW4KFr5ztzFwWRdmnv9rCvu2w==}
     engines: {node: '>=14'}
 
-  consola@3.3.2:
-    resolution: {integrity: sha512-X3dcWPU+QeEaPrdtX3zBRQ0P0kIeEnmJV49uNtpy4N/TPnzA3grJvHftKjHuFIQNLrqBPzzykmc3fNrkQDl5yA==}
+  consola@3.3.3:
+    resolution: {integrity: sha512-Qil5KwghMzlqd51UXM0b6fyaGHtOC22scxrwrz4A2882LyUMwQjnvaedN1HAeXzphspQ6CpHkzMAWxBTUruDLg==}
     engines: {node: ^14.18.0 || >=16.10.0}
 
   convert-source-map@2.0.0:
@@ -3634,8 +3634,8 @@ packages:
     resolution: {integrity: sha512-tpxqxncxnpw3c93u8n3VOzACmRFoVmWJqbWXvX/JfKbkhBw1oslgPrUfeSt2psuqyEJFD6N/9lg5i7bsKpoq+Q==}
     engines: {node: '>= 0.4'}
 
-  es-module-lexer@1.5.4:
-    resolution: {integrity: sha512-MVNK56NiMrOwitFB7cqDwq0CQutbw+0BvLshJSse0MUNU+y1FC3bUS/AQg7oUng+/wKrrki7JfmwtVHkVfPLlw==}
+  es-module-lexer@1.6.0:
+    resolution: {integrity: sha512-qqnD1yMU6tk/jnaMosogGySTZP8YtUgAffA9nMN+E/rjxcfRQ6IEk7IiozUjgxKoFHBGjTLnrHB/YC45r/59EQ==}
 
   es-object-atoms@1.0.0:
     resolution: {integrity: sha512-MZ4iQ6JwHOBQjahnjwaC1ZtIBH+2ohjamzAO3oaHcXYup7qxjF2fixyH+Q71voWHeOkI2q/TnJao/KfXYIZWbw==}
@@ -5958,8 +5958,8 @@ packages:
     resolution: {integrity: sha512-5liCNPuJW8dqh3+DM6uNM2EI3MLLpCKp/KY+9pB5M2S2SR2qvvDHhKgBOaTWEbZTAws3CXfB0rKTIolWKL05VQ==}
     engines: {node: '>=14.0.0'}
 
-  unstorage@1.14.2:
-    resolution: {integrity: sha512-hVSuOOFmB4734AqdTop5/96KJ+oLI0flwjxuq6GAdNDxgfoh3nj3pLIgMMzKIv1oKhWzy2eOrsjYxsuEbpJIPA==}
+  unstorage@1.14.4:
+    resolution: {integrity: sha512-1SYeamwuYeQJtJ/USE1x4l17LkmQBzg7deBJ+U9qOBoHo15d1cDxG4jM31zKRgF7pG0kirZy4wVMX6WL6Zoscg==}
     peerDependencies:
       '@azure/app-configuration': ^1.8.0
       '@azure/cosmos': ^4.2.0
@@ -6332,10 +6332,10 @@ snapshots:
       - '@simplewebauthn/server'
       - nodemailer
 
-  '@auth/unstorage-adapter@2.7.4(@simplewebauthn/server@11.0.0)(unstorage@1.14.2(@upstash/redis@1.34.3)(@vercel/kv@3.0.0))':
+  '@auth/unstorage-adapter@2.7.4(@simplewebauthn/server@11.0.0)(unstorage@1.14.4(@upstash/redis@1.34.3)(@vercel/kv@3.0.0))':
     dependencies:
       '@auth/core': 0.37.4(@simplewebauthn/server@11.0.0)
-      unstorage: 1.14.2(@upstash/redis@1.34.3)(@vercel/kv@3.0.0)
+      unstorage: 1.14.4(@upstash/redis@1.34.3)(@vercel/kv@3.0.0)
     transitivePeerDependencies:
       - '@simplewebauthn/browser'
       - '@simplewebauthn/server'
@@ -10524,7 +10524,7 @@ snapshots:
 
   connection-string@4.4.0: {}
 
-  consola@3.3.2: {}
+  consola@3.3.3: {}
 
   convert-source-map@2.0.0: {}
 
@@ -10842,7 +10842,7 @@ snapshots:
       iterator.prototype: 1.1.4
       safe-array-concat: 1.1.3
 
-  es-module-lexer@1.5.4: {}
+  es-module-lexer@1.6.0: {}
 
   es-object-atoms@1.0.0:
     dependencies:
@@ -13153,7 +13153,7 @@ snapshots:
       bundle-require: 5.0.0(esbuild@0.24.2)
       cac: 6.7.14
       chokidar: 4.0.1
-      consola: 3.3.2
+      consola: 3.3.3
       debug: 4.4.0
       esbuild: 0.24.2
       joycon: 3.1.1
@@ -13298,7 +13298,7 @@ snapshots:
 
   unenv@1.10.0:
     dependencies:
-      consola: 3.3.2
+      consola: 3.3.3
       defu: 6.1.4
       mime: 3.0.0
       node-fetch-native: 1.6.4
@@ -13316,7 +13316,7 @@ snapshots:
       acorn: 8.14.0
       webpack-virtual-modules: 0.6.2
 
-  unstorage@1.14.2(@upstash/redis@1.34.3)(@vercel/kv@3.0.0):
+  unstorage@1.14.4(@upstash/redis@1.34.3)(@vercel/kv@3.0.0):
     dependencies:
       anymatch: 3.1.3
       chokidar: 3.6.0
@@ -13460,7 +13460,7 @@ snapshots:
       browserslist: 4.24.3
       chrome-trace-event: 1.0.4
       enhanced-resolve: 5.18.0
-      es-module-lexer: 1.5.4
+      es-module-lexer: 1.6.0
       eslint-scope: 5.1.1
       events: 3.3.0
       glob-to-regexp: 0.4.1
