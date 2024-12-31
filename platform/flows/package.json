@@ -86,7 +86,7 @@
     "mantine-datatable": "^7.12.4",
     "mantine-form-zod-resolver": "^1.1.0",
     "nanoid": "^5.0.8",
-    "next": "15.1.0",
+    "next": "15.1.3",
     "next-auth": "5.0.0-beta.25",
     "p-limit": "^6.1.0",
     "react": "^18.3.1",
