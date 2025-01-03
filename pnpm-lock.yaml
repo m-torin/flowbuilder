@@ -141,7 +141,7 @@ importers:
         version: 3.721.0
       '@aws-sdk/client-s3':
         specifier: ^3.709.0
-        version: 3.721.0
+        version: 3.722.0
       '@aws-sdk/client-ses':
         specifier: ^3.709.0
         version: 3.721.0
@@ -466,8 +466,8 @@ packages:
     resolution: {integrity: sha512-gvWyPa8WAuaAM2n0ID918yckl+NNLZ0Czuxup88/zFILlmOe26lqUyJkTlQS952ZksVqWaAOg9HqVxpZr2tRKA==}
     engines: {node: '>=16.0.0'}
 
-  '@aws-sdk/client-s3@3.721.0':
-    resolution: {integrity: sha512-uCZC8elYhUFF21yq1yB5TrE/VYz8A4/VnttUHc65/jqnHReTDvEC0XAc756tJnjfrReyM1ws12FzBLHoW/NDjg==}
+  '@aws-sdk/client-s3@3.722.0':
+    resolution: {integrity: sha512-FttdkB39TKjqEITfZJcs6Ihh6alICsNEne0ouLvh8re+gAuTK96zWcfX22mP5ap1QEsATaOGRNsMnyfsDSM0zw==}
     engines: {node: '>=16.0.0'}
 
   '@aws-sdk/client-ses@3.721.0':
@@ -3875,8 +3875,8 @@ packages:
   fast-deep-equal@3.1.3:
     resolution: {integrity: sha512-f3qQ9oQy9j2AhBe/H9VC91wLmKBCCU/gDOnKNAYG5hswO7BLKj09Hc5HYNz9cGI++xlpDCIgDaitVs03ATR84Q==}
 
-  fast-equals@5.0.1:
-    resolution: {integrity: sha512-WF1Wi8PwwSY7/6Kx0vKXtw8RwuSGoM1bvDaJbu7MxDlR1vovZjIAKrnzyrThgAjm6JDTu0fVgWXDlMGspodfoQ==}
+  fast-equals@5.1.2:
+    resolution: {integrity: sha512-PYfM+Owz8Trdw7HOEJbht7O00mdT4TzGdBBioMihoiqFnh2bZpJI19yvMdx78YySYl61qCibgD/LN6lyhLV93A==}
     engines: {node: '>=6.0.0'}
 
   fast-glob@3.3.2:
@@ -6774,7 +6774,7 @@ snapshots:
     transitivePeerDependencies:
       - aws-crt
 
-  '@aws-sdk/client-s3@3.721.0':
+  '@aws-sdk/client-s3@3.722.0':
     dependencies:
       '@aws-crypto/sha1-browser': 5.2.0
       '@aws-crypto/sha256-browser': 5.2.0
@@ -11181,7 +11181,7 @@ snapshots:
 
   fast-deep-equal@3.1.3: {}
 
-  fast-equals@5.0.1: {}
+  fast-equals@5.1.2: {}
 
   fast-glob@3.3.2:
     dependencies:
@@ -12427,7 +12427,7 @@ snapshots:
 
   react-smooth@4.0.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
-      fast-equals: 5.0.1
+      fast-equals: 5.1.2
       prop-types: 15.8.1
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
