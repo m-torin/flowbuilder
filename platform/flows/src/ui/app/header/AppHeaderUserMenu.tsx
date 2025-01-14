@@ -209,8 +209,8 @@ export const AppHeaderUserMenu: React.FC = () => {
     >
       <Menu.Target>
         <UserButton
-          image="https://revealgc.com/wp-content/uploads/2019/04/Dr.-Naveen-Kapoor.jpg"
-          name="Dr. Naveen Kapoor"
+          image="https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-8.png"
+          name="Sydney Bristow"
           email="Role: Project Leader"
           animate={animate}
         />
