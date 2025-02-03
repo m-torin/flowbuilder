@@ -21,7 +21,7 @@
     "@flowbuilder/prettier-config": "workspace:*",
     "turbo": "^2.3.0"
   },
-  "packageManager": "pnpm@9.15.4",
+  "packageManager": "pnpm@9.15.5",
   "engines": {
     "node": ">=20"
   }
