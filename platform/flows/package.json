@@ -82,7 +82,7 @@
     "dayjs": "^1.11.13",
     "framer-motion": "^11.11.17",
     "lru-cache": "^11.0.2",
-    "lucide-react": "^0.475.0",
+    "lucide-react": "^0.476.0",
     "mantine-datatable": "^7.12.4",
     "mantine-form-zod-resolver": "^1.1.0",
     "nanoid": "^5.0.8",
