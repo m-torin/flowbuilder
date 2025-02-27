@@ -126,7 +126,7 @@ importers:
         version: 3.750.0
       '@aws-sdk/client-ec2':
         specifier: ^3.709.0
-        version: 3.756.0
+        version: 3.757.0
       '@aws-sdk/client-eventbridge':
         specifier: ^3.709.0
         version: 3.750.0
@@ -446,8 +446,8 @@ packages:
     resolution: {integrity: sha512-ia5+l7U1ludU/YqQAnEMj5DIp1kfMTu14lUOMG3uTIwTcj8OjkCvAe6BuM0OY6zd8enrJYWLqIqxuKPOWw4I7Q==}
     engines: {node: '>=18.0.0'}
 
-  '@aws-sdk/client-ec2@3.756.0':
-    resolution: {integrity: sha512-xdq2bF9W/NzGMDxLOuV3EERpRPc18EHwBebIl8ILx1WKdxChciQ+qL/sKoyeMBRmNbKiTT5seEYapcOp1tk6LQ==}
+  '@aws-sdk/client-ec2@3.757.0':
+    resolution: {integrity: sha512-mF7a2MsLSabS/PPIn+mica0OUWOrPFTMs3pvuzJRePs9CVm+bG117zYVEJ470PoHyimPw6ei6YPlqkpD1WIeYg==}
     engines: {node: '>=18.0.0'}
 
   '@aws-sdk/client-eventbridge@3.750.0':
@@ -6668,7 +6668,7 @@ snapshots:
     transitivePeerDependencies:
       - aws-crt
 
-  '@aws-sdk/client-ec2@3.756.0':
+  '@aws-sdk/client-ec2@3.757.0':
     dependencies:
       '@aws-crypto/sha256-browser': 5.2.0
       '@aws-crypto/sha256-js': 5.2.0
