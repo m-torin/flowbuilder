@@ -126,7 +126,7 @@ importers:
         version: 3.767.0
       '@aws-sdk/client-ec2':
         specifier: ^3.709.0
-        version: 3.767.0
+        version: 3.771.0
       '@aws-sdk/client-eventbridge':
         specifier: ^3.709.0
         version: 3.758.0
@@ -138,7 +138,7 @@ importers:
         version: 3.758.0
       '@aws-sdk/client-lambda':
         specifier: ^3.709.0
-        version: 3.758.0
+        version: 3.771.0
       '@aws-sdk/client-s3':
         specifier: ^3.709.0
         version: 3.758.0
@@ -446,8 +446,8 @@ packages:
     resolution: {integrity: sha512-h/WOvKhuXVIhNKjDcsF6oY2oJuBusspnmEaX20h+GUzIrNMlf6qkJrWziT58KzzESyzeYZcGNWjcOfbVRpH6NA==}
     engines: {node: '>=18.0.0'}
 
-  '@aws-sdk/client-ec2@3.767.0':
-    resolution: {integrity: sha512-874fUnFX12OGovoqtgUxmbp8V1LvM5fmgGwkR4oz8Ot9znHHkk0z9Jj6gn2iQkHzAhia48G7Liixx7tb8+IBjQ==}
+  '@aws-sdk/client-ec2@3.771.0':
+    resolution: {integrity: sha512-bpPSKruvsGI9NfLsoFewYUx2LrUjk9uIdmjc/Zc7yhG6CL5Nj/wV8/sCEULbPIEiea/BZFF91VeafW6o8KDN6w==}
     engines: {node: '>=18.0.0'}
 
   '@aws-sdk/client-eventbridge@3.758.0':
@@ -462,8 +462,8 @@ packages:
     resolution: {integrity: sha512-g/zDAZ3hqmJFLq3IFSTY9ZvT/9RcHssy3j8TWGu2YQN1LH9oZ5/GW3HDne89TS9GL4GwnYb+oWPkQiGzNGDM2A==}
     engines: {node: '>=18.0.0'}
 
-  '@aws-sdk/client-lambda@3.758.0':
-    resolution: {integrity: sha512-k7L9fe0NN1v2Vhg4ofA1pb26gTdGVFdkA6XUQyElLEdcKzJzoYiQ60faNLuMPfH0zsKNvy/xKfNOD6DFZWjgEg==}
+  '@aws-sdk/client-lambda@3.771.0':
+    resolution: {integrity: sha512-0/4IGf4Nbc9Dfo6/9P0Qq7O5B1L7DGsfUg6Yl963GTOaM8wwYc8WzZy7F3EqMYIrGPz0M12IdYL9bU0hThnZvA==}
     engines: {node: '>=18.0.0'}
 
   '@aws-sdk/client-s3@3.758.0':
@@ -6671,7 +6671,7 @@ snapshots:
     transitivePeerDependencies:
       - aws-crt
 
-  '@aws-sdk/client-ec2@3.767.0':
+  '@aws-sdk/client-ec2@3.771.0':
     dependencies:
       '@aws-crypto/sha256-browser': 5.2.0
       '@aws-crypto/sha256-js': 5.2.0
@@ -6853,7 +6853,7 @@ snapshots:
     transitivePeerDependencies:
       - aws-crt
 
-  '@aws-sdk/client-lambda@3.758.0':
+  '@aws-sdk/client-lambda@3.771.0':
     dependencies:
       '@aws-crypto/sha256-browser': 5.2.0
       '@aws-crypto/sha256-js': 5.2.0
