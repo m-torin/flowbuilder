@@ -56,7 +56,7 @@ importers:
         version: 18.3.1(react@18.3.1)
       sql-formatter:
         specifier: ^15.0.0
-        version: 15.4.11
+        version: 15.5.1
     devDependencies:
       '@flowbuilder/typescript-config':
         specifier: workspace:*
@@ -300,7 +300,7 @@ importers:
         version: 3.2.20
       sql-formatter:
         specifier: ^15.4.6
-        version: 15.4.11
+        version: 15.5.1
       tailwind-merge:
         specifier: ^2.5.4
         version: 2.6.0
@@ -4156,10 +4156,6 @@ packages:
     resolution: {integrity: sha512-sTSfBjoXBp89JvIKIefqw7U2CCebsc74kiY6awiGogKtoSGbgjYE/G/+l9sF3MWFPNc9IcoOC4ODfKHfxFmp0g==}
     engines: {node: '>= 0.4'}
 
-  get-stdin@8.0.0:
-    resolution: {integrity: sha512-sY22aA6xchAzprjyqmSEQv4UbAAzRN0L2dQB0NlN5acTTK9Don6nhoc3eAbUnpZiCANAMfd/+40kVdKfFygohg==}
-    engines: {node: '>=10'}
-
   get-stdin@9.0.0:
     resolution: {integrity: sha512-dVKBjfWisLAicarI2Sf+JuBE/DghV4UzNAVe9yhEJuzeREd3JhOTE9cUaJTeSa77fsbQUK3pcOpJfM59+VKZaA==}
     engines: {node: '>=12'}
@@ -5723,8 +5719,8 @@ packages:
   spdx-license-ids@3.0.20:
     resolution: {integrity: sha512-jg25NiDV/1fLtSgEgyvVyDunvaNHbuwF9lfNV17gSmPFAlYzdfNBlLtLzXTevwkPj7DhGbmN9VnmJIgLnhvaBw==}
 
-  sql-formatter@15.4.11:
-    resolution: {integrity: sha512-AfIjH0mYxv0NVzs4mbcGIAcos2Si20LeF9GMk0VmVA4A3gs1PFIixVu3rtcz34ls7ghPAjrDb+XbRly/aF6HAg==}
+  sql-formatter@15.5.1:
+    resolution: {integrity: sha512-H3XfFRpK8LybkU2mD2Vj3AF35YcfviwUuy3yl98Xp7DTneJJVB40L654DpHYIRctASNIQPoLo7+yCboOfkOpWA==}
     hasBin: true
 
   stable-hash@0.0.4:
@@ -11471,8 +11467,6 @@ snapshots:
       dunder-proto: 1.0.1
       es-object-atoms: 1.1.1
 
-  get-stdin@8.0.0: {}
-
   get-stdin@9.0.0: {}
 
   get-stream@5.2.0:
@@ -13033,10 +13027,9 @@ snapshots:
 
   spdx-license-ids@3.0.20: {}
 
-  sql-formatter@15.4.11:
+  sql-formatter@15.5.1:
     dependencies:
       argparse: 2.0.1
-      get-stdin: 8.0.0
       nearley: 2.20.1
 
   stable-hash@0.0.4: {}
