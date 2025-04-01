@@ -325,7 +325,7 @@ importers:
         version: 7.10.10
       '@types/node':
         specifier: ^22.9.0
-        version: 22.13.14
+        version: 22.13.16
       '@types/react':
         specifier: ^18.3.12
         version: 18.3.18
@@ -2850,8 +2850,8 @@ packages:
   '@types/node@20.17.28':
     resolution: {integrity: sha512-DHlH/fNL6Mho38jTy7/JT7sn2wnXI+wULR6PV4gy4VHLVvnrV/d3pHAMQHhc4gjdLmK2ZiPoMxzp6B3yRajLSQ==}
 
-  '@types/node@22.13.14':
-    resolution: {integrity: sha512-Zs/Ollc1SJ8nKUAgc7ivOEdIBM8JAKgrqqUYi2J997JuKO7/tpQC+WCetQ1sypiKCQWHdvdg9wBNpUPEWZae7w==}
+  '@types/node@22.13.16':
+    resolution: {integrity: sha512-15tM+qA4Ypml/N7kyRdvfRjBQT2RL461uF1Bldn06K0Nzn1lY3nAPgHlsVrJxdZ9WhZiW0Fmc1lOYMtDsAuB3w==}
 
   '@types/normalize-package-data@2.4.4':
     resolution: {integrity: sha512-37i+OaWTh9qeK4LSHPsyRC7NahnGotNuZvjLSgcPzblpHB3rrCJxAOgI5gCdKm7coonsaX1Of0ILiTcnZjbfxA==}
@@ -9829,12 +9829,12 @@ snapshots:
     dependencies:
       '@types/http-cache-semantics': 4.0.4
       '@types/keyv': 3.1.4
-      '@types/node': 22.13.14
+      '@types/node': 22.13.16
       '@types/responselike': 1.0.3
 
   '@types/connect@3.4.36':
     dependencies:
-      '@types/node': 22.13.14
+      '@types/node': 22.13.16
 
   '@types/cookie@0.6.0': {}
 
@@ -9904,7 +9904,7 @@ snapshots:
 
   '@types/keyv@3.1.4':
     dependencies:
-      '@types/node': 22.13.14
+      '@types/node': 22.13.16
 
   '@types/lru-cache@7.10.10':
     dependencies:
@@ -9914,13 +9914,13 @@ snapshots:
 
   '@types/mysql@2.15.26':
     dependencies:
-      '@types/node': 22.13.14
+      '@types/node': 22.13.16
 
   '@types/node@20.17.28':
     dependencies:
       undici-types: 6.19.8
 
-  '@types/node@22.13.14':
+  '@types/node@22.13.16':
     dependencies:
       undici-types: 6.20.0
 
@@ -9932,13 +9932,13 @@ snapshots:
 
   '@types/pg@8.11.6':
     dependencies:
-      '@types/node': 22.13.14
+      '@types/node': 22.13.16
       pg-protocol: 1.7.1
       pg-types: 4.0.2
 
   '@types/pg@8.6.1':
     dependencies:
-      '@types/node': 22.13.14
+      '@types/node': 22.13.16
       pg-protocol: 1.7.1
       pg-types: 2.2.0
 
@@ -9965,7 +9965,7 @@ snapshots:
 
   '@types/responselike@1.0.3':
     dependencies:
-      '@types/node': 22.13.14
+      '@types/node': 22.13.16
 
   '@types/semver@7.5.8': {}
 
@@ -9973,7 +9973,7 @@ snapshots:
 
   '@types/tedious@4.0.14':
     dependencies:
-      '@types/node': 22.13.14
+      '@types/node': 22.13.16
 
   '@types/use-sync-external-store@0.0.3': {}
 
@@ -11844,7 +11844,7 @@ snapshots:
 
   jest-worker@27.5.1:
     dependencies:
-      '@types/node': 22.13.14
+      '@types/node': 22.13.16
       merge-stream: 2.0.0
       supports-color: 8.1.1
 
