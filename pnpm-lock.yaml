@@ -266,8 +266,8 @@ importers:
         specifier: ^11.0.2
         version: 11.1.0
       lucide-react:
-        specifier: ^0.518.0
-        version: 0.518.0(react@18.3.1)
+        specifier: ^0.519.0
+        version: 0.519.0(react@18.3.1)
       mantine-datatable:
         specifier: ^7.12.4
         version: 7.15.1(@mantine/core@7.15.2(@mantine/hooks@7.15.2(react@18.3.1))(@types/react@18.3.18)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(@mantine/hooks@7.15.2(react@18.3.1))(clsx@2.1.1)(react@18.3.1)
@@ -4668,8 +4668,8 @@ packages:
   lru-cache@5.1.1:
     resolution: {integrity: sha512-KpNARQA3Iwv+jTA0utUVVbrh+Jlrr1Fv0e56GGzAFOXN7dk/FviaDW8LHmK52DlcH4WP2n6gI8vN1aesBFgo9w==}
 
-  lucide-react@0.518.0:
-    resolution: {integrity: sha512-kFg34uQqnVl/7HwAiigxPSpj//43VIVHQbMygQPtS1yT4btMXHCWUipHcgcXHD2pm1Z2nUBA/M+Vnh/YmWXQUw==}
+  lucide-react@0.519.0:
+    resolution: {integrity: sha512-cLJyjRKBJFzaZ/+1oIeQaH7XUdxKOYU3uANcGSrKdIZWElmNbRAm8RXKiTJS7AWLCBOS8b7A497Al/kCHozd+A==}
     peerDependencies:
       react: ^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0
 
@@ -6296,8 +6296,8 @@ packages:
   webidl-conversions@4.0.2:
     resolution: {integrity: sha512-YQ+BmxuTgd6UXZW3+ICGfyqRyHXVlD5GtQr5+qjiNW7bF0cqrzX500HVXPBOvgXb5YnzDd+h0zqyv61KUD7+Sg==}
 
-  webpack-sources@3.3.2:
-    resolution: {integrity: sha512-ykKKus8lqlgXX/1WjudpIEjqsafjOTcOJqxnAbMLAu/KCsDCJ6GBtvscewvTkrn24HsnvFwrSCbenFrhtcCsAA==}
+  webpack-sources@3.3.3:
+    resolution: {integrity: sha512-yd1RBzSGanHkitROoPFd6qsrxt+oFhg/129YzheDGqeustzX0vTZJZsSsQjVQC4yzBQ56K55XU8gaNCtIzOnTg==}
     engines: {node: '>=10.13.0'}
 
   webpack-virtual-modules@0.5.0:
@@ -11972,7 +11972,7 @@ snapshots:
     dependencies:
       yallist: 3.1.1
 
-  lucide-react@0.518.0(react@18.3.1):
+  lucide-react@0.519.0(react@18.3.1):
     dependencies:
       react: 18.3.1
 
@@ -13481,7 +13481,7 @@ snapshots:
     dependencies:
       acorn: 8.15.0
       chokidar: 3.6.0
-      webpack-sources: 3.3.2
+      webpack-sources: 3.3.3
       webpack-virtual-modules: 0.5.0
 
   unplugin@1.16.1:
@@ -13612,7 +13612,7 @@ snapshots:
 
   webidl-conversions@4.0.2: {}
 
-  webpack-sources@3.3.2: {}
+  webpack-sources@3.3.3: {}
 
   webpack-virtual-modules@0.5.0: {}
 
@@ -13642,7 +13642,7 @@ snapshots:
       tapable: 2.2.2
       terser-webpack-plugin: 5.3.14(webpack@5.97.1)
       watchpack: 2.4.4
-      webpack-sources: 3.3.2
+      webpack-sources: 3.3.3
     transitivePeerDependencies:
       - '@swc/core'
       - esbuild
