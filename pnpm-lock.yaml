@@ -123,7 +123,7 @@ importers:
         version: 3.848.0
       '@aws-sdk/client-cloudwatch-logs':
         specifier: ^3.709.0
-        version: 3.848.0
+        version: 3.849.0
       '@aws-sdk/client-ec2':
         specifier: ^3.709.0
         version: 3.848.0
@@ -438,8 +438,8 @@ packages:
     resolution: {integrity: sha512-6+0vVnbLmj020Bqqt2qdFGZvvoUSP3smm4ZagxAANponIe+qYmzjsDdIPVmsklITRXRrkXWC+LwgD+jfqTdYzg==}
     engines: {node: '>=18.0.0'}
 
-  '@aws-sdk/client-cloudwatch-logs@3.848.0':
-    resolution: {integrity: sha512-zb9wSTeqozISI3k9rDUCnScGslPHeAkZ6cID38Mt7JgI5QcozAGgqH7m8FWigfiu8/BGJlW/ndOQCXzWYtX8sw==}
+  '@aws-sdk/client-cloudwatch-logs@3.849.0':
+    resolution: {integrity: sha512-+11BgdFro0hV+ypIogNiRofvAGsVNZs1MxkX8fsjuGq6/uflLg3x6/RRmZCFl14Y/NAuGe3ojBp+8UCvBIf8Sg==}
     engines: {node: '>=18.0.0'}
 
   '@aws-sdk/client-cognito-identity@3.848.0':
@@ -6602,7 +6602,7 @@ snapshots:
     transitivePeerDependencies:
       - aws-crt
 
-  '@aws-sdk/client-cloudwatch-logs@3.848.0':
+  '@aws-sdk/client-cloudwatch-logs@3.849.0':
     dependencies:
       '@aws-crypto/sha256-browser': 5.2.0
       '@aws-crypto/sha256-js': 5.2.0
