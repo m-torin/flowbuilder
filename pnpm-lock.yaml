@@ -138,7 +138,7 @@ importers:
         version: 3.848.0
       '@aws-sdk/client-lambda':
         specifier: ^3.709.0
-        version: 3.848.0
+        version: 3.851.0
       '@aws-sdk/client-s3':
         specifier: ^3.709.0
         version: 3.850.0
@@ -462,8 +462,8 @@ packages:
     resolution: {integrity: sha512-X5gFqiPRyIF4Wckyf/OXHcAtlEYyZQJwC5jSLRwm21899KmiGUnk7CQP6C7LVdPCGYI3CCK8g9lZkSdhn8e7xQ==}
     engines: {node: '>=18.0.0'}
 
-  '@aws-sdk/client-lambda@3.848.0':
-    resolution: {integrity: sha512-kxFzSsXPq8ZiFU23q3tOLi40Aqz43VPmBqDfVZbDXOV1kESGMop+sWFEToSolfV85OTYlFHa29OpgxqHpC3zbg==}
+  '@aws-sdk/client-lambda@3.851.0':
+    resolution: {integrity: sha512-wChFgkDH4TepG9HdqVAVYLrczzab4PN2hogK3k/h2KJKoHFiSjY66tlDlZ/CueLk09u3PGMkVrDBDEs0znaXIA==}
     engines: {node: '>=18.0.0'}
 
   '@aws-sdk/client-s3@3.850.0':
@@ -6877,7 +6877,7 @@ snapshots:
     transitivePeerDependencies:
       - aws-crt
 
-  '@aws-sdk/client-lambda@3.848.0':
+  '@aws-sdk/client-lambda@3.851.0':
     dependencies:
       '@aws-crypto/sha256-browser': 5.2.0
       '@aws-crypto/sha256-js': 5.2.0
