@@ -126,7 +126,7 @@ importers:
         version: 3.849.0
       '@aws-sdk/client-ec2':
         specifier: ^3.709.0
-        version: 3.848.0
+        version: 3.850.0
       '@aws-sdk/client-eventbridge':
         specifier: ^3.709.0
         version: 3.848.0
@@ -141,7 +141,7 @@ importers:
         version: 3.848.0
       '@aws-sdk/client-s3':
         specifier: ^3.709.0
-        version: 3.848.0
+        version: 3.850.0
       '@aws-sdk/client-ses':
         specifier: ^3.709.0
         version: 3.848.0
@@ -446,8 +446,8 @@ packages:
     resolution: {integrity: sha512-Sin8aLnA81MgvUJrfQsBIQ1UJg4klWT3NuYYjExLiVQf3A0/F7Bfx1HTIyWXtSchY4QgGr7MMone0/0KZ4Dy9g==}
     engines: {node: '>=18.0.0'}
 
-  '@aws-sdk/client-ec2@3.848.0':
-    resolution: {integrity: sha512-q/ohkLx2n7/1rdNPKqksC2je3LoePpaC/WNiz8KCzJPoogA80g0DhyO7/r+hpGHQ2jdzstm8D4T0Fvq3Wt11HA==}
+  '@aws-sdk/client-ec2@3.850.0':
+    resolution: {integrity: sha512-Ze9Aa5No2KxAAV4Wa/vS8CyrPogNKKzpGZDatj6nsiBoyQ/GrvvOvFuLqbmPiK8ineb27Oa04uXAZSUz704GJA==}
     engines: {node: '>=18.0.0'}
 
   '@aws-sdk/client-eventbridge@3.848.0':
@@ -466,8 +466,8 @@ packages:
     resolution: {integrity: sha512-kxFzSsXPq8ZiFU23q3tOLi40Aqz43VPmBqDfVZbDXOV1kESGMop+sWFEToSolfV85OTYlFHa29OpgxqHpC3zbg==}
     engines: {node: '>=18.0.0'}
 
-  '@aws-sdk/client-s3@3.848.0':
-    resolution: {integrity: sha512-6uT+THQfsB92eAH0p5zvpGiSCtO2ZhGwmuw6HWEngui53YIWz7W/GCnN0G7nrKpgD5DPrMaBwqZvKuoAh9NHAQ==}
+  '@aws-sdk/client-s3@3.850.0':
+    resolution: {integrity: sha512-tX5bUfqiLOh6jtAlaiAuOUKFYh8KDG9k9zFLUdgGplC5TP47AYTreUEg+deCTHo4DD3YCvrLuyZ8tIDgKu7neQ==}
     engines: {node: '>=18.0.0'}
 
   '@aws-sdk/client-ses@3.848.0':
@@ -6695,7 +6695,7 @@ snapshots:
     transitivePeerDependencies:
       - aws-crt
 
-  '@aws-sdk/client-ec2@3.848.0':
+  '@aws-sdk/client-ec2@3.850.0':
     dependencies:
       '@aws-crypto/sha256-browser': 5.2.0
       '@aws-crypto/sha256-js': 5.2.0
@@ -6926,7 +6926,7 @@ snapshots:
     transitivePeerDependencies:
       - aws-crt
 
-  '@aws-sdk/client-s3@3.848.0':
+  '@aws-sdk/client-s3@3.850.0':
     dependencies:
       '@aws-crypto/sha1-browser': 5.2.0
       '@aws-crypto/sha256-browser': 5.2.0
