@@ -126,7 +126,7 @@ importers:
         version: 3.849.0
       '@aws-sdk/client-ec2':
         specifier: ^3.709.0
-        version: 3.852.0
+        version: 3.854.0
       '@aws-sdk/client-eventbridge':
         specifier: ^3.709.0
         version: 3.848.0
@@ -153,7 +153,7 @@ importers:
         version: 3.848.0
       '@aws-sdk/client-sqs':
         specifier: ^3.709.0
-        version: 3.848.0
+        version: 3.854.0
       '@aws-sdk/credential-provider-node':
         specifier: ^3.709.0
         version: 3.848.0
@@ -446,8 +446,8 @@ packages:
     resolution: {integrity: sha512-Sin8aLnA81MgvUJrfQsBIQ1UJg4klWT3NuYYjExLiVQf3A0/F7Bfx1HTIyWXtSchY4QgGr7MMone0/0KZ4Dy9g==}
     engines: {node: '>=18.0.0'}
 
-  '@aws-sdk/client-ec2@3.852.0':
-    resolution: {integrity: sha512-+9UOXSn+h4RCglJiR/JMU0pkNhdGNVmjyNRVyY5qSPFkoiqEf59DKoIRGIYQVCvXPkN5EXp8BfbxTL4wNxOE9w==}
+  '@aws-sdk/client-ec2@3.854.0':
+    resolution: {integrity: sha512-HLR4d7YcQLyHslePFlnAQmgOXZ+q9qpnGO6MUl53CUdQvGPso8EcDaK4DwMPcDcAPCBA1hozYpjrQBb+fYgnew==}
     engines: {node: '>=18.0.0'}
 
   '@aws-sdk/client-eventbridge@3.848.0':
@@ -482,8 +482,8 @@ packages:
     resolution: {integrity: sha512-Jv6gaMvIMc9UkwdgOYZxSUBl6ElIjYaPcoI5Vp2laNislvQS1upfJzF/bClYPZfk4vm51sXPHcQrjFnQfMF+tw==}
     engines: {node: '>=18.0.0'}
 
-  '@aws-sdk/client-sqs@3.848.0':
-    resolution: {integrity: sha512-ikeTO/MvV4nzdH9wpwMOPKSWG2hX0QoJ6ZDbgIZzQy6o53NfCxYrbRODgNSsp4mZDUGY2Mr13jP2zYNxYDBL6w==}
+  '@aws-sdk/client-sqs@3.854.0':
+    resolution: {integrity: sha512-iGB7VG4GRPfJlGrguCfYzRXiEjUNDNxiVeJYmep+pexS6KGBKyYKov+RgGwZy+vKMi5LC8MU1qyNicx8Qnozpw==}
     engines: {node: '>=18.0.0'}
 
   '@aws-sdk/client-sso@3.848.0':
@@ -6696,7 +6696,7 @@ snapshots:
     transitivePeerDependencies:
       - aws-crt
 
-  '@aws-sdk/client-ec2@3.852.0':
+  '@aws-sdk/client-ec2@3.854.0':
     dependencies:
       '@aws-crypto/sha256-browser': 5.2.0
       '@aws-crypto/sha256-js': 5.2.0
@@ -7125,7 +7125,7 @@ snapshots:
     transitivePeerDependencies:
       - aws-crt
 
-  '@aws-sdk/client-sqs@3.848.0':
+  '@aws-sdk/client-sqs@3.854.0':
     dependencies:
       '@aws-crypto/sha256-browser': 5.2.0
       '@aws-crypto/sha256-js': 5.2.0
