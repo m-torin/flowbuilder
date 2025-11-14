@@ -3,14 +3,14 @@
   "private": true,
   "license": "MIT",
   "scripts": {
-    "dev": "pnpm dev:flows",
-    "dev:flows": "pnpm run --filter @flowbuilder/flows dev",
+    "dev": "node api.js && pnpm dev:flows",
+    "dev:flows": "node api.js && pnpm run --filter @flowbuilder/flows dev",
     "build": "turbo run build",
     "clean": "turbo run clean",
-    "dev:turbo": "turbo run dev",
+    "dev:turbo": "node api.js && turbo run dev",
     "lint": "pnpm lint:prettier",
     "lint:prettier": "pnpm --filter @flowbuilder/prettier-config format",
-    "start": "turbo run start",
+    "start": "node api.js && turbo run start",
     "test": "turbo run test",
     "typecheck": "turbo run typecheck"
   },
