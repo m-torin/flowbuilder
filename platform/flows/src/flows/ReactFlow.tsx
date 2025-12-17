@@ -123,11 +123,11 @@ export const ReactFlow12: React.FC = () => {
         // Ensure prismaData exists with required fields
         // For new nodes (node_xxx IDs), use the node.id as prismaData.id
         // For existing nodes, use the existing prismaData.id or node.id
-        const existingPrismaData = node.data?.prismaData || {};
+        const existingPrismaData = node.data?.prismaData;
         const prismaDataWithRequiredFields = {
-          ...existingPrismaData,
-          id: existingPrismaData.id || node.id, // Use node.id if prismaData.id is missing
-          type: existingPrismaData.type || nodeType,
+          ...(existingPrismaData || {}),
+          id: existingPrismaData?.id || node.id, // Use node.id if prismaData.id is missing
+          type: existingPrismaData?.type || nodeType,
         };
 
         return {

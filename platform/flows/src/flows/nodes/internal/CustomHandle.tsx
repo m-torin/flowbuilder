@@ -12,7 +12,7 @@ import { handleVariants } from './animations';
 type MotionHandleProps = Omit<HandleProps, keyof MotionProps> &
   HTMLMotionProps<'div'>;
 
-const MotionHandle = motion(Handle) as React.ComponentType<MotionHandleProps>;
+const MotionHandle = motion.create(Handle) as React.ComponentType<MotionHandleProps>;
 
 const getPositionStyles = (position: Position, theme: MantineTheme) => {
   const offsetSize = 12;

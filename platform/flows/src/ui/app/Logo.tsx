@@ -65,7 +65,7 @@ const AnimatedAnchor: React.FC<AnimatedAnchorProps> = ({ href, text }) => {
               aria-label="Settings"
               color="cyan.6"
             >
-              <IconGitCherryPick size={rem(30)} stroke={1.5} />
+              <IconGitCherryPick size={30} stroke={1.5} />
             </ActionIcon>
           </motion.div>
           <motion.div

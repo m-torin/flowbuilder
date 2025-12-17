@@ -67,7 +67,7 @@ export const NodePreview = memo(() => {
           variant="filled"
           ml="-1px"
           color={`${colorBase}.4`}
-          size={rem(44)}
+          size={44}
           aria-label={`Settings for ${values.name || nodeTypeName}`}
           my={rem(3)}
           style={{

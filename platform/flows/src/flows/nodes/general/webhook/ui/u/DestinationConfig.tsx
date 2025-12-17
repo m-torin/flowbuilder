@@ -97,7 +97,7 @@ export const DestinationConfig: FC = () => {
           <Button
             variant="light"
             size="xs"
-            leftSection={<IconPlus size={rem(14)} />}
+            leftSection={<IconPlus size={14} />}
             onClick={addHeader}
           >
             Add Header
@@ -129,7 +129,7 @@ export const DestinationConfig: FC = () => {
                 (form.values.metadata?.destination?.customHeaders?.length ??
                   0) > 1 && (
                   <IconTrash
-                    size={rem(14)}
+                    size={14}
                     style={{ cursor: 'pointer' }}
                     onClick={() => removeHeader(index)}
                   />
