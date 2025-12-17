@@ -2,10 +2,8 @@
 
 'use client';
 
-import { Box } from '@mantine/core';
-import { useEffect, useRef, forwardRef, useImperativeHandle } from 'react';
+import { useEffect, useRef, forwardRef, useImperativeHandle, useState, useCallback } from 'react';
 import type { editor as MonacoEditorType, MarkerSeverity } from 'monaco-editor';
-import { useResizeObserver, useUncontrolled } from '@mantine/hooks';
 import { draculaTheme } from '../themes/dracula';
 
 // Import Language Registrations and Validators
@@ -92,22 +90,29 @@ export const MonacoEditor = forwardRef<
       null,
     );
     const monacoEl = useRef<HTMLDivElement>(null);
-    const [resizeRef, rect] = useResizeObserver();
+    const resizeRef = useRef<HTMLDivElement>(null);
+    const [rect, setRect] = useState<DOMRectReadOnly | null>(null);
 
-    // Manage internal states using useUncontrolled
-    const [currentTheme] = useUncontrolled<string>({
-      value: theme,
-      defaultValue: 'dracula',
-      finalValue: 'dracula',
-      onChange: undefined,
-    });
+    // Use ResizeObserver API directly instead of Mantine hook
+    useEffect(() => {
+      if (!resizeRef.current) return;
 
-    const [isReadOnly] = useUncontrolled<boolean>({
-      value: readOnly,
-      defaultValue: false,
-      finalValue: false,
-      onChange: undefined,
-    });
+      const resizeObserver = new ResizeObserver((entries) => {
+        for (const entry of entries) {
+          setRect(entry.contentRect);
+        }
+      });
+
+      resizeObserver.observe(resizeRef.current);
+
+      return () => {
+        resizeObserver.disconnect();
+      };
+    }, []);
+
+    // Manage internal states - use controlled values with fallback to defaults
+    const currentTheme = theme ?? 'dracula';
+    const isReadOnly = readOnly ?? false;
 
     // Expose editor instance to parent if ref is provided
     useImperativeHandle(
@@ -347,14 +352,14 @@ export const MonacoEditor = forwardRef<
 
     // Handle editor resizing
     useEffect(() => {
-      if (editorRef.current) {
+      if (editorRef.current && rect) {
         const editorLayout = editorRef.current.getLayoutInfo();
         editorRef.current.layout({
           width: rect.width || editorLayout.width,
           height: typeof height === 'number' ? height : editorLayout.height,
         });
       }
-    }, [rect.width, height]);
+    }, [rect?.width, height]);
 
     // Language-specific feature addition functions
     const addSQLFeatures = (monaco: typeof import('monaco-editor')) => {
@@ -565,9 +570,9 @@ export const MonacoEditor = forwardRef<
     };
 
     return (
-      <Box ref={resizeRef} h={height}>
+      <div ref={resizeRef} style={{ height: typeof height === 'number' ? `${height}px` : height }}>
         <div ref={monacoEl} style={{ width: '100%', height: '100%' }} />
-      </Box>
+      </div>
     );
   },
 );

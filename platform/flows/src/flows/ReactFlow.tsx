@@ -22,12 +22,14 @@ import { FbEdge, FbNode } from './types';
 import { FlowMethod } from '@prisma/client';
 import { useDocumentTitle } from '@mantine/hooks';
 import { saveFlowAction } from './saveFlowAction';
+import { useMantineTheme } from '@mantine/core';
 
 const DEBUG = process.env.NODE_ENV === 'development';
 const debug = DEBUG ? console.log : () => {};
 
 export const ReactFlow12: React.FC = () => {
   const { prismaData, dndType } = useAppContext();
+  const theme = useMantineTheme();
   // console.log('ℹ️ Prisma Data:', JSON.stringify(prismaData, null, 2));
 
   const { flowProps } = useReactFlowSetup(prismaData, dndType, rfNodeTypes);
@@ -190,11 +192,19 @@ export const ReactFlow12: React.FC = () => {
   /////
 
   const nodeColor = useCallback((node: FbNode) => {
-    switch (node.type) {
-      default:
-        return '#ff0072';
+    // Get color from node metadata
+    const colorName = node.nodeMeta?.color || node.data?.nodeMeta?.color || 'gray';
+
+    // Convert Mantine color name to hex value using theme
+    // Mantine colors are arrays of 10 shades, we'll use shade 6 (middle shade) for the minimap
+    const colorShade = theme.colors[colorName as keyof typeof theme.colors];
+    if (colorShade && Array.isArray(colorShade) && colorShade.length > 6) {
+      return colorShade[6];
     }
-  }, []);
+
+    // Fallback to default color if color not found
+    return theme.colors.gray[6] || '#868e96';
+  }, [theme]);
 
   const snapGrid: [number, number] = [20, 20];
 

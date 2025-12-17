@@ -29,17 +29,24 @@ const FilterInputComponent: FunctionComponent<FilterInputProps> = ({
     }}
     onChange={onFilterTextChange}
     leftSection={<IconFilter size={18} className={classes.filterIcon} />}
-    leftSectionWidth={40}
+    leftSectionWidth={42}
     rightSectionPointerEvents="all"
     rightSection={
-      <CloseButton
-        aria-label="Clear filter"
-        onClick={onClearFilterText}
-        className={`${classes.clearButton} ${filterText ? classes.visible : ''}`}
-        size="sm"
-        radius="xl"
-      />
+      filterText ? (
+        <CloseButton
+          aria-label="Clear filter"
+          onClick={onClearFilterText}
+          className={classes.clearButton}
+          size="sm"
+          radius="xl"
+        />
+      ) : null
     }
+    styles={{
+      input: {
+        fontSize: 'var(--mantine-font-size-sm)',
+      },
+    }}
   />
 );
 
