@@ -85,6 +85,29 @@ import {
 import { AnthropicGptNode, metaAnthropicGptNode } from './gpt/anthropic';
 import { OpenaiGptNode, metaOpenaiGptNode } from './gpt/openai';
 
+// Compute Nodes - Logic
+import {
+  CompareNode,
+  metaCompareNode,
+  SwitchNode,
+  metaSwitchNode,
+  ConditionalNode,
+  metaConditionalNode,
+} from './compute/logic';
+
+// Compute Nodes - Data
+import {
+  FilterNode,
+  metaFilterNode,
+  MapNode,
+  metaMapNode,
+  ReduceNode,
+  metaReduceNode,
+} from './compute/data';
+
+// Register compute nodes in the execution registry
+import '#/lib/execution/registerComputeNodes';
+
 // ==================================================================================
 // Group Configuration
 // ==================================================================================
@@ -94,6 +117,8 @@ const GROUP_ORDER: string[] = [
   'source',
   'destination',
   'logic',
+  'compute',
+  'data',
   'general',
   'gpt',
   'aws',
@@ -137,6 +162,16 @@ const GROUP_CONFIG: Record<
     icon: <IconBrandAws />,
     color: 'orange',
     label: 'AWS',
+  },
+  compute: {
+    icon: <IconVariable />,
+    color: 'grape',
+    label: 'Compute',
+  },
+  data: {
+    icon: <IconVariable />,
+    color: 'teal',
+    label: 'Data',
   },
 };
 
@@ -229,6 +264,34 @@ const NODE_MODULES = {
     OpenaiGptNode: {
       component: OpenaiGptNode,
       meta: metaOpenaiGptNode,
+    },
+  },
+  compute: {
+    CompareNode: {
+      component: CompareNode,
+      meta: metaCompareNode,
+    },
+    SwitchNode: {
+      component: SwitchNode,
+      meta: metaSwitchNode,
+    },
+    ConditionalNode: {
+      component: ConditionalNode,
+      meta: metaConditionalNode,
+    },
+  },
+  data: {
+    FilterNode: {
+      component: FilterNode,
+      meta: metaFilterNode,
+    },
+    MapNode: {
+      component: MapNode,
+      meta: metaMapNode,
+    },
+    ReduceNode: {
+      component: ReduceNode,
+      meta: metaReduceNode,
     },
   },
 } as const;

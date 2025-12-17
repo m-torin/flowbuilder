@@ -1,5 +1,18 @@
 // 'use server';
 
+/**
+ * @deprecated This module is deprecated. Use `#/lib/execution` instead.
+ * The FlowExecutor class provides a unified execution system that works
+ * for both server-side (webhook) and client-side (React Flow) execution.
+ *
+ * Migration:
+ * - Replace runEvent() calls with FlowExecutor.execute()
+ * - Use createServerContext() for server-side execution
+ * - Use createClientContext() for client-side execution
+ *
+ * @see platform/flows/src/lib/execution/core.ts
+ */
+
 import { Node } from '@prisma/client';
 import { fetchNextNodes } from './logic';
 import {

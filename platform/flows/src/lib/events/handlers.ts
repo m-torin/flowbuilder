@@ -1,3 +1,11 @@
+/**
+ * @deprecated This module is deprecated. Use `#/lib/execution/computeRegistry` instead.
+ * The compute registry provides a unified way to register and retrieve
+ * compute functions for all node types.
+ *
+ * @see platform/flows/src/lib/execution/computeRegistry.ts
+ */
+
 import { Node } from '@prisma/client';
 
 // Example functions to be called for different node types

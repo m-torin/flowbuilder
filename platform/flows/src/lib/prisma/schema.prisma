@@ -419,14 +419,20 @@ enum NodeType {
   awsS3Node
   awsSnsNode
   awsSqsNode
+  compareNode
+  conditionalNode
   cronNode
   default
+  filterNode
   githubEventReceiverSource
   ifElseThenNode
   javascriptEditorLogic
   javascriptEditorNode
+  mapNode
   openaiGptNode
   pythonEditorNode
+  reduceNode
+  switchNode
   webhook
   webhookDestination
   webhookSource

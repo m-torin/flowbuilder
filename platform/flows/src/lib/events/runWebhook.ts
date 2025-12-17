@@ -1,5 +1,13 @@
 // 'use server';
 
+/**
+ * @deprecated This module is deprecated. Use `#/lib/execution` instead.
+ * Webhook routes now use FlowExecutor directly.
+ *
+ * @see platform/flows/app/[domain]/events/webhook/[hookId]/route.ts
+ * @see platform/flows/src/lib/execution/core.ts
+ */
+
 import { fetchNextNodes } from './logic';
 import { runEvent } from './airTrafficControl';
 

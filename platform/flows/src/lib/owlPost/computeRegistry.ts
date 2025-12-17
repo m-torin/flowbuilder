@@ -1,5 +1,12 @@
 // computeRegistry.ts
 
+/**
+ * @deprecated This module has been migrated to `#/lib/execution/computeRegistry`.
+ * The new registry adds category support and better type safety.
+ *
+ * @see platform/flows/src/lib/execution/computeRegistry.ts
+ */
+
 import { Node } from '@prisma/client';
 import {
   awsLambdaCompute,

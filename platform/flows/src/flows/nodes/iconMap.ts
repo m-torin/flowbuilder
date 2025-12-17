@@ -16,6 +16,12 @@ import {
   IconBrandPython,
   IconWebhook,
   IconArrowFork,
+  IconEqual,
+  IconArrowsSplit,
+  IconGitBranch,
+  IconFilter,
+  IconTransform,
+  IconSum,
 } from '@tabler/icons-react';
 import type { Icon } from '@tabler/icons-react';
 
@@ -36,6 +42,12 @@ export type IconName =
   | 'IconCloud'
   | 'IconWebhook'
   | 'IconApi'
+  | 'IconEqual'
+  | 'IconArrowsSplit'
+  | 'IconGitBranch'
+  | 'IconFilter'
+  | 'IconTransform'
+  | 'IconSum'
   | 'IconDefault';
 
 export const iconMap: Record<IconName, Icon> = {
@@ -55,6 +67,12 @@ export const iconMap: Record<IconName, Icon> = {
   IconCloud,
   IconClock,
   IconApi,
+  IconEqual,
+  IconArrowsSplit,
+  IconGitBranch,
+  IconFilter,
+  IconTransform,
+  IconSum,
   IconDefault: IconSquare,
 };
 

@@ -18,6 +18,7 @@ import { useAppContext } from '#/appDomain/flow/[cuid]/FlowProvider';
 import { FlowAside } from './ui/rightSidebar';
 import { rfNodeTypes, nodeMetaMap } from './nodes';
 import { CustomControls, MiniMapNode } from './ui';
+import { ExecutionPanel } from './ui/ExecutionPanel';
 import { FbEdge, FbNode } from './types';
 import { FlowMethod } from '@prisma/client';
 import { useDocumentTitle } from '@mantine/hooks';
@@ -254,6 +255,10 @@ export const ReactFlow12: React.FC = () => {
             </Button>
           </Group>
         </Group>
+      </Panel>
+
+      <Panel position="top-left">
+        <ExecutionPanel />
       </Panel>
 
       <CustomControls />

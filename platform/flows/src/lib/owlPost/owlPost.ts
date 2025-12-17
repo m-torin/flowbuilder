@@ -1,3 +1,11 @@
+/**
+ * @deprecated This module has been migrated to `#/lib/execution`.
+ * The FlowExecutor class provides the same functionality with a cleaner API
+ * and support for both server and client execution contexts.
+ *
+ * @see platform/flows/src/lib/execution/core.ts
+ */
+
 import { getNodeConnections } from './getNodeConnections';
 import { getComputeFunction } from './computeRegistry';
 import { logUtils } from './logUtils';
