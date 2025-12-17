@@ -38,19 +38,15 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://www.flowbuilder-demo.vercel.app'),
 };
 
-interface InstanceLayoutProps {
+interface RootLayoutProps {
   children: ReactNode;
-  params: {
-    domain: string;
-  };
 }
 
-export default async function CombinedLayout({
+export default async function RootLayout({
   children,
-  params,
-}: InstanceLayoutProps) {
+}: RootLayoutProps) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <ColorSchemeScript defaultColorScheme="light" />
         <link rel="icon" href="/api/icon" type="image/svg+xml" />
@@ -64,7 +60,7 @@ export default async function CombinedLayout({
           content="minimum-scale=1, initial-scale=1, width=device-width, user-scalable=no"
         />
       </head>
-      <body className={cn(cal.variable, inter.variable, notoSans.variable)}>
+      <body className={cn(cal.variable, inter.variable, notoSans.variable)} suppressHydrationWarning>
         <Providers>
           <AppLayout>
             {/* <Header /> */}

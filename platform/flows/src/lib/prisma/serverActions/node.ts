@@ -1,6 +1,6 @@
 'use server';
 
-import { Node, NodeType, Prisma } from '@prisma/client';
+import { Node, Prisma, NodeType } from '@prisma/client';
 import { getNode, getNodeWithConditions } from '#/lib/prisma/ormApi';
 
 /**

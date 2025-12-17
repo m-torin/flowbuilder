@@ -1,5 +1,5 @@
 import { prisma } from '#/lib/prisma/client';
-import { Edge, EdgeType, Prisma, PrismaClient } from '@prisma/client';
+import { Edge, Prisma, PrismaClient, EdgeType } from '@prisma/client';
 
 /**
  * Upsert and map each edge in the incoming list to the flow,
@@ -226,7 +226,7 @@ const createEdges = async (
     data: validEdgesToCreate.map((edge) => ({
       rfId: edge.rfId,
       label: edge.label,
-      type: edge.type || EdgeType.default,
+      type: edge.type || 'default', // EdgeType is now a string
       isActive: edge.isActive,
       sourceNodeId: edge.sourceNodeId,
       targetNodeId: edge.targetNodeId,
@@ -235,7 +235,7 @@ const createEdges = async (
       createdAt: new Date(),
       updatedAt: new Date(),
     })),
-    skipDuplicates: true,
+    // skipDuplicates removed for compatibility
   });
 
   return validEdgesToCreate; // Since `createMany` returns the count, we instead return the validEdgesToCreate
@@ -250,7 +250,7 @@ const cleanFinalEdgesArray = (cleanedArray: any[], updatedEdges: Edge[]) => {
   const finalEdges = cleanedArray
     .filter((edge: any) => !updatedEdges.some((e) => e.id === edge.id))
     .map((edge: any) => {
-      if (!edge.type) edge.type = EdgeType.default;
+      if (!edge.type) edge.type = 'default'; // EdgeType is now a string
       if (edge.id && edge.id.startsWith('edge-')) delete edge.id;
       const { createdAt, updatedAt, dataSource, ...rest } = edge;
       return rest;

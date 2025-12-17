@@ -19,8 +19,8 @@ export type {
   ScheduledJob,
 } from '@prisma/client';
 
-// Add all the missing enums
-export {
+// Enums are exported from @prisma/client
+export type {
   FlowMethod,
   InfraType,
   NodeType,

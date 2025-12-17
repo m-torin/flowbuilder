@@ -12,15 +12,19 @@ import {
 } from '@xyflow/react';
 import { FbNode, FbEdge, FbNodeData, NodeMetadata } from '../types';
 import { NodeTypesEnum, nodeMetaMap } from '../nodes';
-import { NodeType } from '@prisma/client';
+import { NodeType, Prisma } from '@prisma/client';
 import { edgeTypes } from '../edges';
+import type { DbData } from '#/appDomain/flow/[cuid]/types';
+import { XYPosition } from '@xyflow/react';
+import { validatePosition } from '../helpers/prisma';
+import { convertToNodeTypesEnum, isNodeTypes } from '../helpers/typeUtils';
 
-const getId = (): string => `node_${Math.random().toString(36).substr(2, 9)}`;
+const getId = (): string => `node_${Math.random().toString(36).slice(2, 11)}`;
 const getEdgeId = (): string =>
-  `edge_${Math.random().toString(36).substr(2, 9)}`;
+  `edge_${Math.random().toString(36).slice(2, 11)}`;
 
 export const useReactFlowSetup = (
-  flowData: any,
+  flowData: DbData | null | undefined,
   dndType: string | null,
   nodeTypes: NodeTypes,
 ) => {
@@ -30,91 +34,104 @@ export const useReactFlowSetup = (
   const initialNodes = useMemo(() => {
     if (!flowData?.flow?.nodes) return [];
 
-    return flowData.flow.nodes.map((prismaNode: any): FbNode => {
+    return flowData.flow.nodes.map((prismaNode): FbNode => {
       const {
         flowId,
-        flow,
         metadata: rawMetadata,
         type,
         ...baseNodeData
       } = prismaNode;
 
-      // Validate and assign 'type'
-      const nodeType = type as keyof typeof NodeTypesEnum;
-      if (!nodeType || !(nodeType in NodeTypesEnum)) {
-        console.warn(
-          `Invalid or missing node type for node ID: ${prismaNode.id}. Assigning default type.`,
-        );
-        // Assign a default type if necessary
-        // Ensure 'default' exists in NodeTypesEnum
-        return {
-          id: prismaNode.id,
-          type: 'default' as keyof typeof NodeTypesEnum,
-          position: prismaNode.position || { x: 0, y: 0 },
-          data: {
-            ...baseNodeData,
-            type: 'default',
-            metadata: rawMetadata || {},
-            uxMeta: rawMetadata?.uxMeta || {
-              heading: prismaNode.name,
-              isExpanded: false,
-              layer: 0,
-              isLocked: false,
-              rotation: 0,
-            },
-            nodeMeta: nodeMetaMap['default'],
-            formFields: rawMetadata?.formFields || {},
-            isEnabled: true,
-            prismaData: {
-              ...prismaNode,
-              type: 'default' as NodeType,
-            },
-          },
-          uxMeta: rawMetadata?.uxMeta || {
-            heading: prismaNode.name,
-            isExpanded: false,
-            layer: 0,
-            isLocked: false,
-            rotation: 0,
-          },
-          nodeMeta: nodeMetaMap['default'],
-          nodeType: 'default',
-        };
+      // Parse metadata safely first to check for original React Flow type
+      const metadataObj = typeof rawMetadata === 'object' && rawMetadata !== null
+        ? rawMetadata as Record<string, unknown>
+        : {};
+
+      // Try to get the original React Flow node type from metadata first
+      // This preserves the specific type (e.g., awsEventBridgeSource vs awsEventBridgeEvent)
+      const metadataNodeMeta = metadataObj.nodeMeta && typeof metadataObj.nodeMeta === 'object'
+        ? metadataObj.nodeMeta as Record<string, unknown>
+        : null;
+      const metadataNodeType = metadataNodeMeta?.type as string | undefined;
+
+      // Use metadata type if available and valid, otherwise convert Prisma type
+      // For awsEventBridgeEvent, we need to check metadata to determine the specific variant
+      // For webhook, we need to check metadata to determine the specific variant (source/destination/enrichment)
+      let finalNodeType: keyof typeof NodeTypesEnum;
+      if (metadataNodeType && isNodeTypes(metadataNodeType)) {
+        finalNodeType = metadataNodeType;
+      } else if (type === 'awsEventBridgeEvent' && metadataNodeMeta) {
+        // Try to extract the specific variant from nodeMeta
+        const nodeMetaType = metadataNodeMeta.type as string | undefined;
+        if (nodeMetaType && isNodeTypes(nodeMetaType)) {
+          finalNodeType = nodeMetaType;
+        } else {
+          // Fallback: try to infer from group or other metadata
+          const group = metadataNodeMeta.group as string | undefined;
+          if (group === 'source') finalNodeType = 'awsEventBridgeSource';
+          else if (group === 'destination') finalNodeType = 'awsEventBridgeDestination';
+          else if (group === 'general' || group === 'enrichment') finalNodeType = 'awsEventBridgeEnrichment';
+          else finalNodeType = convertToNodeTypesEnum(type as NodeType);
+        }
+      } else if (type === 'webhook' && metadataNodeMeta) {
+        // Map Prisma 'webhook' type to React Flow webhook types based on metadata
+        const nodeMetaType = metadataNodeMeta.type as string | undefined;
+        if (nodeMetaType && isNodeTypes(nodeMetaType)) {
+          finalNodeType = nodeMetaType;
+        } else {
+          // Fallback: try to infer from group or other metadata
+          const group = metadataNodeMeta.group as string | undefined;
+          if (group === 'source') finalNodeType = 'webhookSource';
+          else if (group === 'destination') finalNodeType = 'webhookDestination';
+          else if (group === 'general' || group === 'enrichment') finalNodeType = 'webhookEnrichment';
+          else finalNodeType = convertToNodeTypesEnum(type as NodeType);
+        }
+      } else {
+        finalNodeType = convertToNodeTypesEnum(type as NodeType);
       }
 
-      const nodeMeta = rawMetadata?.nodeMeta || nodeMetaMap[nodeType];
+      // Parse position from JsonValue
+      const position = validatePosition(prismaNode.position);
 
-      const uxMeta = rawMetadata?.uxMeta || {
-        heading: prismaNode.name,
-        isExpanded: false,
-        layer: 0,
-        isLocked: false,
-        rotation: 0,
-      };
+      // Parse uxMeta safely
+      const uxMetaObj = metadataObj.uxMeta && typeof metadataObj.uxMeta === 'object'
+        ? metadataObj.uxMeta as Record<string, unknown>
+        : {};
+
+      const nodeMeta = nodeMetaMap[finalNodeType];
 
       // Keep original data structure including the original rfId
       const prismaData = {
         ...prismaNode,
-        type: nodeType as NodeType,
+        type: finalNodeType as NodeType,
+      };
+
+      const uxMeta = {
+        heading: String(uxMetaObj.heading || prismaNode.name || ''),
+        isExpanded: Boolean(uxMetaObj.isExpanded ?? false),
+        layer: Number(uxMetaObj.layer ?? 0),
+        isLocked: Boolean(uxMetaObj.isLocked ?? false),
+        rotation: Number(uxMetaObj.rotation ?? 0),
       };
 
       return {
         id: prismaNode.id,
-        type: nodeType,
-        position: prismaNode.position || { x: 0, y: 0 },
+        type: finalNodeType,
+        position,
         data: {
           ...baseNodeData,
-          type: nodeType,
-          metadata: rawMetadata || {},
+          type: finalNodeType,
+          position, // XYPosition for React Flow
+          metadata: (metadataObj || null) as Prisma.JsonValue | null,
           uxMeta,
           nodeMeta,
-          formFields: rawMetadata?.formFields || {},
-          isEnabled: true,
+          formFields: ((metadataObj.formFields as Record<string, unknown>) || {}) as Prisma.JsonValue,
+          isEnabled: Boolean(metadataObj.isEnabled ?? true),
           prismaData,
         },
         uxMeta,
         nodeMeta,
-        nodeType,
+        nodeType: finalNodeType,
       };
     });
   }, [flowData?.flow?.nodes]);
@@ -122,12 +139,9 @@ export const useReactFlowSetup = (
   const initialEdges = useMemo(() => {
     if (!flowData?.flow?.edges) return [];
 
-    return flowData.flow.edges.map((prismaEdge: any): FbEdge => {
+    return flowData.flow.edges.map((prismaEdge): FbEdge => {
       const {
         flowId,
-        flow,
-        sourceNode,
-        targetNode,
         metadata: rawMetadata,
         ...baseEdgeData
       } = prismaEdge;
@@ -140,8 +154,8 @@ export const useReactFlowSetup = (
         type: prismaEdge.type,
         data: {
           ...baseEdgeData,
-          metadata: rawMetadata || {},
-          label: prismaEdge.name,
+          metadata: (rawMetadata || {}) as Prisma.JsonValue,
+          label: prismaEdge.label ?? '',
           prismaData: prismaEdge,
         },
       };
@@ -154,7 +168,10 @@ export const useReactFlowSetup = (
   const onConnect = useCallback(
     (connection: Connection) => {
       const edgeId = getEdgeId(); // New edges get edge_xxx id
-      setEdges((eds) => addEdge({ ...connection, id: edgeId }, eds));
+      setEdges((eds) => {
+        const newEdge = addEdge({ ...connection, id: edgeId }, eds);
+        return newEdge;
+      });
     },
     [setEdges],
   );
@@ -166,60 +183,73 @@ export const useReactFlowSetup = (
 
   const onDrop = useCallback(
     (event: React.DragEvent<HTMLDivElement>) => {
-      event.preventDefault();
-      if (!dndType) return;
+      try {
+        event.preventDefault();
 
-      const position = screenToFlowPosition({
-        x: event.clientX,
-        y: event.clientY,
-      });
+        if (!dndType) {
+          return;
+        }
 
-      const nodeType = dndType as keyof typeof NodeTypesEnum;
-      const nodeMeta = nodeMetaMap[nodeType];
-      if (!nodeMeta) {
-        console.error(`No meta information found for node type: ${nodeType}`);
-        return;
+        const position = screenToFlowPosition({
+          x: event.clientX,
+          y: event.clientY,
+        });
+
+        if (!dndType) return;
+
+        const nodeType = convertToNodeTypesEnum(dndType as NodeType);
+
+        const nodeMeta = nodeMetaMap[nodeType];
+        if (!nodeMeta) {
+          console.error(`No meta information found for node type: ${nodeType}`);
+          return;
+        }
+
+        const nodeId = getId();
+        const uxMeta = {
+          heading: nodeMeta.displayName,
+          isExpanded: false,
+          layer: 0,
+          isLocked: false,
+          rotation: 0,
+        };
+
+        const nodeData: FbNodeData = {
+          id: nodeId,
+          type: nodeType,
+          name: nodeMeta.displayName,
+          arn: null,
+          infrastructureId: null,
+          position: { x: 0, y: 0 }, // Default position for new nodes
+          metadata: {},
+          rfId: nodeId, // Set rfId to the original node_xxx ID
+          deleted: false,
+          uxMeta,
+          nodeMeta,
+          isEnabled: true,
+          formFields: {},
+        };
+
+        const newNode: FbNode = {
+          id: nodeId,
+          type: nodeType,
+          position,
+          data: {
+            ...nodeData,
+            rfId: nodeId, // Ensure rfId matches the original node_xxx ID
+          },
+          uxMeta,
+          nodeMeta,
+          nodeType,
+        };
+
+        setNodes((nds) => {
+          return [...nds, newNode];
+        });
+      } catch (error) {
+        console.error('Error in onDrop:', error);
+        throw error;
       }
-
-      const nodeId = getId();
-      const uxMeta = {
-        heading: nodeMeta.displayName,
-        isExpanded: false,
-        layer: 0,
-        isLocked: false,
-        rotation: 0,
-      };
-
-      const nodeData: FbNodeData = {
-        id: nodeId,
-        type: nodeType,
-        name: nodeMeta.displayName,
-        arn: null,
-        infrastructureId: null,
-        position: null,
-        metadata: {},
-        rfId: nodeId, // Set rfId to the original node_xxx ID
-        deleted: false,
-        uxMeta,
-        nodeMeta,
-        isEnabled: true,
-        formFields: {},
-      };
-
-      const newNode: FbNode = {
-        id: nodeId,
-        type: nodeType,
-        position,
-        data: {
-          ...nodeData,
-          rfId: nodeId, // Ensure rfId matches the original node_xxx ID
-        },
-        uxMeta,
-        nodeMeta,
-        nodeType,
-      };
-
-      setNodes((nds) => [...nds, newNode]);
     },
     [dndType, screenToFlowPosition, setNodes],
   );
@@ -240,7 +270,13 @@ export const useReactFlowSetup = (
     onDrop,
     nodeDragThreshold: 1,
     edgesReconnectable: true,
-    defaultViewport: flowData?.flow?.viewport || { x: 0, y: 0, zoom: 1 },
+    defaultViewport: (typeof flowData?.flow?.viewport === 'object' &&
+      flowData?.flow?.viewport !== null &&
+      'x' in flowData.flow.viewport &&
+      'y' in flowData.flow.viewport &&
+      'zoom' in flowData.flow.viewport
+        ? (flowData.flow.viewport as { x: number; y: number; zoom: number })
+        : { x: 0, y: 0, zoom: 1 }),
   };
 
   return {

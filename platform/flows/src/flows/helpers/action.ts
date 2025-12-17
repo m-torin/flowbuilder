@@ -6,16 +6,13 @@ import {
   type Edge as PrismaEdge,
   type Flow as PrismaFlow,
   type Node as PrismaNode,
-  type FlowMethod,
   Prisma,
 } from '@prisma/client';
+
+import { FlowMethod, NodeType, EdgeType } from '@prisma/client';
 import type { FbEdge, FbNode } from '../types';
 
 // Helper types for Prisma JSON handling
-type PrismaJsonInput =
-  | Prisma.InputJsonValue
-  | Prisma.NullableJsonNullValueInput
-  | undefined;
 type NodeCreateData = Prisma.NodeUncheckedCreateInput;
 type NodeUpdateData = Prisma.NodeUncheckedUpdateInput;
 type EdgeCreateData = Prisma.EdgeUncheckedCreateInput;
@@ -24,9 +21,8 @@ type EdgeUpdateData = Prisma.EdgeUncheckedUpdateInput;
 // Helper function to convert JsonValue to Prisma's expected input type
 const toPrismaJson = (
   value: Prisma.JsonValue | null | undefined,
-): PrismaJsonInput => {
-  if (value === null) return Prisma.JsonNull;
-  if (value === undefined) return undefined;
+): Prisma.InputJsonValue | Prisma.NullableJsonNullValueInput | undefined => {
+  if (value === null || value === undefined) return Prisma.JsonNull;
   return value as Prisma.InputJsonValue;
 };
 
@@ -219,7 +215,7 @@ export const upsertFlowAction = async (
                 infrastructureId: node.create.infrastructureId ?? null,
                 metadata: toPrismaJson(node.create.metadata),
                 position: toPrismaJson(node.create.position),
-                type: node.create.type ?? 'default',
+                type: (node.create.type ?? NodeType.default) as NodeType,
               };
 
               const nodeUpdate: NodeUpdateData = {
@@ -247,7 +243,7 @@ export const upsertFlowAction = async (
                 metadata: toPrismaJson(edge.create.metadata),
                 sourceNodeId: edge.create.sourceNodeId,
                 targetNodeId: edge.create.targetNodeId,
-                type: edge.create.type ?? 'default',
+                type: (edge.create.type ?? EdgeType.default) as EdgeType,
               };
 
               const edgeUpdate: EdgeUpdateData = {

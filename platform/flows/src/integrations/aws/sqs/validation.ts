@@ -744,7 +744,7 @@ export const validateCrossAccountAccess = (policy: string): void => {
     const parsedPolicy = JSON.parse(policy);
     // Implement cross-account access validations
     // Example: Ensure only specific AWS accounts are granted access
-    const allowedAccounts = ['123456789012']; // Replace with actual account IDs
+    const allowedAccounts = process.env.AWS_ACCOUNT_ID ? [process.env.AWS_ACCOUNT_ID] : []; // Use environment variable
     parsedPolicy.Statement.forEach((statement: any) => {
       const principals = statement.Principal?.AWS;
       if (principals) {
@@ -789,7 +789,7 @@ export const validatePolicyStatements = (policy: string): void => {
       });
 
       // Restrict principals to specific services or accounts
-      const allowedPrincipals = ['arn:aws:iam::123456789012:root']; // Example
+      const allowedPrincipals = process.env.AWS_ACCOUNT_ID ? [`arn:aws:iam::${process.env.AWS_ACCOUNT_ID}:root`] : []; // Use environment variable
       const principals = Array.isArray(statement.Principal?.AWS)
         ? statement.Principal.AWS
         : statement.Principal?.AWS

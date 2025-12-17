@@ -23,14 +23,14 @@ export const upsertSecrets = async (
     const createPayload = {
       ...data,
       flowId,
-      metadata: data.metadata ?? Prisma.DbNull, // Handle metadata appropriately
+      metadata: data.metadata ? (data.metadata as Prisma.InputJsonValue) : Prisma.JsonNull,
     };
 
     await tx.secret.upsert({
       where: { id: secret.id },
       update: {
         ...data,
-        metadata: data.metadata ?? Prisma.DbNull, // Handle metadata appropriately
+        metadata: data.metadata ? (data.metadata as Prisma.InputJsonValue) : Prisma.JsonNull,
       },
       create: createPayload,
     });

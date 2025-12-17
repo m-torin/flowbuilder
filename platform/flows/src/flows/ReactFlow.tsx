@@ -16,7 +16,7 @@ import { useField } from '@mantine/form';
 import { useReactFlowSetup } from './propHandlers';
 import { useAppContext } from '#/appDomain/flow/[cuid]/FlowProvider';
 import { FlowAside } from './ui/rightSidebar';
-import { rfNodeTypes } from './nodes';
+import { rfNodeTypes, nodeMetaMap } from './nodes';
 import { CustomControls, MiniMapNode } from './ui';
 import { FbEdge, FbNode } from './types';
 import { FlowMethod } from '@prisma/client';
@@ -97,34 +97,69 @@ export const ReactFlow12: React.FC = () => {
       const currentFlow = reactFlowInstance.toObject();
 
       // Transform nodes to ensure required properties
-      const validatedNodes = currentFlow.nodes.map((node) => ({
-        ...node,
-        // Ensure type is always defined
-        type: node.type || 'default',
-        data: {
-          ...node.data,
-          // Ensure required data properties
-          type: node.data.type || 'default',
-          nodeMeta: {
-            ...node.data.nodeMeta,
-            type: node.data.nodeMeta?.type || 'default',
+      const validatedNodes = currentFlow.nodes.map((node) => {
+        // Get nodeMeta from node.data.nodeMeta or fallback to nodeMetaMap
+        const existingNodeMeta = node.data?.nodeMeta;
+        const nodeType = node.type || node.data?.type || 'default';
+        const fallbackNodeMeta = nodeMetaMap[nodeType] || nodeMetaMap['default'] || {
+          displayName: 'Default Node',
+          group: 'Default',
+          icon: 'IconSquare',
+          color: 'gray',
+          type: 'default',
+        };
+
+        // Ensure nodeMeta has all required fields
+        const nodeMeta = {
+          displayName: existingNodeMeta?.displayName || fallbackNodeMeta.displayName || 'Default Node',
+          group: existingNodeMeta?.group || fallbackNodeMeta.group || 'Default',
+          icon: existingNodeMeta?.icon || fallbackNodeMeta.icon || 'IconSquare',
+          color: existingNodeMeta?.color || fallbackNodeMeta.color || 'gray',
+          type: existingNodeMeta?.type || nodeType,
+        };
+
+        // Ensure prismaData exists with required fields
+        // For new nodes (node_xxx IDs), use the node.id as prismaData.id
+        // For existing nodes, use the existing prismaData.id or node.id
+        const existingPrismaData = node.data?.prismaData || {};
+        const prismaDataWithRequiredFields = {
+          ...existingPrismaData,
+          id: existingPrismaData.id || node.id, // Use node.id if prismaData.id is missing
+          type: existingPrismaData.type || nodeType,
+        };
+
+        return {
+          ...node,
+          // Ensure type is always defined
+          type: nodeType,
+          data: {
+            ...node.data,
+            // Ensure required data properties
+            type: nodeType,
+            nodeMeta,
+            // Ensure other required properties
+            name: node.data?.name || null,
+            metadata: node.data?.metadata || {},
+            isEnabled: node.data?.isEnabled ?? true,
+            prismaData: prismaDataWithRequiredFields,
           },
-          // Ensure other required properties
-          name: node.data.name || null,
-          metadata: node.data.metadata || {},
-          isEnabled: node.data.isEnabled ?? true,
-        },
-        // Ensure position is defined
-        position: node.position || { x: 0, y: 0 },
-      }));
+          // Ensure position is defined
+          position: node.position || { x: 0, y: 0 },
+        };
+      });
+
+      // Ensure viewport is included (required by schema)
+      const viewport = reactFlowInstance.getViewport();
+      const flowDataWithViewport = {
+        ...currentFlow,
+        nodes: validatedNodes,
+        viewport: viewport || { x: 0, y: 0, zoom: 1 },
+      };
 
       const payload = {
         flowId,
         instanceId,
-        flowData: {
-          ...currentFlow,
-          nodes: validatedNodes,
-        },
+        flowData: flowDataWithViewport,
         updatedFlow: {
           name: flowNameField.getValue(),
           method: prismaData.flow.method ?? FlowMethod.observable,

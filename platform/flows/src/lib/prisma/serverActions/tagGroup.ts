@@ -7,7 +7,7 @@ import {
   updateTagGroup,
   deleteTagGroup,
 } from '#/lib/prisma/ormApi/tagGroup';
-import { TagGroup } from '@prisma/client';
+import { TagGroup, MantineColor, Prisma } from '@prisma/client';
 
 /**
  * Fetches a TagGroup by its unique identifier and instance ID.
@@ -45,7 +45,7 @@ export const createTagGroupAction = async (
     return await createTagGroup(
       {
         name: data.name,
-        color: data.color,
+        color: data.color as MantineColor,
       },
       instanceId,
     );
@@ -86,7 +86,11 @@ export const updateTagGroupAction = async (
   data: { name?: string; color?: string },
 ): Promise<TagGroup> => {
   try {
-    const updatedTagGroup = await updateTagGroup(tagGroupId, instanceId, data);
+    const updateData: Prisma.TagGroupUpdateInput = {
+      ...(data.name && { name: data.name }),
+      ...(data.color && { color: data.color as MantineColor }),
+    };
+    const updatedTagGroup = await updateTagGroup(tagGroupId, instanceId, updateData);
     if (!updatedTagGroup)
       throw new Error('TagGroup not found or update failed.');
     return updatedTagGroup;

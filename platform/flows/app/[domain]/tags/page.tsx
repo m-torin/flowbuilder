@@ -42,7 +42,9 @@ async function TagsPage({ params }: TagsPageProps) {
           createdAt: tag.tagGroup.createdAt,
           updatedAt: tag.tagGroup.updatedAt,
           instanceId: tag.tagGroup.instanceId,
-          metadata: (tag.tagGroup.metadata as Prisma.JsonValue) || null,
+          metadata: typeof tag.tagGroup.metadata === 'string'
+            ? tag.tagGroup.metadata
+            : JSON.stringify(tag.tagGroup.metadata || {}),
         }
       : null,
   }));

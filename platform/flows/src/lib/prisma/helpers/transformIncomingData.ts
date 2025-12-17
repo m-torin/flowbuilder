@@ -1,12 +1,6 @@
 // transformIncomingData.ts
 
-import {
-  Prisma,
-  NodeType,
-  EdgeType,
-  FlowMethod,
-  SecretCategory,
-} from '@prisma/client';
+import { Prisma, NodeType, EdgeType, FlowMethod, SecretCategory } from '@prisma/client';
 
 type FlowCreateInput = Prisma.FlowCreateInput;
 
@@ -88,18 +82,15 @@ export const transformIncomingData = (
   // Transform nodes
   const transformedNodes = nodes.map((node) => ({
     id: node.id,
-    type: node.type,
-    position:
-      node.position !== null && node.position !== undefined
-        ? node.position
-        : Prisma.DbNull,
+    type: node.type as NodeType,
+    position: node.position ?? Prisma.JsonNull,
     createdAt: node.createdAt,
     updatedAt: node.updatedAt,
     arn: node.arn,
     infrastructureId: node.infrastructureId,
     name: node.name,
     rfId: node.rfId,
-    metadata: node.metadata ?? Prisma.DbNull,
+    metadata: node.metadata ?? Prisma.JsonNull,
     deleted: node.deleted,
   }));
 
@@ -111,12 +102,14 @@ export const transformIncomingData = (
     rfId: edge.rfId ?? null,
     name: edge.name ?? null,
     isActive: edge.isActive ?? false,
-    type: edge.type ?? EdgeType.default,
+    type: (edge.type ?? EdgeType.default) as EdgeType,
     normalizedKey: edge.normalizedKey ?? null,
-    metadata: edge.metadata ?? Prisma.DbNull,
+    metadata: edge.metadata ?? Prisma.JsonNull,
     createdAt: new Date(),
     updatedAt: new Date(),
     deleted: false,
+    sourceNode: { connect: { id: edge.sourceNodeId } },
+    targetNode: { connect: { id: edge.targetNodeId } },
   }));
 
   // Transform secrets if available
@@ -147,7 +140,7 @@ export const transformIncomingData = (
     secrets: {
       create: transformedSecrets,
     },
-    viewport: viewport ?? Prisma.DbNull,
+    viewport: viewport ?? Prisma.JsonNull,
   };
 
   return transformedFlowData;

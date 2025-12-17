@@ -1,22 +1,23 @@
-// middleware/cache/types.ts
-import type { MiddlewareContext } from '../base';
-
-export interface CacheOptions {
-  ttl?: number;
-  keyPrefix?: string;
-  keyGenerator?: (context: MiddlewareContext) => string;
-  serialize?: (data: unknown) => string;
-  deserialize?: (data: string) => unknown;
+// cache/types.ts
+export interface CacheEntry<T = unknown> {
+  value: T;
+  expiresAt: number;
+  metadata?: Record<string, unknown>;
 }
 
 export interface CacheProvider {
-  get(key: string): Promise<string | null>;
-  set(key: string, value: string, ttl?: number): Promise<void>;
+  get<T>(key: string): Promise<CacheEntry<T> | null>;
+  set<T>(key: string, value: T, ttl: number): Promise<void>;
   delete(key: string): Promise<void>;
+  clear(): Promise<void>;
+  has(key: string): Promise<boolean>;
 }
 
-export interface CacheMetadata {
-  hit: boolean;
-  key: string;
+export interface CacheOptions {
+  enabled?: boolean;
+  keyPrefix?: string;
   ttl?: number;
+  serialize?: (value: unknown) => string;
+  deserialize?: (value: string) => unknown;
 }
+

@@ -1,5 +1,5 @@
 import { prisma } from '#/lib/prisma/client';
-import { Flow, Node, NodeType, Prisma } from '@prisma/client';
+import { Flow, Node, Prisma, NodeType } from '@prisma/client';
 
 /**
  * Fetches all nodes from the database.

@@ -116,7 +116,9 @@ export function AppNav() {
                       Their food sources have decreased, and their numbers
                     </Text>
                   </div>
-                  <Button variant="default">Create flow</Button>
+                  <Button variant="default" component={Link} href="/flows/new">
+                    Create flow
+                  </Button>
                 </Group>
               </div>
             </HoverCard.Dropdown>

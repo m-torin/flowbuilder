@@ -5,9 +5,10 @@ import {
   Node,
   Secret,
   Tag,
-  FlowMethod,
-  SecretCategory,
 } from '#/lib/prisma';
+// FlowMethod and SecretCategory are now string types (SQLite compatibility)
+type FlowMethod = string;
+type SecretCategory = string;
 import { UseFormReturnType } from '@mantine/form';
 import { ReactNode, MutableRefObject } from 'react';
 import { Viewport } from '@xyflow/react';

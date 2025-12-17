@@ -50,17 +50,28 @@ function getNodeMeta(type: keyof typeof NodeTypesEnum): MetaType {
 
 /**
  * Safely validates and returns position data
+ * Handles Prisma JsonValue (object) or legacy string format
  */
-function validatePosition(position: unknown): XYPosition {
+export function validatePosition(position: unknown): XYPosition {
+  // Handle legacy string format (defensive programming)
+  let parsedPosition: unknown = position;
+  if (typeof position === 'string') {
+    try {
+      parsedPosition = JSON.parse(position);
+    } catch {
+      return { x: 0, y: 0 };
+    }
+  }
+
   if (
-    typeof position === 'object' &&
-    position !== null &&
-    'x' in position &&
-    'y' in position &&
-    typeof position.x === 'number' &&
-    typeof position.y === 'number'
+    typeof parsedPosition === 'object' &&
+    parsedPosition !== null &&
+    'x' in parsedPosition &&
+    'y' in parsedPosition &&
+    typeof parsedPosition.x === 'number' &&
+    typeof parsedPosition.y === 'number'
   ) {
-    return position as XYPosition;
+    return parsedPosition as XYPosition;
   }
   return { x: 0, y: 0 };
 }
@@ -69,7 +80,17 @@ function validatePosition(position: unknown): XYPosition {
  * Parse stored metadata with type safety
  */
 function parseStoredNodeMetadata(rawMetadata: unknown): StoredNodeMetadata {
-  const metadata = (rawMetadata as Record<string, unknown>) || {};
+  // Handle Prisma JsonValue (object) or legacy string format
+  let metadata: Record<string, unknown>;
+  if (typeof rawMetadata === 'string') {
+    try {
+      metadata = JSON.parse(rawMetadata) || {};
+    } catch {
+      metadata = {};
+    }
+  } else {
+    metadata = (rawMetadata as Record<string, unknown>) || {};
+  }
   const uxMeta = (metadata.uxMeta as Record<string, unknown>) || {};
 
   return {
@@ -119,12 +140,15 @@ function createFbNode(node: PrismaNode): FbNode {
   const nodeMeta = getNodeMeta(nodeType);
   const storedMetadata = parseStoredNodeMetadata(node.metadata);
 
+  // Parse position from Prisma JsonValue
+  const position = validatePosition(node.position);
+
   const nodeData: FbNodeData = {
     arn: node.arn,
     deleted: node.deleted,
     id: node.id,
     infrastructureId: node.infrastructureId,
-    position: validatePosition(node.position),
+    position, // XYPosition for React Flow (not Prisma's string)
     rfId: node.rfId,
     type: nodeType,
     uxMeta: storedMetadata.uxMeta,

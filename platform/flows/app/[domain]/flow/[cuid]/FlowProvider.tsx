@@ -13,7 +13,9 @@ import {
   FlowProviderProps,
   FormSecret,
 } from './types';
-import { Flow, FlowMethod } from '#/lib/prisma';
+import { Flow } from '#/lib/prisma';
+// FlowMethod is now a string type (SQLite compatibility)
+import { FlowMethod } from '@prisma/client';
 
 // Create Mantine's Form Context
 const [FormProvider, useFormContextHook, useFormHook] =

@@ -866,9 +866,9 @@ export const TagOptionalDefaultsWithRelationsSchema: z.ZodType<TagOptionalDefaul
 /////////////////////////////////////////
 
 export const TagGroupSchema = z.object({
+  color: MantineColorSchema,
   id: z.string().cuid(),
   name: z.string(),
-  color: z.string(),
   deleted: z.boolean(),
   createdAt: z.coerce.date(),
   updatedAt: z.coerce.date(),
@@ -2904,7 +2904,7 @@ export const TagGroupWhereInputSchema: z.ZodType<Prisma.TagGroupWhereInput> = z.
   NOT: z.union([ z.lazy(() => TagGroupWhereInputSchema),z.lazy(() => TagGroupWhereInputSchema).array() ]).optional(),
   id: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
   name: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
-  color: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
+  color: z.union([ z.lazy(() => EnumMantineColorFilterSchema),z.lazy(() => MantineColorSchema) ]).optional(),
   deleted: z.union([ z.lazy(() => BoolFilterSchema),z.boolean() ]).optional(),
   createdAt: z.union([ z.lazy(() => DateTimeFilterSchema),z.coerce.date() ]).optional(),
   updatedAt: z.union([ z.lazy(() => DateTimeFilterSchema),z.coerce.date() ]).optional(),
@@ -2946,7 +2946,7 @@ export const TagGroupWhereUniqueInputSchema: z.ZodType<Prisma.TagGroupWhereUniqu
   OR: z.lazy(() => TagGroupWhereInputSchema).array().optional(),
   NOT: z.union([ z.lazy(() => TagGroupWhereInputSchema),z.lazy(() => TagGroupWhereInputSchema).array() ]).optional(),
   name: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
-  color: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
+  color: z.union([ z.lazy(() => EnumMantineColorFilterSchema),z.lazy(() => MantineColorSchema) ]).optional(),
   deleted: z.union([ z.lazy(() => BoolFilterSchema),z.boolean() ]).optional(),
   createdAt: z.union([ z.lazy(() => DateTimeFilterSchema),z.coerce.date() ]).optional(),
   updatedAt: z.union([ z.lazy(() => DateTimeFilterSchema),z.coerce.date() ]).optional(),
@@ -2976,7 +2976,7 @@ export const TagGroupScalarWhereWithAggregatesInputSchema: z.ZodType<Prisma.TagG
   NOT: z.union([ z.lazy(() => TagGroupScalarWhereWithAggregatesInputSchema),z.lazy(() => TagGroupScalarWhereWithAggregatesInputSchema).array() ]).optional(),
   id: z.union([ z.lazy(() => StringWithAggregatesFilterSchema),z.string() ]).optional(),
   name: z.union([ z.lazy(() => StringWithAggregatesFilterSchema),z.string() ]).optional(),
-  color: z.union([ z.lazy(() => StringWithAggregatesFilterSchema),z.string() ]).optional(),
+  color: z.union([ z.lazy(() => EnumMantineColorWithAggregatesFilterSchema),z.lazy(() => MantineColorSchema) ]).optional(),
   deleted: z.union([ z.lazy(() => BoolWithAggregatesFilterSchema),z.boolean() ]).optional(),
   createdAt: z.union([ z.lazy(() => DateTimeWithAggregatesFilterSchema),z.coerce.date() ]).optional(),
   updatedAt: z.union([ z.lazy(() => DateTimeWithAggregatesFilterSchema),z.coerce.date() ]).optional(),
@@ -4516,7 +4516,7 @@ export const TagUncheckedUpdateManyInputSchema: z.ZodType<Prisma.TagUncheckedUpd
 export const TagGroupCreateInputSchema: z.ZodType<Prisma.TagGroupCreateInput> = z.object({
   id: z.string().cuid().optional(),
   name: z.string(),
-  color: z.string(),
+  color: z.lazy(() => MantineColorSchema),
   deleted: z.boolean().optional(),
   createdAt: z.coerce.date().optional(),
   updatedAt: z.coerce.date().optional(),
@@ -4528,7 +4528,7 @@ export const TagGroupCreateInputSchema: z.ZodType<Prisma.TagGroupCreateInput> = 
 export const TagGroupUncheckedCreateInputSchema: z.ZodType<Prisma.TagGroupUncheckedCreateInput> = z.object({
   id: z.string().cuid().optional(),
   name: z.string(),
-  color: z.string(),
+  color: z.lazy(() => MantineColorSchema),
   deleted: z.boolean().optional(),
   createdAt: z.coerce.date().optional(),
   updatedAt: z.coerce.date().optional(),
@@ -4540,7 +4540,7 @@ export const TagGroupUncheckedCreateInputSchema: z.ZodType<Prisma.TagGroupUnchec
 export const TagGroupUpdateInputSchema: z.ZodType<Prisma.TagGroupUpdateInput> = z.object({
   id: z.union([ z.string().cuid(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
   name: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
-  color: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  color: z.union([ z.lazy(() => MantineColorSchema),z.lazy(() => EnumMantineColorFieldUpdateOperationsInputSchema) ]).optional(),
   deleted: z.union([ z.boolean(),z.lazy(() => BoolFieldUpdateOperationsInputSchema) ]).optional(),
   createdAt: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
   updatedAt: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
@@ -4552,7 +4552,7 @@ export const TagGroupUpdateInputSchema: z.ZodType<Prisma.TagGroupUpdateInput> = 
 export const TagGroupUncheckedUpdateInputSchema: z.ZodType<Prisma.TagGroupUncheckedUpdateInput> = z.object({
   id: z.union([ z.string().cuid(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
   name: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
-  color: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  color: z.union([ z.lazy(() => MantineColorSchema),z.lazy(() => EnumMantineColorFieldUpdateOperationsInputSchema) ]).optional(),
   deleted: z.union([ z.boolean(),z.lazy(() => BoolFieldUpdateOperationsInputSchema) ]).optional(),
   createdAt: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
   updatedAt: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
@@ -4564,7 +4564,7 @@ export const TagGroupUncheckedUpdateInputSchema: z.ZodType<Prisma.TagGroupUnchec
 export const TagGroupCreateManyInputSchema: z.ZodType<Prisma.TagGroupCreateManyInput> = z.object({
   id: z.string().cuid().optional(),
   name: z.string(),
-  color: z.string(),
+  color: z.lazy(() => MantineColorSchema),
   deleted: z.boolean().optional(),
   createdAt: z.coerce.date().optional(),
   updatedAt: z.coerce.date().optional(),
@@ -4575,7 +4575,7 @@ export const TagGroupCreateManyInputSchema: z.ZodType<Prisma.TagGroupCreateManyI
 export const TagGroupUpdateManyMutationInputSchema: z.ZodType<Prisma.TagGroupUpdateManyMutationInput> = z.object({
   id: z.union([ z.string().cuid(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
   name: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
-  color: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  color: z.union([ z.lazy(() => MantineColorSchema),z.lazy(() => EnumMantineColorFieldUpdateOperationsInputSchema) ]).optional(),
   deleted: z.union([ z.boolean(),z.lazy(() => BoolFieldUpdateOperationsInputSchema) ]).optional(),
   createdAt: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
   updatedAt: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
@@ -4585,7 +4585,7 @@ export const TagGroupUpdateManyMutationInputSchema: z.ZodType<Prisma.TagGroupUpd
 export const TagGroupUncheckedUpdateManyInputSchema: z.ZodType<Prisma.TagGroupUncheckedUpdateManyInput> = z.object({
   id: z.union([ z.string().cuid(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
   name: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
-  color: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  color: z.union([ z.lazy(() => MantineColorSchema),z.lazy(() => EnumMantineColorFieldUpdateOperationsInputSchema) ]).optional(),
   deleted: z.union([ z.boolean(),z.lazy(() => BoolFieldUpdateOperationsInputSchema) ]).optional(),
   createdAt: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
   updatedAt: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
@@ -6075,6 +6075,13 @@ export const TagSumOrderByAggregateInputSchema: z.ZodType<Prisma.TagSumOrderByAg
   id: z.lazy(() => SortOrderSchema).optional()
 }).strict();
 
+export const EnumMantineColorFilterSchema: z.ZodType<Prisma.EnumMantineColorFilter> = z.object({
+  equals: z.lazy(() => MantineColorSchema).optional(),
+  in: z.lazy(() => MantineColorSchema).array().optional(),
+  notIn: z.lazy(() => MantineColorSchema).array().optional(),
+  not: z.union([ z.lazy(() => MantineColorSchema),z.lazy(() => NestedEnumMantineColorFilterSchema) ]).optional(),
+}).strict();
+
 export const TagGroupIdInstanceIdCompoundUniqueInputSchema: z.ZodType<Prisma.TagGroupIdInstanceIdCompoundUniqueInput> = z.object({
   id: z.string(),
   instanceId: z.string()
@@ -6111,11 +6118,14 @@ export const TagGroupMinOrderByAggregateInputSchema: z.ZodType<Prisma.TagGroupMi
   instanceId: z.lazy(() => SortOrderSchema).optional()
 }).strict();
 
-export const EnumMantineColorFilterSchema: z.ZodType<Prisma.EnumMantineColorFilter> = z.object({
+export const EnumMantineColorWithAggregatesFilterSchema: z.ZodType<Prisma.EnumMantineColorWithAggregatesFilter> = z.object({
   equals: z.lazy(() => MantineColorSchema).optional(),
   in: z.lazy(() => MantineColorSchema).array().optional(),
   notIn: z.lazy(() => MantineColorSchema).array().optional(),
-  not: z.union([ z.lazy(() => MantineColorSchema),z.lazy(() => NestedEnumMantineColorFilterSchema) ]).optional(),
+  not: z.union([ z.lazy(() => MantineColorSchema),z.lazy(() => NestedEnumMantineColorWithAggregatesFilterSchema) ]).optional(),
+  _count: z.lazy(() => NestedIntFilterSchema).optional(),
+  _min: z.lazy(() => NestedEnumMantineColorFilterSchema).optional(),
+  _max: z.lazy(() => NestedEnumMantineColorFilterSchema).optional()
 }).strict();
 
 export const TestCaseCountOrderByAggregateInputSchema: z.ZodType<Prisma.TestCaseCountOrderByAggregateInput> = z.object({
@@ -6147,16 +6157,6 @@ export const TestCaseMinOrderByAggregateInputSchema: z.ZodType<Prisma.TestCaseMi
   name: z.lazy(() => SortOrderSchema).optional(),
   updatedAt: z.lazy(() => SortOrderSchema).optional(),
   deleted: z.lazy(() => SortOrderSchema).optional()
-}).strict();
-
-export const EnumMantineColorWithAggregatesFilterSchema: z.ZodType<Prisma.EnumMantineColorWithAggregatesFilter> = z.object({
-  equals: z.lazy(() => MantineColorSchema).optional(),
-  in: z.lazy(() => MantineColorSchema).array().optional(),
-  notIn: z.lazy(() => MantineColorSchema).array().optional(),
-  not: z.union([ z.lazy(() => MantineColorSchema),z.lazy(() => NestedEnumMantineColorWithAggregatesFilterSchema) ]).optional(),
-  _count: z.lazy(() => NestedIntFilterSchema).optional(),
-  _min: z.lazy(() => NestedEnumMantineColorFilterSchema).optional(),
-  _max: z.lazy(() => NestedEnumMantineColorFilterSchema).optional()
 }).strict();
 
 export const UserRelationFilterSchema: z.ZodType<Prisma.UserRelationFilter> = z.object({
@@ -7546,6 +7546,10 @@ export const TagUncheckedCreateNestedManyWithoutTagGroupInputSchema: z.ZodType<P
   connect: z.union([ z.lazy(() => TagWhereUniqueInputSchema),z.lazy(() => TagWhereUniqueInputSchema).array() ]).optional(),
 }).strict();
 
+export const EnumMantineColorFieldUpdateOperationsInputSchema: z.ZodType<Prisma.EnumMantineColorFieldUpdateOperationsInput> = z.object({
+  set: z.lazy(() => MantineColorSchema).optional()
+}).strict();
+
 export const TagUpdateManyWithoutTagGroupNestedInputSchema: z.ZodType<Prisma.TagUpdateManyWithoutTagGroupNestedInput> = z.object({
   create: z.union([ z.lazy(() => TagCreateWithoutTagGroupInputSchema),z.lazy(() => TagCreateWithoutTagGroupInputSchema).array(),z.lazy(() => TagUncheckedCreateWithoutTagGroupInputSchema),z.lazy(() => TagUncheckedCreateWithoutTagGroupInputSchema).array() ]).optional(),
   connectOrCreate: z.union([ z.lazy(() => TagCreateOrConnectWithoutTagGroupInputSchema),z.lazy(() => TagCreateOrConnectWithoutTagGroupInputSchema).array() ]).optional(),
@@ -7586,10 +7590,6 @@ export const FlowCreateNestedOneWithoutTestCasesInputSchema: z.ZodType<Prisma.Fl
   create: z.union([ z.lazy(() => FlowCreateWithoutTestCasesInputSchema),z.lazy(() => FlowUncheckedCreateWithoutTestCasesInputSchema) ]).optional(),
   connectOrCreate: z.lazy(() => FlowCreateOrConnectWithoutTestCasesInputSchema).optional(),
   connect: z.lazy(() => FlowWhereUniqueInputSchema).optional()
-}).strict();
-
-export const EnumMantineColorFieldUpdateOperationsInputSchema: z.ZodType<Prisma.EnumMantineColorFieldUpdateOperationsInput> = z.object({
-  set: z.lazy(() => MantineColorSchema).optional()
 }).strict();
 
 export const FlowUpdateOneRequiredWithoutTestCasesNestedInputSchema: z.ZodType<Prisma.FlowUpdateOneRequiredWithoutTestCasesNestedInput> = z.object({
@@ -9660,7 +9660,7 @@ export const TagCreateManyInstanceInputEnvelopeSchema: z.ZodType<Prisma.TagCreat
 export const TagGroupCreateWithoutInstanceInputSchema: z.ZodType<Prisma.TagGroupCreateWithoutInstanceInput> = z.object({
   id: z.string().cuid().optional(),
   name: z.string(),
-  color: z.string(),
+  color: z.lazy(() => MantineColorSchema),
   deleted: z.boolean().optional(),
   createdAt: z.coerce.date().optional(),
   updatedAt: z.coerce.date().optional(),
@@ -9671,7 +9671,7 @@ export const TagGroupCreateWithoutInstanceInputSchema: z.ZodType<Prisma.TagGroup
 export const TagGroupUncheckedCreateWithoutInstanceInputSchema: z.ZodType<Prisma.TagGroupUncheckedCreateWithoutInstanceInput> = z.object({
   id: z.string().cuid().optional(),
   name: z.string(),
-  color: z.string(),
+  color: z.lazy(() => MantineColorSchema),
   deleted: z.boolean().optional(),
   createdAt: z.coerce.date().optional(),
   updatedAt: z.coerce.date().optional(),
@@ -9790,7 +9790,7 @@ export const TagGroupScalarWhereInputSchema: z.ZodType<Prisma.TagGroupScalarWher
   NOT: z.union([ z.lazy(() => TagGroupScalarWhereInputSchema),z.lazy(() => TagGroupScalarWhereInputSchema).array() ]).optional(),
   id: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
   name: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
-  color: z.union([ z.lazy(() => StringFilterSchema),z.string() ]).optional(),
+  color: z.union([ z.lazy(() => EnumMantineColorFilterSchema),z.lazy(() => MantineColorSchema) ]).optional(),
   deleted: z.union([ z.lazy(() => BoolFilterSchema),z.boolean() ]).optional(),
   createdAt: z.union([ z.lazy(() => DateTimeFilterSchema),z.coerce.date() ]).optional(),
   updatedAt: z.union([ z.lazy(() => DateTimeFilterSchema),z.coerce.date() ]).optional(),
@@ -10545,7 +10545,7 @@ export const NodeCreateOrConnectWithoutTagInputSchema: z.ZodType<Prisma.NodeCrea
 export const TagGroupCreateWithoutTagsInputSchema: z.ZodType<Prisma.TagGroupCreateWithoutTagsInput> = z.object({
   id: z.string().cuid().optional(),
   name: z.string(),
-  color: z.string(),
+  color: z.lazy(() => MantineColorSchema),
   deleted: z.boolean().optional(),
   createdAt: z.coerce.date().optional(),
   updatedAt: z.coerce.date().optional(),
@@ -10556,7 +10556,7 @@ export const TagGroupCreateWithoutTagsInputSchema: z.ZodType<Prisma.TagGroupCrea
 export const TagGroupUncheckedCreateWithoutTagsInputSchema: z.ZodType<Prisma.TagGroupUncheckedCreateWithoutTagsInput> = z.object({
   id: z.string().cuid().optional(),
   name: z.string(),
-  color: z.string(),
+  color: z.lazy(() => MantineColorSchema),
   deleted: z.boolean().optional(),
   createdAt: z.coerce.date().optional(),
   updatedAt: z.coerce.date().optional(),
@@ -10720,7 +10720,7 @@ export const TagGroupUpdateToOneWithWhereWithoutTagsInputSchema: z.ZodType<Prism
 export const TagGroupUpdateWithoutTagsInputSchema: z.ZodType<Prisma.TagGroupUpdateWithoutTagsInput> = z.object({
   id: z.union([ z.string().cuid(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
   name: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
-  color: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  color: z.union([ z.lazy(() => MantineColorSchema),z.lazy(() => EnumMantineColorFieldUpdateOperationsInputSchema) ]).optional(),
   deleted: z.union([ z.boolean(),z.lazy(() => BoolFieldUpdateOperationsInputSchema) ]).optional(),
   createdAt: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
   updatedAt: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
@@ -10731,7 +10731,7 @@ export const TagGroupUpdateWithoutTagsInputSchema: z.ZodType<Prisma.TagGroupUpda
 export const TagGroupUncheckedUpdateWithoutTagsInputSchema: z.ZodType<Prisma.TagGroupUncheckedUpdateWithoutTagsInput> = z.object({
   id: z.union([ z.string().cuid(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
   name: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
-  color: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  color: z.union([ z.lazy(() => MantineColorSchema),z.lazy(() => EnumMantineColorFieldUpdateOperationsInputSchema) ]).optional(),
   deleted: z.union([ z.boolean(),z.lazy(() => BoolFieldUpdateOperationsInputSchema) ]).optional(),
   createdAt: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
   updatedAt: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
@@ -12194,7 +12194,7 @@ export const TagCreateManyInstanceInputSchema: z.ZodType<Prisma.TagCreateManyIns
 export const TagGroupCreateManyInstanceInputSchema: z.ZodType<Prisma.TagGroupCreateManyInstanceInput> = z.object({
   id: z.string().cuid().optional(),
   name: z.string(),
-  color: z.string(),
+  color: z.lazy(() => MantineColorSchema),
   deleted: z.boolean().optional(),
   createdAt: z.coerce.date().optional(),
   updatedAt: z.coerce.date().optional(),
@@ -12293,7 +12293,7 @@ export const TagUncheckedUpdateManyWithoutInstanceInputSchema: z.ZodType<Prisma.
 export const TagGroupUpdateWithoutInstanceInputSchema: z.ZodType<Prisma.TagGroupUpdateWithoutInstanceInput> = z.object({
   id: z.union([ z.string().cuid(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
   name: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
-  color: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  color: z.union([ z.lazy(() => MantineColorSchema),z.lazy(() => EnumMantineColorFieldUpdateOperationsInputSchema) ]).optional(),
   deleted: z.union([ z.boolean(),z.lazy(() => BoolFieldUpdateOperationsInputSchema) ]).optional(),
   createdAt: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
   updatedAt: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
@@ -12304,7 +12304,7 @@ export const TagGroupUpdateWithoutInstanceInputSchema: z.ZodType<Prisma.TagGroup
 export const TagGroupUncheckedUpdateWithoutInstanceInputSchema: z.ZodType<Prisma.TagGroupUncheckedUpdateWithoutInstanceInput> = z.object({
   id: z.union([ z.string().cuid(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
   name: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
-  color: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  color: z.union([ z.lazy(() => MantineColorSchema),z.lazy(() => EnumMantineColorFieldUpdateOperationsInputSchema) ]).optional(),
   deleted: z.union([ z.boolean(),z.lazy(() => BoolFieldUpdateOperationsInputSchema) ]).optional(),
   createdAt: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
   updatedAt: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
@@ -12315,7 +12315,7 @@ export const TagGroupUncheckedUpdateWithoutInstanceInputSchema: z.ZodType<Prisma
 export const TagGroupUncheckedUpdateManyWithoutInstanceInputSchema: z.ZodType<Prisma.TagGroupUncheckedUpdateManyWithoutInstanceInput> = z.object({
   id: z.union([ z.string().cuid(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
   name: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
-  color: z.union([ z.string(),z.lazy(() => StringFieldUpdateOperationsInputSchema) ]).optional(),
+  color: z.union([ z.lazy(() => MantineColorSchema),z.lazy(() => EnumMantineColorFieldUpdateOperationsInputSchema) ]).optional(),
   deleted: z.union([ z.boolean(),z.lazy(() => BoolFieldUpdateOperationsInputSchema) ]).optional(),
   createdAt: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),
   updatedAt: z.union([ z.coerce.date(),z.lazy(() => DateTimeFieldUpdateOperationsInputSchema) ]).optional(),

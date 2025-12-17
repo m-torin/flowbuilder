@@ -1,37 +1,28 @@
 import { z } from 'zod';
 import { NodeSchema, EdgeSchema } from '#/lib/prisma/generated/zod';
 import { FbNode, FbEdge, FbNodeData, FbEdgeData } from '../types';
-import { EdgeType, NodeType, Prisma } from '@prisma/client';
+import { Prisma, NodeType, EdgeType } from '@prisma/client';
 
 type NodeSchemaType = z.infer<typeof NodeSchema>;
 type EdgeSchemaType = z.infer<typeof EdgeSchema>;
 
 /**
- * Ensure value is a valid Prisma.JsonValue
+ * Ensure value is converted to Prisma JsonValue
  */
-const ensureJsonValue = (value: unknown): Prisma.JsonValue => {
+const ensureJsonValue = (value: unknown): Prisma.JsonValue | null => {
   if (value === null || value === undefined) {
     return null;
   }
 
+  // If already a JsonValue, return it
   if (
     typeof value === 'string' ||
     typeof value === 'number' ||
-    typeof value === 'boolean'
+    typeof value === 'boolean' ||
+    Array.isArray(value) ||
+    (typeof value === 'object' && value !== null)
   ) {
-    return value;
-  }
-
-  if (Array.isArray(value)) {
-    return value.map(ensureJsonValue);
-  }
-
-  if (typeof value === 'object') {
-    const result: Record<string, Prisma.JsonValue> = {};
-    for (const [key, val] of Object.entries(value)) {
-      result[key] = ensureJsonValue(val);
-    }
-    return result;
+    return value as Prisma.JsonValue;
   }
 
   return null;
@@ -107,7 +98,7 @@ export const transformEdgeForValidation = (
   flowId: string,
   existingEdge?: EdgeSchemaType,
 ): EdgeSchemaType => {
-  const edgeType = edge.type || 'custom';
+  const edgeType = edge.type || EdgeType.custom;
   const edgeData = (edge.data as FbEdgeData) || {};
 
   const existingMetadata = (edgeData.metadata as Record<string, unknown>) || {};

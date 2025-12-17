@@ -1,4 +1,4 @@
-import { Edge, Node, Prisma, Secret, Tag } from '@prisma/client';
+import { Edge, Node, Prisma, Secret, Tag, FlowMethod } from '@prisma/client';
 import { prisma } from '#/lib/prisma';
 import {
   deduplicateNodes,
@@ -79,11 +79,11 @@ export const upsertFlowWithNodesAndEdges = async (
         // Prepare the data payload for the flow
         const flowPayload = {
           name: flow.name,
-          method: flow.method,
+          method: flow.method as FlowMethod,
           isEnabled: flow.isEnabled,
           instanceId: flow.instanceId,
-          viewport: flow.viewport ?? Prisma.JsonNull,
-          metadata: flow.metadata ?? Prisma.JsonNull,
+          viewport: flow.viewport ? (flow.viewport as Prisma.InputJsonValue) : Prisma.JsonNull,
+          metadata: flow.metadata ? (flow.metadata as Prisma.InputJsonValue) : Prisma.JsonNull,
           deleted: false,
         };
 
@@ -117,8 +117,8 @@ export const upsertFlowWithNodesAndEdges = async (
                 create: deduplicatedNodes.map((node) => ({
                   ...node,
                   flowId: flow.id,
-                  metadata: node.metadata ?? Prisma.JsonNull,
-                  position: node.position ?? Prisma.JsonNull,
+                  metadata: node.metadata ? (node.metadata as Prisma.InputJsonValue) : Prisma.JsonNull,
+                  position: node.position ? (node.position as Prisma.InputJsonValue) : Prisma.JsonNull,
                   deleted: false,
                 })),
               },
@@ -126,7 +126,7 @@ export const upsertFlowWithNodesAndEdges = async (
                 create: deduplicatedEdges.map((edge) => ({
                   ...edge,
                   flowId: flow.id,
-                  metadata: edge.metadata ?? Prisma.JsonNull,
+                  metadata: edge.metadata ? (edge.metadata as Prisma.InputJsonValue) : Prisma.JsonNull,
                   deleted: false,
                 })),
               },
@@ -134,7 +134,7 @@ export const upsertFlowWithNodesAndEdges = async (
                 create: deduplicatedSecrets.map((secret) => ({
                   ...secret,
                   flowId: flow.id,
-                  metadata: secret.metadata ?? Prisma.JsonNull,
+                  metadata: secret.metadata ? (secret.metadata as Prisma.InputJsonValue) : Prisma.JsonNull,
                   deleted: false,
                 })),
               },

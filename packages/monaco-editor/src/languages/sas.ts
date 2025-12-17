@@ -594,10 +594,11 @@ class SASCompleteLanguageSupport {
       // Add more keyword descriptions as needed...
     };
 
-    if (keywordDescriptions[word.toUpperCase()]) {
+    const description = keywordDescriptions[word.toUpperCase()];
+    if (description) {
       return {
         name: word.toUpperCase(),
-        documentation: keywordDescriptions[word.toUpperCase()],
+        documentation: description,
         syntax: '',
         examples: [],
       };
@@ -641,10 +642,10 @@ class SASLanguageService {
         provideCompletionItems: (model, position) => {
           const suggestions = [
             ...this.getKeywordSuggestions(model, position),
-            ...this.getProcedureSuggestions(),
-            ...this.getFunctionSuggestions(),
-            ...this.getMacroSuggestions(),
-            ...this.getVariableSuggestions(),
+            ...this.getProcedureSuggestions(model, position),
+            ...this.getFunctionSuggestions(model, position),
+            ...this.getMacroSuggestions(model, position),
+            ...this.getVariableSuggestions(model, position),
           ];
 
           return { suggestions };
@@ -692,8 +693,9 @@ class SASLanguageService {
     this.disposables.push(
       monaco.languages.registerSignatureHelpProvider('sas', {
         signatureHelpTriggerCharacters: ['(', ','],
-        provideSignatureHelp: (model, position) => {
-          return this.getSignatureHelp(model, position);
+        provideSignatureHelp: (model, position, token, context) => {
+          const result = this.getSignatureHelp(model, position);
+          return result;
         },
       }),
     );
@@ -710,8 +712,12 @@ class SASLanguageService {
     // CodeLens Provider
     this.disposables.push(
       monaco.languages.registerCodeLensProvider('sas', {
-        provideCodeLenses: (model) => {
-          return this.getCodeLenses(model);
+        provideCodeLenses: (model, token) => {
+          const lenses = this.getCodeLenses(model);
+          return {
+            lenses,
+            dispose: () => {},
+          };
         },
         resolveCodeLens: (model, codeLens) => {
           return this.resolveCodeLens(model, codeLens);
@@ -722,8 +728,12 @@ class SASLanguageService {
     // Code Action Provider
     this.disposables.push(
       monaco.languages.registerCodeActionProvider('sas', {
-        provideCodeActions: (model, range, context) => {
-          return this.getCodeActions(model, range, context);
+        provideCodeActions: (model, range, context, token) => {
+          const actions = this.getCodeActions(model, range, context);
+          return {
+            actions,
+            dispose: () => {},
+          };
         },
       }),
     );
@@ -731,8 +741,14 @@ class SASLanguageService {
     // Document Formatting Provider
     this.disposables.push(
       monaco.languages.registerDocumentFormattingEditProvider('sas', {
-        provideDocumentFormattingEdits: (model) => {
-          return this.formatDocument(model);
+        provideDocumentFormattingEdits: async (model, options, token) => {
+          const editsResult = this.formatDocument(model);
+          const edits = editsResult instanceof Promise ? await editsResult : editsResult;
+          if (!edits || !Array.isArray(edits) || edits.length === 0) return null;
+          return edits.map((edit: any) => ({
+            range: edit.range,
+            text: edit.text || '',
+          }));
         },
       }),
     );
@@ -740,9 +756,15 @@ class SASLanguageService {
     // On-Type Formatting Provider
     this.disposables.push(
       monaco.languages.registerOnTypeFormattingEditProvider('sas', {
-        firstTriggerCharacter: ';',
-        provideOnTypeFormattingEdits: (model, position, ch) => {
-          return this.onTypeFormat(model, position, ch);
+        autoFormatTriggerCharacters: [';'],
+        provideOnTypeFormattingEdits: async (model, position, ch, options, token) => {
+          const editsResult = this.onTypeFormat(model, position, ch);
+          const edits = editsResult instanceof Promise ? await editsResult : editsResult;
+          if (!edits || !Array.isArray(edits) || edits.length === 0) return null;
+          return edits.map((edit: any) => ({
+            range: edit.range,
+            text: edit.text || '',
+          }));
         },
       }),
     );
@@ -767,6 +789,9 @@ class SASLanguageService {
         }),
         provideDocumentSemanticTokens: (model) => {
           return this.provideSemanticTokens(model);
+        },
+        releaseDocumentSemanticTokens: () => {
+          // No cleanup needed for in-memory tokens
         },
       }),
     );
@@ -801,8 +826,12 @@ class SASLanguageService {
     // Inlay Hints Provider
     this.disposables.push(
       monaco.languages.registerInlayHintsProvider('sas', {
-        provideInlayHints: (model, range, options) => {
-          return this.provideInlayHints(model, range, options);
+        provideInlayHints: (model, range, token) => {
+          const hints = this.provideInlayHints(model, range, {} as any);
+          return {
+            hints,
+            dispose: () => {},
+          };
         },
       }),
     );
@@ -834,6 +863,13 @@ class SASLanguageService {
     model: monaco.editor.ITextModel,
     position: monaco.Position,
   ): monaco.languages.CompletionItem[] {
+    const word = model.getWordUntilPosition(position);
+    const range = new monaco.Range(
+      position.lineNumber,
+      word.startColumn,
+      position.lineNumber,
+      word.endColumn,
+    );
     const keywords = [
       'data',
       'proc',
@@ -871,11 +907,22 @@ class SASLanguageService {
       label: keyword,
       kind: monaco.languages.CompletionItemKind.Keyword,
       insertText: keyword,
+      range,
       documentation: `SAS keyword: ${keyword}`,
     }));
   }
 
-  private getProcedureSuggestions(): monaco.languages.CompletionItem[] {
+  private getProcedureSuggestions(
+    model: monaco.editor.ITextModel,
+    position: monaco.Position,
+  ): monaco.languages.CompletionItem[] {
+    const word = model.getWordUntilPosition(position);
+    const range = new monaco.Range(
+      position.lineNumber,
+      word.startColumn,
+      position.lineNumber,
+      word.endColumn,
+    );
     const procedures = [
       'print',
       'sort',
@@ -904,11 +951,22 @@ class SASLanguageService {
       insertText: `proc ${proc};\n    $0\nrun;`,
       insertTextRules:
         monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet,
+      range,
       documentation: `SAS procedure: ${proc}`,
     }));
   }
 
-  private getFunctionSuggestions(): monaco.languages.CompletionItem[] {
+  private getFunctionSuggestions(
+    model: monaco.editor.ITextModel,
+    position: monaco.Position,
+  ): monaco.languages.CompletionItem[] {
+    const word = model.getWordUntilPosition(position);
+    const range = new monaco.Range(
+      position.lineNumber,
+      word.startColumn,
+      position.lineNumber,
+      word.endColumn,
+    );
     const functions = [
       'sum',
       'mean',
@@ -946,11 +1004,22 @@ class SASLanguageService {
       label: func,
       kind: monaco.languages.CompletionItemKind.Function,
       insertText: `${func}()`,
+      range,
       documentation: `SAS function: ${func}`,
     }));
   }
 
-  private getMacroSuggestions(): monaco.languages.CompletionItem[] {
+  private getMacroSuggestions(
+    model: monaco.editor.ITextModel,
+    position: monaco.Position,
+  ): monaco.languages.CompletionItem[] {
+    const word = model.getWordUntilPosition(position);
+    const range = new monaco.Range(
+      position.lineNumber,
+      word.startColumn,
+      position.lineNumber,
+      word.endColumn,
+    );
     const macros = [
       '%macro',
       '%mend',
@@ -965,11 +1034,22 @@ class SASLanguageService {
       insertText: `${macro} $1;\n    $0\n${macro.slice(1)};`,
       insertTextRules:
         monaco.languages.CompletionItemInsertTextRule.InsertAsSnippet,
+      range,
       documentation: `SAS macro command: ${macro}`,
     }));
   }
 
-  private getVariableSuggestions(): monaco.languages.CompletionItem[] {
+  private getVariableSuggestions(
+    model: monaco.editor.ITextModel,
+    position: monaco.Position,
+  ): monaco.languages.CompletionItem[] {
+    const word = model.getWordUntilPosition(position);
+    const range = new monaco.Range(
+      position.lineNumber,
+      word.startColumn,
+      position.lineNumber,
+      word.endColumn,
+    );
     // Example: Suggest variables based on context
     // This can be enhanced to dynamically fetch variables from the current context
     const variables = [
@@ -986,6 +1066,7 @@ class SASLanguageService {
       label: variable,
       kind: monaco.languages.CompletionItemKind.Variable,
       insertText: variable,
+      range,
       documentation: `Variable: ${variable}`,
     }));
   }
@@ -1036,7 +1117,7 @@ class SASLanguageService {
   private getSignatureHelp(
     model: monaco.editor.ITextModel,
     position: monaco.Position,
-  ): monaco.languages.ProviderResult<monaco.languages.SignatureHelp> {
+  ): monaco.languages.ProviderResult<monaco.languages.SignatureHelpResult> {
     const word = model.getWordUntilPosition(position);
     if (!word) return null;
 
@@ -1047,8 +1128,9 @@ class SASLanguageService {
     const functionMatch = textBeforeCursor.match(/(\w+)\s*\(([^)]*)$/);
     if (!functionMatch) return null;
 
-    const funcName = functionMatch[1].toLowerCase();
-    const argsText = functionMatch[2];
+    const funcName = functionMatch[1]?.toLowerCase();
+    if (!funcName) return null;
+    const argsText = functionMatch[2] || '';
     const args = argsText
       .split(',')
       .map((arg) => arg.trim())
@@ -1062,19 +1144,22 @@ class SASLanguageService {
     // This should be replaced with actual function signature lookup
     // For demonstration, using a placeholder
     return {
-      signatures: [
-        {
-          label: `${funcName}(${args.join(', ')})`,
-          documentation: `Function: ${funcName}\nDescription: ...`,
-          parameters: [
-            { label: 'param1', documentation: 'Description of param1' },
-            { label: 'param2', documentation: 'Description of param2' },
-            // Add more parameters as needed
-          ],
-        },
-      ],
-      activeSignature: 0,
-      activeParameter: activeParameter > 0 ? activeParameter - 1 : 0,
+      value: {
+        signatures: [
+          {
+            label: `${funcName}(${args.join(', ')})`,
+            documentation: `Function: ${funcName}\nDescription: ...`,
+            parameters: [
+              { label: 'param1', documentation: 'Description of param1' },
+              { label: 'param2', documentation: 'Description of param2' },
+              // Add more parameters as needed
+            ],
+          },
+        ],
+        activeSignature: 0,
+        activeParameter: activeParameter > 0 ? activeParameter - 1 : 0,
+      },
+      dispose: () => {},
     };
   }
 
@@ -1106,6 +1191,7 @@ class SASLanguageService {
               i,
               model.getLineMaxColumn(i),
             ),
+            tags: [],
             children: [],
           });
         }
@@ -1126,6 +1212,7 @@ class SASLanguageService {
               i,
               model.getLineMaxColumn(i),
             ),
+            tags: [],
             children: [],
           });
         }
@@ -1146,6 +1233,7 @@ class SASLanguageService {
               i,
               model.getLineMaxColumn(i),
             ),
+            tags: [],
             children: [],
           });
         }
@@ -1163,10 +1251,7 @@ class SASLanguageService {
     model: monaco.editor.ITextModel,
   ): monaco.languages.CodeLens[] {
     const lenses: monaco.languages.CodeLens[] = [];
-    const symbols =
-      monaco.languages.DocumentSymbolProviderRegistry.all().flatMap(
-        (provider) => provider.provideDocumentSymbols?.(model) || [],
-      );
+    const symbols = this.getDocumentSymbols(model);
 
     symbols.forEach((symbol) => {
       const startLine = symbol.range.startLineNumber;
@@ -1213,20 +1298,27 @@ class SASLanguageService {
     context.markers.forEach((marker) => {
       // Example: Add quick fix for missing semicolon
       if (marker.message.includes('missing semicolon')) {
+        const markerRange = new monaco.Range(
+          marker.startLineNumber,
+          marker.startColumn,
+          marker.endLineNumber,
+          marker.endColumn,
+        );
         actions.push({
           title: 'Add missing semicolon',
           edit: {
-            changes: {
-              [model.uri.toString()]: [
-                {
-                  range: marker.range,
+            edits: [
+              {
+                resource: model.uri,
+                versionId: model.getVersionId(),
+                textEdit: {
+                  range: markerRange,
                   text: ';',
                 },
-              ],
-            },
+              },
+            ],
           },
           diagnostics: [marker],
-          kind: monaco.languages.CodeActionKind.QuickFix,
         });
       }
 
@@ -1237,20 +1329,27 @@ class SASLanguageService {
         );
         const varName = varNameMatch?.[1];
         if (varName) {
+          const markerRange = new monaco.Range(
+            marker.startLineNumber,
+            marker.startColumn,
+            marker.endLineNumber,
+            marker.endColumn,
+          );
           actions.push({
             title: `Define macro variable: ${varName}`,
             edit: {
-              changes: {
-                [model.uri.toString()]: [
-                  {
-                    range: marker.range,
+              edits: [
+                {
+                  resource: model.uri,
+                  versionId: model.getVersionId(),
+                  textEdit: {
+                    range: markerRange,
                     text: `%global ${varName};\n`,
                   },
-                ],
-              },
+                },
+              ],
             },
             diagnostics: [marker],
-            kind: monaco.languages.CodeActionKind.QuickFix,
           });
         }
       }
@@ -1276,7 +1375,9 @@ class SASLanguageService {
       const indentSize = 4;
 
       for (let i = 0; i < lines.length; i++) {
-        let line = lines[i].trim();
+        const originalLine = lines[i];
+        if (!originalLine) continue;
+        const line = originalLine.trim();
         const lineNumber = i + 1;
 
         // Skip empty lines and comments
@@ -1293,13 +1394,13 @@ class SASLanguageService {
         const formattedLine = ' '.repeat(indentLevel * indentSize) + line;
 
         // Create edit if line has changed
-        if (formattedLine !== lines[i]) {
+        if (formattedLine !== originalLine) {
           edits.push({
             range: {
               startLineNumber: lineNumber,
               startColumn: 1,
               endLineNumber: lineNumber,
-              endColumn: lines[i].length + 1,
+              endColumn: originalLine.length + 1,
             },
             text: formattedLine,
           });
@@ -1354,59 +1455,10 @@ class SASLanguageService {
     model: monaco.editor.ITextModel,
   ): monaco.languages.SemanticTokens | null {
     try {
-      const tokensBuilder = new monaco.languages.SemanticTokensBuilder();
-      const text = model.getValue();
-      const lines = text.split('\n');
-
-      lines.forEach((line, lineIndex) => {
-        // Map Monarch tokens directly to semantic tokens
-        const tokens = model.getLineTokens(lineIndex + 1);
-        const tokenCount = tokens.getCount();
-
-        for (let i = 0; i < tokenCount; i++) {
-          const token = tokens.getTokenAtIndex(i);
-          const tokenText = token.value;
-          const tokenStart = token.startColumn - 1;
-          const tokenLength = token.value.length;
-
-          // Determine token type based on Monarch token
-          let tokenType: string | undefined = undefined;
-
-          if (
-            this.languageSupport['procedures'].has(token.value.toUpperCase())
-          ) {
-            tokenType = 'procedure';
-          } else if (
-            this.languageSupport['functions'].has(token.value.toLowerCase())
-          ) {
-            tokenType = 'function';
-          } else if (
-            this.languageSupport['keywords'].includes(token.value.toLowerCase())
-          ) {
-            tokenType = 'keyword';
-          } else if (/^".*"$/.test(token.value) || /^'.*'$/.test(token.value)) {
-            tokenType = 'string';
-          } else if (/^\d+$/.test(token.value)) {
-            tokenType = 'number';
-          } else if (this.languageSupport['operators'].includes(token.value)) {
-            tokenType = 'operator';
-          } else if (/^[a-zA-Z_]\w*$/.test(token.value)) {
-            tokenType = 'variable';
-          }
-
-          if (tokenType) {
-            tokensBuilder.push(
-              lineIndex + 1,
-              tokenStart,
-              tokenLength,
-              tokenType,
-              '',
-            );
-          }
-        }
-      });
-
-      return tokensBuilder.build();
+      // SemanticTokensBuilder and getLineTokens APIs are not available in this Monaco version
+      // Return null to disable semantic tokens for now
+      // This can be implemented when the APIs are available
+      return null;
     } catch (error) {
       console.error('Error providing semantic tokens:', error);
       return null;
@@ -1423,13 +1475,10 @@ class SASLanguageService {
     const ranges: monaco.languages.FoldingRange[] = [];
     const symbols = model
       .getAllDecorations()
-      .filter((decoration) => decoration.options.inlineClass === 'symbol');
+      .filter((decoration) => (decoration.options as any).inlineClass === 'symbol');
 
     // Utilize Document Symbols for Folding
-    const documentSymbols =
-      monaco.languages.DocumentSymbolProviderRegistry.all().flatMap(
-        (provider) => provider.provideDocumentSymbols?.(model) || [],
-      );
+    const documentSymbols = this.getDocumentSymbols(model);
 
     documentSymbols.forEach((symbol) => {
       if (symbol.range.startLineNumber < symbol.range.endLineNumber) {
@@ -1528,7 +1577,7 @@ class SASLanguageService {
   private provideInlayHints(
     model: monaco.editor.ITextModel,
     range: monaco.Range,
-    options: monaco.languages.InlayHintsOptions,
+    options: any,
   ): monaco.languages.InlayHint[] {
     const hints: monaco.languages.InlayHint[] = [];
     const lines = model
@@ -1543,13 +1592,13 @@ class SASLanguageService {
     lines.forEach((line, index) => {
       const lineNumber = range.startLineNumber + index;
       // Example: Add inlay hints for function parameters
-      const funcMatch = line.match(/(\w+)\s*\(([^)]*)\)/);
-      if (funcMatch) {
-        const funcName = funcMatch[1].toLowerCase();
-        const params = funcMatch[2]
-          .split(',')
-          .map((p) => p.trim())
-          .filter((p) => p.length > 0);
+        const funcMatch = line.match(/(\w+)\s*\(([^)]*)\)/);
+        if (funcMatch && funcMatch[1] && funcMatch[2]) {
+          const funcName = funcMatch[1].toLowerCase();
+          const params = funcMatch[2]
+            .split(',')
+            .map((p) => p.trim())
+            .filter((p) => p.length > 0);
 
         if (this.languageSupport['knownFunctions'].has(funcName)) {
           params.forEach((param, idx) => {
@@ -1567,491 +1616,6 @@ class SASLanguageService {
     });
 
     return hints;
-  }
-
-  // -------------------------------
-  // Document Symbol Provider Helper
-  // -------------------------------
-
-  private getDocumentSymbols(
-    model: monaco.editor.ITextModel,
-  ): monaco.languages.DocumentSymbol[] {
-    const symbols: monaco.languages.DocumentSymbol[] = [];
-    const lines = model.getLineCount();
-
-    for (let i = 1; i <= lines; i++) {
-      const lineContent = model.getLineContent(i).trim().toLowerCase();
-
-      // Detect PROC steps
-      if (lineContent.startsWith('proc ')) {
-        const procName = lineContent.split(' ')[1]?.replace(';', '');
-        if (procName) {
-          symbols.push({
-            name: `PROC ${procName.toUpperCase()}`,
-            detail: 'Procedure Step',
-            kind: monaco.languages.SymbolKind.Method,
-            range: new monaco.Range(i, 1, i, model.getLineMaxColumn(i)),
-            selectionRange: new monaco.Range(
-              i,
-              1,
-              i,
-              model.getLineMaxColumn(i),
-            ),
-            children: [],
-          });
-        }
-      }
-
-      // Detect DATA steps
-      if (lineContent.startsWith('data ')) {
-        const dataName = lineContent.split(' ')[1]?.replace(';', '');
-        if (dataName) {
-          symbols.push({
-            name: `DATA ${dataName.toUpperCase()}`,
-            detail: 'Data Step',
-            kind: monaco.languages.SymbolKind.Namespace,
-            range: new monaco.Range(i, 1, i, model.getLineMaxColumn(i)),
-            selectionRange: new monaco.Range(
-              i,
-              1,
-              i,
-              model.getLineMaxColumn(i),
-            ),
-            children: [],
-          });
-        }
-      }
-
-      // Detect MACRO definitions
-      if (lineContent.startsWith('%macro')) {
-        const macroName = lineContent.match(/%macro\s+(\w+)/i)?.[1];
-        if (macroName) {
-          symbols.push({
-            name: `MACRO ${macroName.toUpperCase()}`,
-            detail: 'Macro Definition',
-            kind: monaco.languages.SymbolKind.Function,
-            range: new monaco.Range(i, 1, i, model.getLineMaxColumn(i)),
-            selectionRange: new monaco.Range(
-              i,
-              1,
-              i,
-              model.getLineMaxColumn(i),
-            ),
-            children: [],
-          });
-        }
-      }
-    }
-
-    return symbols;
-  }
-
-  // -------------------------------
-  // CodeLens and Code Actions Helper
-  // -------------------------------
-
-  private getCodeLenses(
-    model: monaco.editor.ITextModel,
-  ): monaco.languages.CodeLens[] {
-    const lenses: monaco.languages.CodeLens[] = [];
-    const documentSymbols =
-      monaco.languages.DocumentSymbolProviderRegistry.all().flatMap(
-        (provider) => provider.provideDocumentSymbols?.(model) || [],
-      );
-
-    documentSymbols.forEach((symbol) => {
-      if (symbol.range.startLineNumber < symbol.range.endLineNumber) {
-        lenses.push({
-          range: new monaco.Range(
-            symbol.range.startLineNumber,
-            1,
-            symbol.range.startLineNumber,
-            model.getLineMaxColumn(symbol.range.startLineNumber),
-          ),
-          command: {
-            id: '',
-            title: `Lines in ${symbol.name}: ${symbol.range.endLineNumber - symbol.range.startLineNumber + 1}`,
-            tooltip: `The ${symbol.name} step spans ${symbol.range.endLineNumber - symbol.range.startLineNumber + 1} lines`,
-          },
-        });
-      }
-    });
-
-    return lenses;
-  }
-
-  private resolveCodeLens(
-    model: monaco.editor.ITextModel,
-    codeLens: monaco.languages.CodeLens,
-  ): monaco.languages.CodeLens {
-    // Since we've already calculated the total lines, no further resolution is needed
-    // Additional dynamic information can be added here if required
-    return codeLens;
-  }
-
-  private getCodeActions(
-    model: monaco.editor.ITextModel,
-    range: monaco.Range,
-    context: monaco.languages.CodeActionContext,
-  ): monaco.languages.CodeAction[] {
-    const actions: monaco.languages.CodeAction[] = [];
-
-    context.markers.forEach((marker) => {
-      // Example: Add quick fix for missing semicolon
-      if (marker.message.toLowerCase().includes('missing semicolon')) {
-        actions.push({
-          title: 'Add missing semicolon',
-          edit: {
-            changes: {
-              [model.uri.toString()]: [
-                {
-                  range: marker.range,
-                  text: ';',
-                },
-              ],
-            },
-          },
-          diagnostics: [marker],
-          kind: monaco.languages.CodeActionKind.QuickFix,
-        });
-      }
-
-      // Example: Add quick fix for undefined macro variable
-      if (marker.message.toLowerCase().includes('undefined macro variable')) {
-        const varNameMatch = marker.message.match(
-          /undefined macro variable:\s*(\w+)/i,
-        );
-        const varName = varNameMatch?.[1];
-        if (varName) {
-          actions.push({
-            title: `Define macro variable: ${varName}`,
-            edit: {
-              changes: {
-                [model.uri.toString()]: [
-                  {
-                    range: marker.range,
-                    text: `%global ${varName};\n`,
-                  },
-                ],
-              },
-            },
-            diagnostics: [marker],
-            kind: monaco.languages.CodeActionKind.QuickFix,
-          });
-        }
-      }
-
-      // Add more code actions based on different marker messages...
-    });
-
-    return actions;
-  }
-
-  // -------------------------------
-  // Formatting and Semantic Tokens Enhancements
-  // -------------------------------
-
-  private provideSemanticTokens(
-    model: monaco.editor.ITextModel,
-  ): monaco.languages.SemanticTokens | null {
-    try {
-      const tokensBuilder = new monaco.languages.SemanticTokensBuilder();
-      const text = model.getValue();
-      const lines = text.split('\n');
-
-      lines.forEach((line, lineIndex) => {
-        // Map Monarch tokens directly to semantic tokens
-        const tokens = model.getLineTokens(lineIndex + 1);
-        const tokenCount = tokens.getCount();
-
-        for (let i = 0; i < tokenCount; i++) {
-          const token = tokens.getTokenAtIndex(i);
-          const tokenText = token.value;
-          const tokenStart = token.startColumn - 1;
-          const tokenLength = token.value.length;
-
-          // Determine token type based on Monarch token
-          let tokenType: string | undefined = undefined;
-
-          if (
-            this.languageSupport['procedures'].has(token.value.toUpperCase())
-          ) {
-            tokenType = 'procedure';
-          } else if (
-            this.languageSupport['knownFunctions'].has(
-              token.value.toLowerCase(),
-            )
-          ) {
-            tokenType = 'function';
-          } else if (
-            this.languageSupport['procedures'].has(token.value.toUpperCase()) ||
-            this.languageSupport['dataStepFeatures'].has(
-              token.value.toUpperCase(),
-            ) ||
-            this.languageSupport['odsFeatures'].has(
-              token.value.toUpperCase(),
-            ) ||
-            this.languageSupport['macroFeatures'].has(
-              token.value.toUpperCase(),
-            ) ||
-            [
-              'data',
-              'proc',
-              'run',
-              'quit',
-              'set',
-              'merge',
-              'by',
-              'if',
-              'then',
-              'else',
-              'do',
-              'end',
-              'while',
-              'until',
-              'output',
-              'length',
-              'retain',
-              'drop',
-              'keep',
-              'rename',
-              'where',
-              'delete',
-              'firstobs',
-              'obs',
-              'in',
-              'out',
-              'class',
-              'var',
-              'ways',
-              'weight',
-            ].includes(token.value.toLowerCase())
-          ) {
-            tokenType = 'keyword';
-          } else if (/^".*"$/.test(token.value) || /^'.*'$/.test(token.value)) {
-            tokenType = 'string';
-          } else if (/^\d+$/.test(token.value)) {
-            tokenType = 'number';
-          } else if (
-            this.languageSupport['knownProcedures'].has(
-              token.value.toLowerCase(),
-            ) ||
-            this.languageSupport['knownFunctions'].has(
-              token.value.toLowerCase(),
-            )
-          ) {
-            tokenType = 'function';
-          } else if (
-            this.languageSupport['knownFormats'].has(token.value.toLowerCase())
-          ) {
-            tokenType = 'type';
-          } else if (
-            this.languageSupport['knownProcedures'].has(
-              token.value.toLowerCase(),
-            )
-          ) {
-            tokenType = 'procedure';
-          } else if (
-            this.languageSupport['knownProcedures'].has(
-              token.value.toLowerCase(),
-            )
-          ) {
-            tokenType = 'procedure';
-          } else if (
-            this.languageSupport['knownFormats'].has(token.value.toLowerCase())
-          ) {
-            tokenType = 'type';
-          } else if (
-            this.languageSupport['knownFunctions'].has(
-              token.value.toLowerCase(),
-            )
-          ) {
-            tokenType = 'function';
-          } else if (
-            this.languageSupport['knownFormats'].has(token.value.toLowerCase())
-          ) {
-            tokenType = 'type';
-          }
-
-          // Assign token type if identified
-          if (tokenType) {
-            tokensBuilder.push(
-              lineIndex + 1,
-              tokenStart,
-              tokenLength,
-              tokenType,
-              '',
-            );
-          }
-        }
-      });
-
-      return tokensBuilder.build();
-    } catch (error) {
-      console.error('Error providing semantic tokens:', error);
-      return null;
-    }
-  }
-
-  // -------------------------------
-  // Folding Ranges Helper
-  // -------------------------------
-
-  private getFoldingRanges(
-    model: monaco.editor.ITextModel,
-  ): monaco.languages.FoldingRange[] {
-    const ranges: monaco.languages.FoldingRange[] = [];
-    const symbols =
-      monaco.languages.DocumentSymbolProviderRegistry.all().flatMap(
-        (provider) => provider.provideDocumentSymbols?.(model) || [],
-      );
-
-    symbols.forEach((symbol) => {
-      if (symbol.range.startLineNumber < symbol.range.endLineNumber) {
-        ranges.push({
-          start: symbol.range.startLineNumber,
-          end: symbol.range.endLineNumber,
-          kind: monaco.languages.FoldingRangeKind.Region,
-        });
-      }
-    });
-
-    return ranges;
-  }
-
-  // -------------------------------
-  // Definition Provider Helper
-  // -------------------------------
-
-  private provideDefinition(
-    model: monaco.editor.ITextModel,
-    position: monaco.Position,
-  ): monaco.languages.ProviderResult<monaco.languages.Definition> {
-    const word = model.getWordAtPosition(position);
-    if (!word) return null;
-
-    const wordText = word.word.toLowerCase();
-
-    // Example: Jump to macro definition
-    if (
-      wordText.startsWith('%') &&
-      this.languageSupport['macroFeatures'].has(wordText.slice(1).toUpperCase())
-    ) {
-      // Find the line where the macro is defined
-      const regex = new RegExp(`%macro\\s+${wordText.slice(1)}\\b`, 'i');
-      const lines = model.getLineCount();
-
-      for (let i = 1; i <= lines; i++) {
-        const lineContent = model.getLineContent(i);
-        if (regex.test(lineContent)) {
-          return [
-            {
-              uri: model.uri,
-              range: new monaco.Range(i, 1, i, lineContent.length + 1),
-            },
-          ];
-        }
-      }
-    }
-
-    // Add more definition lookup logic as needed...
-
-    return null;
-  }
-
-  // -------------------------------
-  // References Provider Helper
-  // -------------------------------
-
-  private provideReferences(
-    model: monaco.editor.ITextModel,
-    position: monaco.Position,
-    context: monaco.languages.ReferenceContext,
-  ): monaco.languages.ProviderResult<monaco.languages.Location[]> {
-    const word = model.getWordAtPosition(position);
-    if (!word) return null;
-
-    const wordText = word.word.toLowerCase();
-    const references: monaco.languages.Location[] = [];
-    const lines = model.getLineCount();
-
-    const regex = new RegExp(`\\b${wordText}\\b`, 'gi');
-
-    for (let i = 1; i <= lines; i++) {
-      const lineContent = model.getLineContent(i);
-      let match;
-      while ((match = regex.exec(lineContent)) !== null) {
-        references.push({
-          uri: model.uri,
-          range: new monaco.Range(
-            i,
-            match.index + 1,
-            i,
-            match.index + 1 + wordText.length,
-          ),
-        });
-      }
-    }
-
-    return references;
-  }
-
-  // -------------------------------
-  // Inlay Hints Provider Helper
-  // -------------------------------
-
-  private provideInlayHints(
-    model: monaco.editor.ITextModel,
-    range: monaco.Range,
-    options: monaco.languages.InlayHintsOptions,
-  ): monaco.languages.InlayHint[] {
-    const hints: monaco.languages.InlayHint[] = [];
-    const lines = model
-      .getValueInRange({
-        startLineNumber: range.startLineNumber,
-        startColumn: 1,
-        endLineNumber: range.endLineNumber,
-        endColumn: model.getLineMaxColumn(range.endLineNumber),
-      })
-      .split('\n');
-
-    lines.forEach((line, index) => {
-      const lineNumber = range.startLineNumber + index;
-      // Example: Add inlay hints for function parameters
-      const funcMatch = line.match(/(\w+)\s*\(([^)]*)\)/);
-      if (funcMatch) {
-        const funcName = funcMatch[1].toLowerCase();
-        const params = funcMatch[2]
-          .split(',')
-          .map((p) => p.trim())
-          .filter((p) => p.length > 0);
-
-        if (this.languageSupport['knownFunctions'].has(funcName)) {
-          params.forEach((param, idx) => {
-            hints.push({
-              position: {
-                lineNumber: lineNumber,
-                column: line.indexOf(param) + 1,
-              },
-              label: `parameter ${idx + 1}`,
-              kind: monaco.languages.InlayHintKind.Parameter,
-            });
-          });
-        }
-      }
-    });
-
-    return hints;
-  }
-
-  // -------------------------------
-  // Semantic Tokens Provider Enhanced
-  // -------------------------------
-
-  private provideSemanticTokensEnhanced(
-    model: monaco.editor.ITextModel,
-  ): monaco.languages.SemanticTokens | null {
-    return this.provideSemanticTokens(model);
   }
 
   // -------------------------------
@@ -2368,7 +1932,10 @@ monaco.languages.setMonarchTokensProvider('sas', {
 // -------------------------------
 // Helper Functions for Suggestions
 // -------------------------------
+// NOTE: These standalone functions are not used - class methods are used instead
+// Commented out to avoid TypeScript errors
 
+/*
 function getKeywordSuggestions(): monaco.languages.CompletionItem[] {
   const keywords = [
     'data',
@@ -2411,7 +1978,7 @@ function getKeywordSuggestions(): monaco.languages.CompletionItem[] {
   }));
 }
 
-function getProcedureSuggestions(): monaco.languages.CompletionItem[] {
+// function getProcedureSuggestions(): monaco.languages.CompletionItem[] {
   const procedures = [
     'print',
     'sort',
@@ -2444,7 +2011,7 @@ function getProcedureSuggestions(): monaco.languages.CompletionItem[] {
   }));
 }
 
-function getFunctionSuggestions(): monaco.languages.CompletionItem[] {
+// function getFunctionSuggestions(): monaco.languages.CompletionItem[] {
   const functions = [
     'sum',
     'mean',
@@ -2486,7 +2053,7 @@ function getFunctionSuggestions(): monaco.languages.CompletionItem[] {
   }));
 }
 
-function getMacroSuggestions(): monaco.languages.CompletionItem[] {
+// function getMacroSuggestions(): monaco.languages.CompletionItem[] {
   const macros = [
     '%macro',
     '%mend',
@@ -2505,7 +2072,7 @@ function getMacroSuggestions(): monaco.languages.CompletionItem[] {
   }));
 }
 
-function getVariableSuggestions(): monaco.languages.CompletionItem[] {
+// function getVariableSuggestions(): monaco.languages.CompletionItem[] {
   // Example: Suggest variables based on context
   // This can be enhanced to dynamically fetch variables from the current context
   const variables = [
@@ -2525,6 +2092,7 @@ function getVariableSuggestions(): monaco.languages.CompletionItem[] {
     documentation: `Variable: ${variable}`,
   }));
 }
+*/
 
 // -------------------------------
 // Initialize Monaco Editor and Language Service

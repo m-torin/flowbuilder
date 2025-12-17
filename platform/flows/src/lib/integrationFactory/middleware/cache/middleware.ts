@@ -1,78 +1,130 @@
-// middleware/cache/middleware.ts
-import { createHash } from 'crypto';
+// cache/middleware.ts
 import {
   Middleware,
   MiddlewareContext,
+  MiddlewareResult,
   createMiddleware,
-  MiddlewareOptions,
 } from '../base';
-import type { CacheOptions, CacheProvider, CacheMetadata } from './types';
+import { CacheProvider, CacheOptions, CacheEntry } from './types';
 
-const DEFAULT_OPTIONS: CacheOptions = {
-  ttl: 300, // 5 minutes
-  keyPrefix: 'sdk:cache:',
-  serialize: JSON.stringify,
-  deserialize: JSON.parse,
-  keyGenerator: (context) => {
-    const data = `${context.operation}:${JSON.stringify(context.metadata)}`;
-    return createHash('sha256').update(data).digest('hex');
-  },
+export class MemoryCacheProvider implements CacheProvider {
+  private cache = new Map<string, CacheEntry>();
+
+  async get<T>(key: string): Promise<CacheEntry<T> | null> {
+    const entry = this.cache.get(key);
+    if (!entry) {
+      return null;
+    }
+
+    if (entry.expiresAt < Date.now()) {
+      this.cache.delete(key);
+      return null;
+    }
+
+    return entry as CacheEntry<T>;
+  }
+
+  async set<T>(key: string, value: T, ttl: number): Promise<void> {
+    const expiresAt = Date.now() + ttl;
+    this.cache.set(key, {
+      value,
+      expiresAt,
+    });
+  }
+
+  async delete(key: string): Promise<void> {
+    this.cache.delete(key);
+  }
+
+  async clear(): Promise<void> {
+    this.cache.clear();
+  }
+
+  async has(key: string): Promise<boolean> {
+    const entry = this.cache.get(key);
+    if (!entry) {
+      return false;
+    }
+
+    if (entry.expiresAt < Date.now()) {
+      this.cache.delete(key);
+      return false;
+    }
+
+    return true;
+  }
+}
+
+const generateCacheKey = (
+  prefix: string,
+  operation: string,
+  context: MiddlewareContext,
+): string => {
+  const parts = [prefix, operation];
+  if (context.metadata && Object.keys(context.metadata).length > 0) {
+    const metadataHash = JSON.stringify(context.metadata);
+    parts.push(metadataHash);
+  }
+  return parts.join(':');
 };
 
 export const createCacheMiddleware = (
-  provider: CacheProvider,
-  options: CacheOptions & MiddlewareOptions = {},
+  provider: CacheProvider = new MemoryCacheProvider(),
+  options: CacheOptions = {},
 ): Middleware => {
-  const opts = { ...DEFAULT_OPTIONS, ...options };
+  const {
+    enabled = true,
+    keyPrefix = 'cache',
+    ttl = 300000, // 5 minutes default
+    serialize = JSON.stringify,
+    deserialize = JSON.parse,
+  } = options;
 
-  const getCacheKey = (context: MiddlewareContext): string => {
-    const key = opts.keyGenerator!(context);
-    return `${opts.keyPrefix}${key}`;
-  };
+  return createMiddleware(
+    async (context: MiddlewareContext, next) => {
+      if (!enabled) {
+        return next();
+      }
 
-  return createMiddleware(async (context, next) => {
-    const cacheKey = getCacheKey(context);
-    const startTime = Date.now();
+      const cacheKey = generateCacheKey(keyPrefix, context.operation, context);
 
-    try {
-      // Check cache
+      // Try to get from cache
       const cached = await provider.get(cacheKey);
       if (cached) {
         return {
-          data: opts.deserialize!(cached),
-          duration: Date.now() - startTime,
+          data: cached.value,
           metadata: {
-            cache: {
-              hit: true,
-              key: cacheKey,
-              ttl: opts.ttl,
-            } as CacheMetadata,
+            ...context.metadata,
+            cacheHit: true,
+            cacheKey,
           },
+          duration: Date.now() - context.startTime,
         };
       }
 
-      // Execute operation
+      // Cache miss - execute operation
       const result = await next();
 
-      // Cache successful results
-      if (!result.error && result.data) {
-        await provider.set(cacheKey, opts.serialize!(result.data), opts.ttl);
+      // Store result in cache if successful
+      if (result.data && !result.error) {
+        try {
+          await provider.set(cacheKey, result.data, ttl);
+        } catch (error) {
+          // Cache write failures shouldn't fail the operation
+          console.warn('Failed to write to cache:', error);
+        }
       }
 
       return {
         ...result,
         metadata: {
           ...result.metadata,
-          cache: {
-            hit: false,
-            key: cacheKey,
-            ttl: opts.ttl,
-          } as CacheMetadata,
+          cacheHit: false,
+          cacheKey,
         },
       };
-    } catch (error) {
-      // Don't fail operation if cache fails
-      return next();
-    }
-  }, options);
+    },
+    { enabled },
+  );
 };
+

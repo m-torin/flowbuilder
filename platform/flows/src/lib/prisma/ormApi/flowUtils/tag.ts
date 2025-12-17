@@ -31,13 +31,13 @@ export const upsertTags = async (
         update: {
           flowId,
           deleted: false,
-          metadata: tag.metadata ?? Prisma.DbNull, // Handle metadata appropriately
+          metadata: tag.metadata ? (tag.metadata as Prisma.InputJsonValue) : Prisma.JsonNull,
         },
         create: {
           ...tag,
           flowId,
           deleted: false,
-          metadata: tag.metadata ?? Prisma.DbNull, // Handle metadata appropriately
+          metadata: tag.metadata ? (tag.metadata as Prisma.InputJsonValue) : Prisma.JsonNull,
         },
       }),
     ),
@@ -50,7 +50,7 @@ export const upsertTags = async (
         where: { id: tag.id },
         data: {
           flowId: null,
-          metadata: tag.metadata ?? Prisma.DbNull, // Handle metadata appropriately
+          metadata: tag.metadata ? (tag.metadata as Prisma.InputJsonValue) : Prisma.JsonNull,
         },
       }),
     ),

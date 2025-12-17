@@ -90,7 +90,7 @@ const SECURITY_OPERATION_DEFAULTS: S3CommandOptions = {
     security: {
       validateKmsKey: true,
       enforceSSE: true,
-      allowedPrincipals: ['arn:aws:iam::123456789012:role/S3AccessRole'],
+      allowedPrincipals: process.env.AWS_ACCOUNT_ID ? [`arn:aws:iam::${process.env.AWS_ACCOUNT_ID}:role/S3AccessRole`] : [],
     },
   },
   checksum: {

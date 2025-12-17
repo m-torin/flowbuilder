@@ -5,12 +5,12 @@ import { z } from 'zod';
 import { prisma } from '#/lib/prisma';
 import {
   Prisma,
-  FlowMethod,
-  NodeType as PrismaNodeType,
-  EdgeType,
   type Flow,
   type Node as PrismaNode,
   type Edge as PrismaEdge,
+  FlowMethod,
+  NodeType as PrismaNodeType,
+  EdgeType,
 } from '@prisma/client';
 import { NodeTypesEnum } from './nodes';
 
@@ -24,7 +24,7 @@ const NODE_TYPES = [...Object.values(NodeTypesEnum)] as [string, ...string[]];
 // 2. Define NodeTypeEnum using the single source of truth
 const NodeTypeEnum = z.enum(NODE_TYPES);
 
-// 3. Infer NodeType from NodeTypeEnum for type safety
+// 3. Infer NodeType from NodeTypeEnum for type safety (React Flow node type)
 type NodeType = z.infer<typeof NodeTypeEnum>;
 
 // 4. Define ReactFlowNodeSchema using NodeTypeEnum consistently
@@ -78,7 +78,7 @@ const ReactFlowEdgeSchema = z.object({
   id: z.string(),
   source: z.string(),
   target: z.string(),
-  type: z.nativeEnum(EdgeType).optional(),
+  type: z.string().optional(), // EdgeType enum value
   selected: z.boolean().optional(),
   data: z
     .object({
@@ -91,7 +91,7 @@ const ReactFlowEdgeSchema = z.object({
       prismaData: z
         .object({
           id: z.string(),
-          type: z.nativeEnum(EdgeType),
+          type: z.string(), // EdgeType enum value
         })
         .optional(),
     })
@@ -117,7 +117,7 @@ const SaveFlowInputSchema = z
     updatedFlow: z
       .object({
         name: z.string(),
-        method: z.nativeEnum(FlowMethod),
+        method: z.string(), // FlowMethod enum value
         isEnabled: z.boolean(),
         metadata: z.custom<Prisma.JsonValue>().optional(),
       })
@@ -167,24 +167,63 @@ function isValidNodeType(type: string): type is NodeType {
 }
 
 /**
- * Validates and casts node type to PrismaNodeType
+ * Maps React Flow node types to Prisma NodeType enum values
+ * Some React Flow types (like awsEventBridgeSource/Destination/Enrichment)
+ * all map to the same Prisma type (awsEventBridgeEvent)
+ * Webhook types: webhookEnrichment maps to webhook, webhookSource/Destination map directly
  */
-function castNodeType(type: string): PrismaNodeType {
+function mapToPrismaNodeType(type: string): PrismaNodeType {
+  // Map AWS EventBridge variants to single Prisma type
+  if (type === 'awsEventBridgeSource' ||
+      type === 'awsEventBridgeDestination' ||
+      type === 'awsEventBridgeEnrichment') {
+    return PrismaNodeType.awsEventBridgeEvent;
+  }
+
+  // Map webhook variants
+  // React Flow has: webhookSource, webhookDestination, webhookEnrichment
+  // Prisma has: webhookSource, webhookDestination, webhook (for enrichment)
+  if (type === 'webhookEnrichment') {
+    return PrismaNodeType.webhook;
+  }
+  if (type === 'webhookSource') {
+    return PrismaNodeType.webhookSource;
+  }
+  if (type === 'webhookDestination') {
+    return PrismaNodeType.webhookDestination;
+  }
+
+  // Handle legacy javascriptEditorLogic (maps to javascriptEditorNode)
+  if (type === 'javascriptEditorLogic') {
+    logger.warning(`Legacy node type "javascriptEditorLogic" mapped to "javascriptEditorNode"`);
+    return PrismaNodeType.javascriptEditorNode;
+  }
+
+  // Check if it's already a valid Prisma type
   if (isValidNodeType(type)) {
     return type as PrismaNodeType;
   }
+
   logger.warning(`Unknown node type "${type}", defaulting to 'default'`);
-  return 'default';
+  return PrismaNodeType.default;
+}
+
+/**
+ * Validates and casts node type to PrismaNodeType
+ * @deprecated Use mapToPrismaNodeType instead
+ */
+function castNodeType(type: string): PrismaNodeType {
+  return mapToPrismaNodeType(type);
 }
 
 /**
  * Validates edge type and returns appropriate Prisma EdgeType
  */
 function castEdgeType(type: string | undefined): EdgeType {
-  if (type && Object.values(EdgeType).includes(type as EdgeType)) {
+  if (type && (type === 'custom' || type === 'default')) {
     return type as EdgeType;
   }
-  return 'default';
+  return EdgeType.default;
 }
 
 /**
@@ -265,7 +304,7 @@ function transformNodeForUpsert(
   // Use runtime validation to ensure node type is valid
   const nodeType = isValidNodeType(node.type) ? node.type : 'default';
 
-  const metadata: Prisma.InputJsonObject = {
+  const metadataObj = {
     ...((node.data?.metadata as Record<string, unknown>) ?? {}),
     uxMeta: node.data?.uxMeta ?? {},
     nodeMeta: node.data?.nodeMeta ?? {},
@@ -275,13 +314,13 @@ function transformNodeForUpsert(
   // Build base data with corrected rfId handling
   const baseData: Prisma.NodeUncheckedCreateInput = {
     flowId,
-    type: castNodeType(nodeType),
+    type: mapToPrismaNodeType(nodeType),
     name: node.data?.name ?? null,
-    position: node.position as Prisma.InputJsonObject,
+    position: node.position as Prisma.InputJsonValue,
     rfId: node.data?.rfId ?? node.id, // Use rfId from data or fall back to node.id
     infrastructureId: node.data?.infrastructureId ?? null,
     arn: node.data?.arn ?? null,
-    metadata,
+    metadata: metadataObj as Prisma.InputJsonValue,
   };
 
   logger.info('Node transform', {
@@ -333,7 +372,7 @@ function transformEdgeForUpsert(
   const baseMetadata = cleanMetadata(
     edge.data?.metadata as Record<string, unknown>,
   );
-  const metadata: Prisma.InputJsonObject = {
+  const metadataObj = {
     ...baseMetadata,
     ...(edge.data?.label !== undefined && { label: edge.data.label }),
   };
@@ -359,17 +398,13 @@ function transformEdgeForUpsert(
     label: edge.data?.label || null,
     isActive: edge.data?.isActive ?? false,
     normalizedKey: edge.data?.normalizedKey ?? null,
-    metadata: Object.keys(metadata).length > 0 ? metadata : {},
+    metadata: Object.keys(metadataObj).length > 0 ? (metadataObj as Prisma.InputJsonValue) : Prisma.JsonNull,
   };
 
   // For new edges
   if (edge.id.startsWith('edge_')) {
     return {
       data: baseData,
-      include: {
-        sourceNode: true,
-        targetNode: true,
-      },
     };
   }
 
@@ -383,10 +418,6 @@ function transformEdgeForUpsert(
     update: {
       ...baseData,
       id: edge.id,
-    },
-    include: {
-      sourceNode: true,
-      targetNode: true,
     },
   };
 }
@@ -576,38 +607,48 @@ export async function saveFlowAction(input: SaveFlowInput) {
       // Create new edges with node mapping
       logger.info('Creating new edges', { count: newEdges.length });
       const createdEdges = await Promise.all(
-        newEdges.map((edge) => {
-          const args = transformEdgeForUpsert(
-            edge,
-            flowId,
-            nodeMapping,
-          ) as Prisma.EdgeCreateArgs;
-          return tx.edge.create({
-            ...args,
-            include: {
-              sourceNode: true,
-              targetNode: true,
-            },
-          });
+        newEdges.map(async (edge) => {
+          try {
+            const args = transformEdgeForUpsert(
+              edge,
+              flowId,
+              nodeMapping,
+            ) as Prisma.EdgeCreateArgs;
+            const result = await tx.edge.create({
+              ...args,
+              include: {
+                sourceNode: true,
+                targetNode: true,
+              },
+            });
+            return result;
+          } catch (error) {
+            throw error;
+          }
         }),
       );
 
       // Update existing edges with node mapping
       logger.info('Upserting existing edges', { count: existingEdges.length });
       const upsertedEdges = await Promise.all(
-        existingEdges.map((edge) => {
-          const args = transformEdgeForUpsert(
-            edge,
-            flowId,
-            nodeMapping,
-          ) as Prisma.EdgeUpsertArgs;
-          return tx.edge.upsert({
-            ...args,
-            include: {
-              sourceNode: true,
-              targetNode: true,
-            },
-          });
+        existingEdges.map(async (edge) => {
+          try {
+            const args = transformEdgeForUpsert(
+              edge,
+              flowId,
+              nodeMapping,
+            ) as Prisma.EdgeUpsertArgs;
+            const result = await tx.edge.upsert({
+              ...args,
+              include: {
+                sourceNode: true,
+                targetNode: true,
+              },
+            });
+            return result;
+          } catch (error) {
+            throw error;
+          }
         }),
       );
 
@@ -621,9 +662,9 @@ export async function saveFlowAction(input: SaveFlowInput) {
         where: { id: flowId },
         data: {
           name: updatedFlow.name,
-          method: updatedFlow.method,
+          method: updatedFlow.method as FlowMethod,
           isEnabled: updatedFlow.isEnabled,
-          metadata: (updatedFlow.metadata as Prisma.InputJsonValue) ?? {},
+          metadata: updatedFlow.metadata ? (updatedFlow.metadata as Prisma.InputJsonValue) : Prisma.JsonNull,
           viewport: viewport as Prisma.InputJsonValue,
           updatedAt: new Date(),
         },

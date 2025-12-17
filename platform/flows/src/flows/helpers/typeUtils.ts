@@ -1,8 +1,5 @@
 // typeUtils.ts
-import {
-  NodeType as PrismaNodeType,
-  EdgeType as PrismaEdgeType,
-} from '@prisma/client';
+import { NodeType, EdgeType } from '@prisma/client';
 import { NodeTypesEnum, NodeTypes } from '../nodes';
 
 /**
@@ -19,11 +16,31 @@ export const isNodeTypes = (type: unknown): type is NodeTypes => {
  * Convert any node type to NodeTypesEnum (our source of truth)
  */
 export const convertToNodeTypesEnum = (
-  type: NodeTypes | PrismaNodeType | undefined,
+  type: NodeTypes | NodeType | undefined,
 ): NodeTypes => {
   if (!type) return NodeTypesEnum.Default;
 
   if (isNodeTypes(type)) return type;
+
+  // Map Prisma webhook types to React Flow types
+  // Prisma has: webhook, webhookSource, webhookDestination
+  // React Flow expects: webhookSource, webhookDestination, webhookEnrichment
+  if (type === NodeType.webhook) {
+    // Map Prisma 'webhook' to React Flow 'webhookEnrichment'
+    return 'webhookEnrichment' as NodeTypes;
+  }
+  if (type === NodeType.webhookSource) {
+    return 'webhookSource' as NodeTypes;
+  }
+  if (type === NodeType.webhookDestination) {
+    return 'webhookDestination' as NodeTypes;
+  }
+
+  // Handle legacy javascriptEditorLogic (maps to javascriptEditorNode)
+  if (type === NodeType.javascriptEditorLogic) {
+    console.warn(`Legacy node type "javascriptEditorLogic" mapped to "javascriptEditorNode"`);
+    return 'javascriptEditorNode' as NodeTypes;
+  }
 
   const enumValue = Object.values(NodeTypesEnum).find((enumType) => {
     return (
@@ -41,32 +58,29 @@ export const convertToNodeTypesEnum = (
 };
 
 /**
- * Convert NodeTypesEnum to PrismaNodeType
- * Since NodeTypesEnum is the source of truth, we cast it as PrismaNodeType
+ * Convert NodeTypesEnum to Prisma NodeType
+ * Since NodeTypesEnum is the source of truth, we cast it as NodeType
  */
 export const convertToPrismaNodeType = (
-  type: NodeTypes | PrismaNodeType | undefined,
-): PrismaNodeType => {
-  if (!type) return 'default';
-  return type as PrismaNodeType;
+  type: NodeTypes | NodeType | undefined,
+): NodeType => {
+  if (!type) return NodeType.default;
+  return type as NodeType;
 };
 
 /**
- * Type guard to check if a value is a valid PrismaEdgeType
+ * Type guard to check if a value is a valid Prisma EdgeType
  */
-export const isPrismaEdgeType = (type: unknown): type is PrismaEdgeType => {
-  return (
-    typeof type === 'string' &&
-    Object.values(PrismaEdgeType).includes(type as PrismaEdgeType)
-  );
+export const isPrismaEdgeType = (type: unknown): type is EdgeType => {
+  return typeof type === 'string' && (type === 'custom' || type === 'default');
 };
 
 /**
- * Convert to PrismaEdgeType with validation
+ * Convert to Prisma EdgeType with validation
  */
 export const convertToPrismaEdgeType = (
   type: string | undefined,
-): PrismaEdgeType => {
-  if (!type || !isPrismaEdgeType(type)) return 'default';
-  return type;
+): EdgeType => {
+  if (!type || !isPrismaEdgeType(type)) return EdgeType.default;
+  return type as EdgeType;
 };

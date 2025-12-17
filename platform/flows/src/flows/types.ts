@@ -17,17 +17,20 @@ import {
   PanelPosition,
   ReactFlowInstance,
   Viewport,
+  XYPosition,
 } from '@xyflow/react';
 
 import {
   Prisma,
   Flow,
-  FlowMethod,
   Node as PrismaNode,
   Edge as PrismaEdge,
-  EdgeType as PrismaEdgeType,
-  NodeType as PrismaNodeType,
 } from '@prisma/client';
+
+import type { FlowMethod, EdgeType, NodeType } from '@prisma/client';
+// Prisma enum types are imported from @prisma/client
+type PrismaEdgeType = EdgeType;
+type PrismaNodeType = NodeType;
 
 import { IconName } from './nodes/iconMap';
 import { NodeTypesEnum } from '#/flows/nodes';
@@ -99,12 +102,15 @@ interface BaseNodeData {
 }
 
 // Define Custom Node Data by extending PrismaNode
+// Note: position is excluded because PrismaNode has JsonValue but we need XYPosition for React Flow
 export interface FbNodeData
   extends Omit<
       PrismaNode,
-      'flowId' | 'flow' | 'createdAt' | 'updatedAt' | 'type' | 'metadata'
+      'flowId' | 'flow' | 'createdAt' | 'updatedAt' | 'type' | 'metadata' | 'position'
     >,
-    BaseNodeData {}
+    BaseNodeData {
+  position: XYPosition; // Override with React Flow's XYPosition type
+}
 
 // Define FbNode type with extended properties
 export interface FbNode extends Node<FbNodeData, keyof typeof NodeTypesEnum> {

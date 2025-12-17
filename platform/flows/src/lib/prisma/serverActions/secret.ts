@@ -1,7 +1,7 @@
 'use server';
 
-import { Prisma } from '@prisma/client';
-import { Secret, SecretCategory } from '#/lib/prisma';
+import { Prisma, SecretCategory } from '@prisma/client';
+import { Secret } from '#/lib/prisma';
 import {
   getSecretById,
   createSecret,

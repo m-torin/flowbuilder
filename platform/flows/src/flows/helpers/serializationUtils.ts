@@ -72,29 +72,20 @@ function sanitizeViewport(viewport: unknown): Viewport | null {
 /**
  * Type-safe JSON value transformer
  */
-export function sanitizeJsonValue(value: unknown): Prisma.JsonValue {
+export function sanitizeJsonValue(value: unknown): Prisma.JsonValue | null {
   if (value === undefined || value === null) {
     return null;
   }
 
+  // If already a JsonValue, return it
   if (
     typeof value === 'string' ||
     typeof value === 'number' ||
-    typeof value === 'boolean'
+    typeof value === 'boolean' ||
+    Array.isArray(value) ||
+    (typeof value === 'object' && value !== null)
   ) {
-    return value;
-  }
-
-  if (Array.isArray(value)) {
-    return value.map(sanitizeJsonValue);
-  }
-
-  if (typeof value === 'object' && value !== null) {
-    const result: Record<string, Prisma.JsonValue> = {};
-    Object.entries(value as Record<string, unknown>).forEach(([key, val]) => {
-      result[key] = sanitizeJsonValue(val);
-    });
-    return result;
+    return value as Prisma.JsonValue;
   }
 
   return null;

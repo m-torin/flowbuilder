@@ -24,6 +24,9 @@
     "typecheck": {
       "dependsOn": ["^build"]
     },
+    "repo:ci": {
+      "dependsOn": ["build", "test", "lint", "typecheck"]
+    },
     "dev": {
       "dependsOn": ["^build"],
       "cache": false,

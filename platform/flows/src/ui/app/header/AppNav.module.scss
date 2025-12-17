@@ -1,3 +1,8 @@
+@use 'sass:math';
+@function rem($value) {
+  @return #{math.div(math.div($value, $value * 0 + 1), 16)}rem;
+}
+
 .header {
   height: rem(56px);
   margin-bottom: rem(120px);

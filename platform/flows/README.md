@@ -51,13 +51,27 @@ pnpm install
 
 ### 2. Configure your local environment
 
-Copy the .env.local.example file in this directory to .env.local (which will be ignored by Git):
+Copy the env.example file in this directory to .env.local (which will be ignored by Git):
 
 ```
-cp .env.local.example .env.local
+cp env.example .env.local
 ```
 
-Add details for one or more providers (e.g. Google, Twitter, GitHub, Email, etc).
+**⚠️ IMPORTANT: This application requires several environment variables to function properly. Please review the `env.example` file and configure all required variables.**
+
+#### Required Environment Variables
+
+This application integrates with multiple services and requires the following environment variables:
+
+- **Database**: `PRISMA_DB_URL` - PostgreSQL connection string
+- **Authentication**: `AUTH_SECRET`, `GITHUB_ID`, `GITHUB_SECRET` - NextAuth.js and GitHub OAuth
+- **AWS Integration**: `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_REGION` - For S3, SNS, SQS, EventBridge, Lambda
+- **Vercel Integration**: `VERCEL_AUTH_BEARER_TOKEN`, `VERCEL_PROJECT_ID` - For domain management
+- **OpenAI Integration**: `OPENAI_API_KEY` - For GPT functionality
+- **Encryption**: `ENCRYPTION_SECRET` - For data encryption
+- **Cache**: `REDIS_URL`, `CACHE_STORE` - For caching and rate limiting
+
+See `env.example` for a complete list with descriptions.
 
 #### Database
 

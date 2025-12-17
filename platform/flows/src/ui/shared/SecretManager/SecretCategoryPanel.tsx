@@ -3,7 +3,7 @@
 
 import React, { memo, FC, useMemo } from 'react';
 import { Paper, Box, Title, Stack } from '@mantine/core';
-import { Secret, SecretCategory, Prisma } from '@prisma/client';
+import { Secret, Prisma, SecretCategory } from '@prisma/client';
 import { SecretRow } from './SecretRow';
 
 interface SecretCategoryPanelProps {

@@ -20,7 +20,7 @@ export const upsertEdges = async (
     const existingEdge = existingEdges.find((e) => e.id === edge.id);
     const data = {
       ...edge,
-      metadata: edge.metadata ?? Prisma.JsonNull, // Ensure proper typing for metadata
+      metadata: edge.metadata ? (edge.metadata as Prisma.InputJsonValue) : Prisma.JsonNull,
     };
 
     const createPayload = {

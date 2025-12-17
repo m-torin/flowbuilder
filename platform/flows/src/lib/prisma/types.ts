@@ -1,12 +1,13 @@
 import {
   Edge,
   Flow,
-  FlowMethod,
   Instance,
   Tag,
   TestCase,
   User,
 } from '@prisma/client';
+
+import type { FlowMethod } from '@prisma/client';
 import { Edge as FlowEdge, Node as FlowNode } from '@xyflow/react';
 
 export interface FlowValues {

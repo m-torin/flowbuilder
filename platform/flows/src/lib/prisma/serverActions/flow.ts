@@ -16,7 +16,7 @@ import {
   Node as PrismaNode,
   Edge as PrismaEdge,
 } from '#/lib/prisma';
-import { Prisma } from '@prisma/client';
+import { Prisma, FlowMethod } from '@prisma/client';
 import { DbData } from '@/app/[domain]/flow/[cuid]/types';
 
 /**
@@ -87,7 +87,7 @@ export const createFlowAction = async (
   return await createFlow(
     values.instanceId,
     values.flowName,
-    values.flowMethod,
+    values.flowMethod as FlowMethod,
     values.authorId,
     [],
   );

@@ -1,7 +1,11 @@
 'use server';
 
 import { NextRequest, NextResponse } from 'next/server';
-import { NodeType } from '#/lib/prisma';
+// NodeType is now a string type (SQLite compatibility)
+const NodeType = {
+  webhookSource: 'webhookSource',
+} as const;
+type NodeType = string;
 import { getChainStatus } from '#/lib/owlPost';
 import {
   validateHookId,

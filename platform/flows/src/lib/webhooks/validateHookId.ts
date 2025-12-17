@@ -3,7 +3,8 @@
 
 import { NextResponse } from 'next/server';
 import { readNodeAction } from '#/lib/prisma/serverActions/node';
-import { Node, NodeType } from '#/lib/prisma';
+import { Node } from '#/lib/prisma';
+import { NodeType } from '@prisma/client';
 
 export interface ValidationResult {
   node: Node | null;
@@ -26,7 +27,7 @@ export const validateHookId = async (
 
   try {
     const node = await readNodeAction(hookId, {
-      type: nodeType,
+      type: nodeType as NodeType,
       includeDeleted: false,
     });
 

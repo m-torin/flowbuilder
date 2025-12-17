@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useMemo } from 'react';
 import { getBezierPath, BaseEdge } from '@xyflow/react';
 import { EdgeRenderer } from './ui';
@@ -10,8 +12,6 @@ const DEFAULT_STYLE = {
 } as const;
 
 export const CustomEdge = (props: FbEdgeProps) => {
-  console.log('All CustomEdge props:', props);
-
   const {
     id,
     label,
@@ -28,8 +28,30 @@ export const CustomEdge = (props: FbEdgeProps) => {
     markerStart,
     markerEnd,
     interactionWidth = 20,
+    sourceHandleId,
+    targetHandleId,
+    pathOptions,
+    selectable,
+    deletable,
     ...restProps
   } = props;
+
+  // Filter out React Flow internal props that shouldn't be passed to DOM elements
+  // These props are used by React Flow internally but shouldn't be on DOM elements
+  const safeRestProps = Object.fromEntries(
+    Object.entries(restProps as Record<string, unknown>).filter(
+      ([key]) =>
+        ![
+          'sourceHandleId',
+          'targetHandleId',
+          'pathOptions',
+          'sourceHandle',
+          'targetHandle',
+          'selectable',
+          'deletable',
+        ].includes(key),
+    ),
+  );
 
   const [edgePath, labelX, labelY] = getBezierPath({
     sourceX,
@@ -68,7 +90,7 @@ export const CustomEdge = (props: FbEdgeProps) => {
         markerEnd={markerEnd}
         interactionWidth={interactionWidth}
         className={selected ? 'selected' : ''}
-        {...restProps}
+        {...safeRestProps}
       />
       <EdgeRenderer
         id={id}

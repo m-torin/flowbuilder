@@ -13,6 +13,7 @@ import {
 import { TagsInput } from '@mantine/core';
 import { useFlowFormContext } from '#/appDomain/flow/[cuid]/FlowProvider';
 import { FlowProviderFormValues } from '../../types';
+import { FlowMethod } from '@prisma/client';
 
 interface DatabaseElement {
   id: string;
@@ -80,9 +81,9 @@ export const FlowSettings: React.FC = () => {
           label="Flow Method"
           placeholder="Choose flow method"
           data={[
-            { value: 'graphOnly', label: 'Graph Only' },
-            { value: 'observable', label: 'Observable' },
-            { value: 'sequential', label: 'Sequential' },
+            { value: FlowMethod.graphOnly, label: 'Graph Only' },
+            { value: FlowMethod.observable, label: 'Observable' },
+            { value: FlowMethod.sequential, label: 'Sequential' },
           ]}
           {...form.getInputProps('method')}
         />

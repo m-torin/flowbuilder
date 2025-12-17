@@ -2,13 +2,17 @@
 'use server';
 
 import { NextRequest } from 'next/server';
-import { NodeType } from '#/lib/prisma';
 import {
   validateHookId,
   processWebhook,
   extractRequestInput,
 } from '#/lib/webhooks';
 import { getChainStatus } from '#/lib/owlPost';
+
+// NodeType is now a string type (SQLite compatibility)
+const NodeType = {
+  githubEventReceiverSource: 'githubEventReceiverSource',
+} as const;
 
 interface GithubResponse {
   message: string;

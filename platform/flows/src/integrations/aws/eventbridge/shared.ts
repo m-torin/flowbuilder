@@ -15,7 +15,7 @@ export const EVENTBRIDGE_CONFIG = Object.freeze({
     maxTotalEventSize: 1 * 1024 * 1024, // 1 MB
   },
   region: process.env.AWS_REGION ?? 'us-east-1',
-  accountId: process.env.AWS_ACCOUNT_ID ?? '123456789012', // Replace with dynamic retrieval if necessary
+  accountId: process.env.AWS_ACCOUNT_ID ?? '',
 } as const);
 
 /**

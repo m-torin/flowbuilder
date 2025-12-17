@@ -1,8 +1,8 @@
 // secret.ts
 
 import { encrypt, decrypt } from '#/lib/encryption';
-import { prisma, Secret, SecretCategory } from '#/lib/prisma';
-import { Prisma } from '@prisma/client';
+import { prisma, Secret } from '#/lib/prisma';
+import { Prisma, SecretCategory } from '@prisma/client';
 
 /**
  * Fetches all secrets by category.

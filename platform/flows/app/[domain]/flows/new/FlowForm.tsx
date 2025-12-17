@@ -3,7 +3,7 @@
 'use client';
 
 import { useState, useMemo, useCallback, useEffect } from 'react';
-import { useForm, UseFormReturnType } from '@mantine/form';
+import { useForm } from '@mantine/form';
 import {
   Button,
   Paper,
@@ -25,10 +25,10 @@ import {
 } from '@tabler/icons-react';
 import { useRouter } from 'next/navigation';
 import {
-  FlowMethod,
   createFlowAction,
   getInstanceBySubdomainAction,
 } from '#/lib/prisma';
+import { FlowMethod } from '@prisma/client';
 import { motion } from 'framer-motion';
 import { PageFrame } from '#/ui/shared';
 import { isolateSubdomain } from '#/lib/utils';
@@ -64,8 +64,7 @@ export const NewFlowForm: React.FC<NewFlowFormProps> = ({ params }) => {
     useDisclosure(false);
 
   // Updated form to include flowData
-  // @ts-ignore TODO: Fix this
-  const form: UseFormReturnType<FlowFormValues> = useForm({
+  const form = useForm<FlowFormValues>({
     mode: 'uncontrolled',
     initialValues: {
       flowName: '',
@@ -120,7 +119,18 @@ export const NewFlowForm: React.FC<NewFlowFormProps> = ({ params }) => {
   }, [subdomain, fetchInstanceId]);
 
   const handleSubmit = async (values: FlowFormValues) => {
-    if (!form.isValid() || !instanceId) return;
+    console.log('Form submit triggered', { isValid: form.isValid(), instanceId, values });
+
+    if (!form.isValid()) {
+      console.error('Form validation failed', form.errors);
+      return;
+    }
+
+    if (!instanceId) {
+      console.error('Instance ID not set, cannot create flow');
+      form.setErrors({ instanceId: 'Instance ID not available. Please refresh the page.' });
+      return;
+    }
 
     startLoading();
 

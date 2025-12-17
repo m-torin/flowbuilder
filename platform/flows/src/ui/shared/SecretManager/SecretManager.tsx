@@ -3,7 +3,8 @@
 import React, { memo, useEffect, useState, useCallback, FC } from 'react';
 import { Container, Box, LoadingOverlay, Divider } from '@mantine/core';
 import { useForm, UseFormReturnType } from '@mantine/form';
-import { SecretCategory, type Secret } from '#/lib/prisma';
+import { type Secret } from '#/lib/prisma';
+import { SecretCategory } from '@prisma/client';
 import { SecretForm, SecretFormValues } from './SecretForm';
 import { SecretCategoryPanel } from './SecretCategoryPanel';
 import {
@@ -31,14 +32,14 @@ export const SecretManager: FC<SecretManagerProps> = memo(
         initialValues: {
           secretName: '',
           secretValue: '',
-          category: SecretCategory.global,
+          category: 'global',
           shouldEncrypt: true,
         },
         validate: {
           secretName: (value: string) => (value ? null : 'Name is required'),
           secretValue: (value: string) =>
             value ? null : 'Secret value is required',
-          category: (value: SecretCategory) =>
+          category: (value: string) =>
             value ? null : 'Category is required',
         },
       },
@@ -90,7 +91,7 @@ export const SecretManager: FC<SecretManagerProps> = memo(
             name: values.secretName,
             secret: values.secretValue,
             shouldEncrypt: values.shouldEncrypt,
-            category: values.category,
+            category: values.category as SecretCategory,
             ...(flowId && { flow: { connect: { id: flowId } } }),
             ...(nodeId && { node: { connect: { id: nodeId } } }),
           };
@@ -216,7 +217,7 @@ export const SecretManager: FC<SecretManagerProps> = memo(
 
           <SecretCategoryPanel
             secrets={secrets}
-            category={SecretCategory.global}
+            category="global"
             isLoading={isLoading}
             handleEditSubmit={handleEditSubmit}
             setEditSecretId={setEditSecretId}
@@ -227,7 +228,7 @@ export const SecretManager: FC<SecretManagerProps> = memo(
           {nodeId && (
             <SecretCategoryPanel
               secrets={secrets}
-              category={SecretCategory.node}
+              category="node"
               isLoading={isLoading}
               handleEditSubmit={handleEditSubmit}
               setEditSecretId={setEditSecretId}
@@ -238,7 +239,7 @@ export const SecretManager: FC<SecretManagerProps> = memo(
           {flowId && (
             <SecretCategoryPanel
               secrets={secrets}
-              category={SecretCategory.flow}
+              category="flow"
               isLoading={isLoading}
               handleEditSubmit={handleEditSubmit}
               setEditSecretId={setEditSecretId}

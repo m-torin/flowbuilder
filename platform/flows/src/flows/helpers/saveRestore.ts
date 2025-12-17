@@ -4,7 +4,7 @@ import { useCallbackRef } from '@mantine/hooks';
 import type { ReactFlowJsonObject } from '@xyflow/react';
 import type { FbNode, FbEdge, FlowUpdate } from '../types';
 import { useAppContext } from '#/appDomain/flow/[cuid]/FlowProvider';
-import { FlowMethodSchema } from '#/lib/prisma/generated/zod';
+import { FlowMethod } from '@prisma/client';
 import { FlowCreateUpdateData, upsertFlowAction } from './action';
 import {
   transformNodeForValidation,
@@ -113,9 +113,7 @@ export const useSaveFlow = () => {
           id: flowId,
           instanceId,
           name: cleanFlowData?.name ?? prismaData?.flow?.name ?? '',
-          method: FlowMethodSchema.parse(
-            cleanFlowData?.method ?? prismaData?.flow?.method ?? 'observable',
-          ),
+          method: (cleanFlowData?.method ?? prismaData?.flow?.method ?? FlowMethod.observable) as FlowMethod,
           isEnabled:
             cleanFlowData?.isEnabled ?? prismaData?.flow?.isEnabled ?? false,
           metadata: sanitizeJsonValue(cleanFlowData?.metadata),

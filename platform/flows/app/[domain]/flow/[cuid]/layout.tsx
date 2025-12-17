@@ -3,6 +3,7 @@
 import { sanitizeFormName } from '#/lib';
 import { getInstanceIdBySubdomainAction, getFlowAction } from '#/lib/prisma';
 import { FlowProvider } from './FlowProvider';
+import { notFound } from 'next/navigation';
 
 interface FlowLayoutProps {
   children: React.ReactNode;
@@ -24,6 +25,11 @@ export default async function FlowLayout({
 
   const flowData = await getFlowAction(cuid, instanceId);
   console.log('🔍 Flow Data:', JSON.stringify(flowData, null, 2));
+
+  // Handle case where flow is not found
+  if (!flowData || !flowData.flow) {
+    notFound();
+  }
 
   const sanitizedCuid = sanitizeFormName(cuid);
   if (!sanitizedCuid) {

@@ -13,7 +13,7 @@ export const metaWebhookEnrichmentNode: MetaType = {
   group: 'general',
   color: 'blue',
   icon: 'IconWebhook',
-  type: 'webhook',
+  type: 'webhookEnrichment',
 };
 
 export const metaWebhookDestinationNode: MetaType = {

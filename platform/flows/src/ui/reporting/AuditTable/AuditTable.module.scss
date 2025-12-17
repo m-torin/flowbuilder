@@ -1,4 +1,9 @@
 // AuditTable.module.scss
+@use 'sass:math';
+@function rem($value) {
+  @return #{math.div(math.div($value, $value * 0 + 1), 16)}rem;
+}
+
 .header {
   padding: var(--mantine-spacing-md);
   margin-bottom: var(--mantine-spacing-sm);

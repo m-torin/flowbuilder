@@ -4,10 +4,9 @@ import { getFlowsBySubdomainAction } from '#/lib/prisma';
 import { redirect } from 'next/navigation';
 import { Metadata } from 'next';
 import { PageFrame } from '#/ui/shared';
-import { Button, Paper, rem } from '@mantine/core';
-import { IconPlus } from '@tabler/icons-react';
-import Link from 'next/link';
+import { Paper, rem } from '@mantine/core';
 import { TableBooksSelection } from './TableBooksSelection';
+import { NewFlowButton } from '#/ui/shared/NewFlowButton';
 
 export const metadata: Metadata = {
   title: 'All Flows | Flowbuilder',
@@ -47,17 +46,7 @@ export default async function FlowsPage({ params }: FlowsPageProps) {
     <PageFrame
       title="All Flows"
       description="View and manage your data integration flows"
-      sideContent={
-        <Button
-          leftSection={<IconPlus size={16} />}
-          variant="light"
-          color="blue.8"
-          component={Link}
-          href="/flows/new"
-        >
-          New Flow
-        </Button>
-      }
+      sideContent={<NewFlowButton />}
     >
       <Paper withBorder mb={rem(50)}>
         <TableBooksSelection data={tableData} />

@@ -8,11 +8,13 @@
     "build": "turbo run build",
     "clean": "turbo run clean",
     "dev:turbo": "turbo run dev",
-    "lint": "pnpm lint:prettier",
+    "lint": "turbo lint --only",
     "lint:prettier": "pnpm --filter @flowbuilder/prettier-config format",
+    "repo:ci": "turbo repo:ci --concurrency=8",
+    "repo:clean": "./scripts/clean-everything.sh",
     "start": "turbo run start",
     "test": "turbo run test",
-    "typecheck": "turbo run typecheck"
+    "typecheck": "turbo typecheck --only"
   },
   "dependencies": {
     "concurrently": "^8.2.2"

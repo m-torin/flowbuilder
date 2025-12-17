@@ -141,7 +141,7 @@ export async function owlPost(
     maxDepth: 10,
   },
 ): Promise<string> {
-  const chainId = `chain_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+  const chainId = `chain_${Date.now()}_${Math.random().toString(36).slice(2, 11)}`;
   const tracker = ExecutionTracker.getInstance();
 
   console.log('Starting execution chain:', {

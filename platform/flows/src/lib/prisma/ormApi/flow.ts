@@ -4,11 +4,11 @@ import { prisma } from '#/lib/prisma/client';
 import {
   Node,
   Edge,
-  FlowMethod,
   Prisma,
   Tag,
   Secret,
   Flow,
+  FlowMethod,
 } from '@prisma/client';
 import { upsertFlowWithNodesAndEdges } from './upsertFlow';
 import { FullFlow } from './flowUtils';
@@ -202,7 +202,7 @@ export const createFlow = async (
   try {
     const flowData: Prisma.FlowCreateInput = {
       name,
-      method,
+      method: method as FlowMethod,
       isEnabled: false,
       metadata: Prisma.JsonNull,
       instance: {

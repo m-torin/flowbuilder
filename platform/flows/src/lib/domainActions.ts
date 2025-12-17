@@ -7,9 +7,13 @@ import type {
 } from './domains';
 
 export const addSubdomain = async () => {
-  const projectId = 'prj_6imjw8MltW65OAxBhrDy7waV71BD';
+  const projectId = process.env.VERCEL_PROJECT_ID;
   const subdomain = 'subdomain.flowbuilder-demo.vercel.app';
-  const token = 'AYmHOKHYQwAS1EQrEeZULyI0';
+  const token = process.env.VERCEL_AUTH_BEARER_TOKEN;
+
+  if (!projectId || !token) {
+    throw new Error('VERCEL_PROJECT_ID and VERCEL_AUTH_BEARER_TOKEN must be configured');
+  }
 
   const addDomainResponse = await fetch(
     `https://api.vercel.com/v9/projects/${projectId}/domains`,
@@ -56,14 +60,20 @@ export const verifySubdomain = async () => {
 
 export const addDomainToVercel = async (subdomain: string) => {
   const domain = `${subdomain}.flowbuilder-demo.vercel.app`;
+  const projectId = process.env.VERCEL_PROJECT_ID;
+  const token = process.env.VERCEL_AUTH_BEARER_TOKEN;
+
+  if (!projectId || !token) {
+    throw new Error('VERCEL_PROJECT_ID and VERCEL_AUTH_BEARER_TOKEN must be configured');
+  }
+
   return await fetch(
-    `https://api.vercel.com/v10/projects/prj_6imjw8MltW65OAxBhrDy7waV71BD/domains${
-      process.env.VERCEL_TEAM_ID ? `?teamId=${process.env.VERCEL_TEAM_ID}` : ''
+    `https://api.vercel.com/v10/projects/${projectId}/domains${process.env.VERCEL_TEAM_ID ? `?teamId=${process.env.VERCEL_TEAM_ID}` : ''
     }`,
     {
       method: 'POST',
       headers: {
-        Authorization: `Bearer AYmHOKHYQwAS1EQrEeZULyI0`,
+        Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
@@ -81,10 +91,8 @@ export const addDomainToVercel = async (subdomain: string) => {
 export const removeDomainFromVercelProject = async (subdomain: string) => {
   const domain = `${subdomain}.${process.env.VERCEL_DOMAIN}`;
   return await fetch(
-    `https://api.vercel.com/v9/projects/${
-      process.env.VERCEL_PROJECT_ID
-    }/domains/${domain}${
-      process.env.VERCEL_TEAM_ID ? `?teamId=${process.env.VERCEL_TEAM_ID}` : ''
+    `https://api.vercel.com/v9/projects/${process.env.VERCEL_PROJECT_ID
+    }/domains/${domain}${process.env.VERCEL_TEAM_ID ? `?teamId=${process.env.VERCEL_TEAM_ID}` : ''
     }`,
     {
       headers: {
@@ -98,8 +106,7 @@ export const removeDomainFromVercelProject = async (subdomain: string) => {
 export const removeDomainFromVercelTeam = async (subdomain: string) => {
   const domain = `${subdomain}.${process.env.VERCEL_DOMAIN}`;
   return await fetch(
-    `https://api.vercel.com/v6/domains/${domain}${
-      process.env.VERCEL_TEAM_ID ? `?teamId=${process.env.VERCEL_TEAM_ID}` : ''
+    `https://api.vercel.com/v6/domains/${domain}${process.env.VERCEL_TEAM_ID ? `?teamId=${process.env.VERCEL_TEAM_ID}` : ''
     }`,
     {
       headers: {
@@ -115,10 +122,8 @@ export const getDomainResponse = async (
 ): Promise<DomainResponse & { error: { code: string; message: string } }> => {
   const domain = `${subdomain}.${process.env.VERCEL_DOMAIN}`;
   return await fetch(
-    `https://api.vercel.com/v9/projects/${
-      process.env.VERCEL_PROJECT_ID
-    }/domains/${domain}${
-      process.env.VERCEL_TEAM_ID ? `?teamId=${process.env.VERCEL_TEAM_ID}` : ''
+    `https://api.vercel.com/v9/projects/${process.env.VERCEL_PROJECT_ID
+    }/domains/${domain}${process.env.VERCEL_TEAM_ID ? `?teamId=${process.env.VERCEL_TEAM_ID}` : ''
     }`,
     {
       method: 'GET',
@@ -136,8 +141,7 @@ export const getConfigResponse = async (
   domain: string,
 ): Promise<DomainConfigResponse> => {
   return await fetch(
-    `https://api.vercel.com/v6/domains/${domain}/config${
-      process.env.VERCEL_TEAM_ID ? `?teamId=${process.env.VERCEL_TEAM_ID}` : ''
+    `https://api.vercel.com/v6/domains/${domain}/config${process.env.VERCEL_TEAM_ID ? `?teamId=${process.env.VERCEL_TEAM_ID}` : ''
     }`,
     {
       method: 'GET',
@@ -153,10 +157,8 @@ export const verifyDomain = async (
   domain: string,
 ): Promise<DomainVerificationResponse> => {
   return await fetch(
-    `https://api.vercel.com/v9/projects/${
-      process.env.VERCEL_PROJECT_ID
-    }/domains/${domain}/verify${
-      process.env.VERCEL_TEAM_ID ? `?teamId=${process.env.VERCEL_TEAM_ID}` : ''
+    `https://api.vercel.com/v9/projects/${process.env.VERCEL_PROJECT_ID
+    }/domains/${domain}/verify${process.env.VERCEL_TEAM_ID ? `?teamId=${process.env.VERCEL_TEAM_ID}` : ''
     }`,
     {
       method: 'POST',

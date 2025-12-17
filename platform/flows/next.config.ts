@@ -2,9 +2,8 @@ import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
-  sassOptions: {
-    prependData: `@import "./src/styles/_mantine.scss";`,
-  },
+  // SCSS utilities removed from global config due to Next.js 16 Turbopack limitations
+  // The rem() function and other utilities are defined inline in files that need them
   images: {
     domains: [
       'flowbuilder-demo.vercel.app',
@@ -12,27 +11,19 @@ const nextConfig: NextConfig = {
       // ...`${process.env.VALID_SUBDOMAINS}`.split(',').map(s => `${s.trim()}.flowbuilder-demo.vercel.app`)
     ],
   },
-  serverActions: {
-    allowedOrigins: [
-      'localhost:3000',
-      '*.localhost:3000',
-      '*.flowbuilder-demo.vercel.app',
-      'flowbuilder-demo.vercel.app',
-    ],
-  },
   experimental: {
-    optimizePackageImports: ['@mantine/core', '@mantine/hooks'],
-    turbo: {
-      resolveAlias: {
-        // Add any module resolutions here
-      },
-      // You can add more Turbopack-specific configurations here
+    serverActions: {
+      allowedOrigins: [
+        'localhost:3000',
+        '*.localhost:3000',
+        '*.flowbuilder-demo.vercel.app',
+        'flowbuilder-demo.vercel.app',
+      ],
     },
+    optimizePackageImports: ['@mantine/core', '@mantine/hooks'],
   },
-  // Consider removing this in production to enable ESLint checks during build
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
+  // ESLint config removed - Next.js 16 no longer supports eslint config in next.config.ts
+  // Configure ESLint in .eslintrc.json or eslint.config.js instead
   async redirects() {
     return [
       {
