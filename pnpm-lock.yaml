@@ -59,7 +59,7 @@ importers:
         version: 18.3.1(react@18.3.1)
       sql-formatter:
         specifier: ^15.0.0
-        version: 15.7.3
+        version: 15.7.4
     devDependencies:
       '@flowbuilder/typescript-config':
         specifier: workspace:*
@@ -306,7 +306,7 @@ importers:
         version: 3.2.24
       sql-formatter:
         specifier: ^15.4.6
-        version: 15.7.3
+        version: 15.7.4
       tailwind-merge:
         specifier: ^2.5.4
         version: 2.6.1
@@ -6132,8 +6132,8 @@ packages:
   spdx-license-ids@3.0.20:
     resolution: {integrity: sha512-jg25NiDV/1fLtSgEgyvVyDunvaNHbuwF9lfNV17gSmPFAlYzdfNBlLtLzXTevwkPj7DhGbmN9VnmJIgLnhvaBw==}
 
-  sql-formatter@15.7.3:
-    resolution: {integrity: sha512-5+zl9Nqg5aNjss0tb1G+StpC4dJKbjv3+g8CL/+V+00PfZop+2RKGyi53ScFl0dr+Dkx1LjmUO54Q3N7K3EtMw==}
+  sql-formatter@15.7.4:
+    resolution: {integrity: sha512-87VsXfl9ng7oNZlV0p3c/DfraFneH4EPYZ1F7v+ZbGTdddtI0FHcqRRshJx6/Sy7saXOiCwstw0J2cP4Z6Xj5A==}
     hasBin: true
 
   stable-hash@0.0.4:
@@ -13860,7 +13860,7 @@ snapshots:
 
   spdx-license-ids@3.0.20: {}
 
-  sql-formatter@15.7.3:
+  sql-formatter@15.7.4:
     dependencies:
       argparse: 2.0.1
       nearley: 2.20.1
