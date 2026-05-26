@@ -183,7 +183,7 @@ importers:
         version: 7.15.2(@mantine/hooks@7.15.2(react@19.2.3))(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       '@mantine/dates':
         specifier: ^7.14.1
-        version: 7.15.2(@mantine/core@7.15.2(@mantine/hooks@7.15.2(react@19.2.3))(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(@mantine/hooks@7.15.2(react@19.2.3))(dayjs@1.11.20)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+        version: 7.15.2(@mantine/core@7.15.2(@mantine/hooks@7.15.2(react@19.2.3))(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(@mantine/hooks@7.15.2(react@19.2.3))(dayjs@1.11.21)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       '@mantine/form':
         specifier: ^7.14.1
         version: 7.15.2(react@19.2.3)
@@ -264,7 +264,7 @@ importers:
         version: 4.4.0
       dayjs:
         specifier: ^1.11.13
-        version: 1.11.20
+        version: 1.11.21
       framer-motion:
         specifier: ^11.11.17
         version: 11.18.2(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
@@ -3784,8 +3784,8 @@ packages:
     resolution: {integrity: sha512-fnULvOpxnC5/Vg3NCiWelDsLiUc9bRwAPs/+LfTLNvetFCtCTN+yQz15C/fs4AwX1R9K5GLtLfn8QW+dWisaAw==}
     engines: {node: '>=0.11'}
 
-  dayjs@1.11.20:
-    resolution: {integrity: sha512-YbwwqR/uYpeoP4pu043q+LTDLFBLApUP6VxRihdfNTqu4ubqMlGDLd6ErXhEgsyvY0K6nCs7nggYumAN+9uEuQ==}
+  dayjs@1.11.21:
+    resolution: {integrity: sha512-98IT+HOahAisibz/yjKbzuOBwYcjJ7BCLPzARyHiyEBmRz4fatF+KPJszEHXsGYjUG234aH/cOjW1wwTbKUZlA==}
 
   debug@3.2.7:
     resolution: {integrity: sha512-CFjzYYAi4ThfiQvizrFQevTTXHtnCqWfe7x1AhgEscTz6ZbLbfoLRLPugTQyBth6f8ZERVUSyWHFD/7Wu4t1XQ==}
@@ -5649,6 +5649,7 @@ packages:
   recharts@2.14.1:
     resolution: {integrity: sha512-xtWulflkA+/xu4/QClBdtZYN30dbvTHjxjkh5XTMrH/CQ3WGDDPHHa/LLKCbgoqz0z3UaSH2/blV1i6VNMeh1g==}
     engines: {node: '>=14'}
+    deprecated: 1.x and 2.x branches are no longer active. Bump to Recharts v3 to receive latest features and bugfixes. See https://github.com/recharts/recharts/wiki/3.0-migration-guide
     peerDependencies:
       react: ^16.0.0 || ^17.0.0 || ^18.0.0
       react-dom: ^16.0.0 || ^17.0.0 || ^18.0.0
@@ -7763,12 +7764,12 @@ snapshots:
     transitivePeerDependencies:
       - '@types/react'
 
-  '@mantine/dates@7.15.2(@mantine/core@7.15.2(@mantine/hooks@7.15.2(react@19.2.3))(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(@mantine/hooks@7.15.2(react@19.2.3))(dayjs@1.11.20)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)':
+  '@mantine/dates@7.15.2(@mantine/core@7.15.2(@mantine/hooks@7.15.2(react@19.2.3))(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(@mantine/hooks@7.15.2(react@19.2.3))(dayjs@1.11.21)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)':
     dependencies:
       '@mantine/core': 7.15.2(@mantine/hooks@7.15.2(react@19.2.3))(@types/react@19.2.7)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       '@mantine/hooks': 7.15.2(react@19.2.3)
       clsx: 2.1.1
-      dayjs: 1.11.20
+      dayjs: 1.11.21
       react: 19.2.3
       react-dom: 19.2.3(react@19.2.3)
 
@@ -10386,7 +10387,7 @@ snapshots:
     dependencies:
       '@babel/runtime': 7.29.2
 
-  dayjs@1.11.20: {}
+  dayjs@1.11.21: {}
 
   debug@3.2.7:
     dependencies:
