@@ -126,46 +126,46 @@ importers:
         version: 2.11.2(@simplewebauthn/server@11.0.0)(unstorage@1.17.5(@upstash/redis@1.38.0)(@vercel/kv@3.0.0))
       '@aws-sdk/client-api-gateway':
         specifier: ^3.709.0
-        version: 3.1071.0
+        version: 3.1072.0
       '@aws-sdk/client-cloudwatch-logs':
         specifier: ^3.709.0
-        version: 3.1071.0
+        version: 3.1072.0
       '@aws-sdk/client-ec2':
         specifier: ^3.709.0
-        version: 3.1071.0
+        version: 3.1072.0
       '@aws-sdk/client-eventbridge':
         specifier: ^3.709.0
-        version: 3.1071.0
+        version: 3.1072.0
       '@aws-sdk/client-iam':
         specifier: ^3.709.0
-        version: 3.1071.0
+        version: 3.1072.0
       '@aws-sdk/client-kafka':
         specifier: ^3.709.0
-        version: 3.1071.0
+        version: 3.1072.0
       '@aws-sdk/client-lambda':
         specifier: ^3.709.0
-        version: 3.1071.0
+        version: 3.1072.0
       '@aws-sdk/client-s3':
         specifier: ^3.709.0
-        version: 3.1071.0
+        version: 3.1072.0
       '@aws-sdk/client-ses':
         specifier: ^3.709.0
-        version: 3.1071.0
+        version: 3.1072.0
       '@aws-sdk/client-sfn':
         specifier: ^3.709.0
-        version: 3.1071.0
+        version: 3.1072.0
       '@aws-sdk/client-sns':
         specifier: ^3.709.0
-        version: 3.1071.0
+        version: 3.1072.0
       '@aws-sdk/client-sqs':
         specifier: ^3.709.0
-        version: 3.1071.0
+        version: 3.1072.0
       '@aws-sdk/credential-provider-node':
         specifier: ^3.709.0
         version: 3.972.57
       '@aws-sdk/credential-providers':
         specifier: ^3.709.0
-        version: 3.1071.0
+        version: 3.1072.0
       '@flowbuilder/monaco-editor':
         specifier: workspace:^
         version: link:../../packages/monaco-editor
@@ -282,7 +282,7 @@ importers:
         version: 1.1.0(@mantine/form@7.15.2(react@19.2.3))(zod@3.24.1)
       nanoid:
         specifier: ^5.0.8
-        version: 5.1.11
+        version: 5.1.14
       next:
         specifier: 16.0.10
         version: 16.0.10(@opentelemetry/api@1.9.1)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(sass@1.68.0)
@@ -440,56 +440,56 @@ packages:
     resolution: {integrity: sha512-qh0fG/RtrFztst4+vn1HZehAvAhr5Jlq/WMP7e5KvvfF16oNVBc9CDNVdxdm19vzOY2x0qiDMFCRjhxQAusGWQ==}
     engines: {node: '>=20.0.0'}
 
-  '@aws-sdk/client-api-gateway@3.1071.0':
-    resolution: {integrity: sha512-AhKwHq9TtYU2iZ3stpT/jO3lVrR5ubcuKWtQal3y/en1UGH4SFMCIj2ezhG20jTNRlFnXI74/IYgwjw4LglBvg==}
+  '@aws-sdk/client-api-gateway@3.1072.0':
+    resolution: {integrity: sha512-OhfSu/t9tczwqtvXiiYGbyPxT/OXfV4/mjDpRvxgDlegoVk2aD7L8u/w8ApJTSYL73TQSPCttqrZSEm7mCJCoA==}
     engines: {node: '>=20.0.0'}
 
-  '@aws-sdk/client-cloudwatch-logs@3.1071.0':
-    resolution: {integrity: sha512-8l4evPw4V6N9rKKCGBP39Dc3bzaPf0ytqgCkVHTeGtaJg8ih6XCdEIuKFBTYTQpFUbPu010Tt+rEQ8GuJnSKoQ==}
+  '@aws-sdk/client-cloudwatch-logs@3.1072.0':
+    resolution: {integrity: sha512-wCTPJvsRxEBN5hmHQHo3heXUnbvV//qFsSlS3fMV2BsDMOcm3iy+7uqUNvkaVeAVuiQNQSo2dGlSdG89wlbLow==}
     engines: {node: '>=20.0.0'}
 
-  '@aws-sdk/client-cognito-identity@3.1071.0':
-    resolution: {integrity: sha512-DIzsM+S/jLcTu+gRHy/luPGkqjiXIQFQTe8zCADE1SX4QXw05bUJNoF2yI0z3HUEMC4wIJsVhDpgKt6jeUr/eA==}
+  '@aws-sdk/client-cognito-identity@3.1072.0':
+    resolution: {integrity: sha512-V4Ic0hmxYlDiyMGArYoPL0EG6A4NHO6tlXC0oIfVJNAr/4uG9cbEMwcutrZkWVMU0QnxYk4iuOjUenF3wOGEBg==}
     engines: {node: '>=20.0.0'}
 
-  '@aws-sdk/client-ec2@3.1071.0':
-    resolution: {integrity: sha512-AEHUuRAxguKhBq7M6C3qPnQN2yJAeB4XxXxZ1c2PZr3OOMr7pnG91IoAN9aqzVhZYlXZsk3KuX8056FD64k5ow==}
+  '@aws-sdk/client-ec2@3.1072.0':
+    resolution: {integrity: sha512-dGAvEyjEa6EZWZc26/a+Wmyf9Xmxf7EoyCEbxwQGdo0fqZMKteupkLOw1SKvtb8evstv190NrQT1pi/+ICrrdA==}
     engines: {node: '>=20.0.0'}
 
-  '@aws-sdk/client-eventbridge@3.1071.0':
-    resolution: {integrity: sha512-zRfJzr5UAoOJFuks6XYVDWgqsgr3Tm+lcmaMzi83s/um02mzC+jc8PkEEqdGHalzhY9qUeVEm6iP9mWha1doZg==}
+  '@aws-sdk/client-eventbridge@3.1072.0':
+    resolution: {integrity: sha512-EEbRPwTZfkwbZzX2E57OO4CTHLy24RM5R12z2eYvmLVIYOjNAEhM4Rx4iszVuVG3rt8mYrrW8v6h2/idIatWaA==}
     engines: {node: '>=20.0.0'}
 
-  '@aws-sdk/client-iam@3.1071.0':
-    resolution: {integrity: sha512-7Bojv5nuPX+NNCRkTde9ZKl51Y2MPLbFkMgVm2hA43L8rOsgDz2tjBfY9IpTW78K1s+1IaW2DTmJTwa5vmNxAw==}
+  '@aws-sdk/client-iam@3.1072.0':
+    resolution: {integrity: sha512-Jr4BZhtwsEQkH1mDSqIBKWaTLpF+G+FB7j1iSFLdGKU6goQs4MmUoLaOKjhct2PZO1mOPXtePEFUDFSDtqNuOg==}
     engines: {node: '>=20.0.0'}
 
-  '@aws-sdk/client-kafka@3.1071.0':
-    resolution: {integrity: sha512-BXgbSGXE912OR8McV2yGo4Pmjf7QiGDZCGNWCIfSTxCrWMsOWekY1/lqn0PcjztrV8jhizG3aonxT8OZ96Nw3A==}
+  '@aws-sdk/client-kafka@3.1072.0':
+    resolution: {integrity: sha512-wvYTaGj+WpGeSlaFN/0zU4AFz6PZTLUCF4qmhxiieY3wjKbvGpO+RIiUWMBkqOao1NpK9qEZVtH7eu3rqbQAEA==}
     engines: {node: '>=20.0.0'}
 
-  '@aws-sdk/client-lambda@3.1071.0':
-    resolution: {integrity: sha512-x4GpPVVTV8lcO6qcHwMK78taqGb4om0E4vELYtE1LNrJlIW34n3zKheavrVj2lsSenhM1zqPAqKZxZZGV4gPHw==}
+  '@aws-sdk/client-lambda@3.1072.0':
+    resolution: {integrity: sha512-Uf2YaHVmvlP5fzufjixf4+nq8YIZbJia4ztVCCfxElVjxYZMzZ75p9SNvuknAWGyozgvE6mucpkF8he1Ck0Tqg==}
     engines: {node: '>=20.0.0'}
 
-  '@aws-sdk/client-s3@3.1071.0':
-    resolution: {integrity: sha512-BqsqkaU/FztbQnq5Aw0BK6/weQgwnC3n2w19M7CjEjRHscr5dZU8+ihi7PIY6UMW9RkJrzUUEmaoHQrIVScFYQ==}
+  '@aws-sdk/client-s3@3.1072.0':
+    resolution: {integrity: sha512-W5+7uklGSWJYsK1v/pUsv6i5/VR4xKXzcqPq7xHubhWPcRfhV4v/93XRkjjn57nJheDBjvzD/nVxBqhHOLuxCw==}
     engines: {node: '>=20.0.0'}
 
-  '@aws-sdk/client-ses@3.1071.0':
-    resolution: {integrity: sha512-KVs3nUgIVRrNW68zJjje4Mr9X9FvmQSHJU0MoiIvfqPI17MB5YIH7XLWL3yKKBVDlvbnfQ5dc1W6haX08r9Ujg==}
+  '@aws-sdk/client-ses@3.1072.0':
+    resolution: {integrity: sha512-fJfVwXlyPakN1gvEqq2jB5JL/4SzEXOPt7HSwrjMkaDzl56qM3g/wrgcIp2ms3uImqR4hn8jpp44DHX0ebu4tQ==}
     engines: {node: '>=20.0.0'}
 
-  '@aws-sdk/client-sfn@3.1071.0':
-    resolution: {integrity: sha512-Fg3iINa3N8Jl0WjQGUxq6RVTXAbdx30YUXYLIAz5NGpSV8YGikL+kZILdhepbywCGXDLWI1F4raLgRByw2WoYw==}
+  '@aws-sdk/client-sfn@3.1072.0':
+    resolution: {integrity: sha512-4KlbGS6U5vLvNqgp752M4Wci+x27dWB+As5RHHVOm4e2EmrAhYX3kOlelnpwVSIDQSip5216NefDXom131ciuw==}
     engines: {node: '>=20.0.0'}
 
-  '@aws-sdk/client-sns@3.1071.0':
-    resolution: {integrity: sha512-/fgKJy/z0cOWyj0riUQ7HFurhW6tuRgjf9aVD5XVUZFh0Q6vg2x6Z9Fjnt3Ka3Ws8V8xgnoflK0aSl+P/V88pQ==}
+  '@aws-sdk/client-sns@3.1072.0':
+    resolution: {integrity: sha512-/e5WY1/Ixn2RRZ+fyfsxguSoL4X48k9r4ovzdKPadQK3aIBNApcQi3EovwVR9Z1o44Qxm5MuTiOaQlAnzx/ZbQ==}
     engines: {node: '>=20.0.0'}
 
-  '@aws-sdk/client-sqs@3.1071.0':
-    resolution: {integrity: sha512-TZfHYkrvfJ6Ti/iA1xckY2BrxmcSJ7c9CihwJNMfGpSjkAOUrKLwhhTqYdAyyfMHhPGhWFEc7mXpbUcnGM/QnQ==}
+  '@aws-sdk/client-sqs@3.1072.0':
+    resolution: {integrity: sha512-ubn3AbaR5suSZ1deeb4dE6PZ9wGnAHGzkD+W2l9aFhQ+4Feev4sVKrxX2t+9oyujB/1Au2zz29y/EgNStxs75A==}
     engines: {node: '>=20.0.0'}
 
   '@aws-sdk/core@3.974.22':
@@ -532,8 +532,8 @@ packages:
     resolution: {integrity: sha512-0Iv5QttS6wcATlodYKgvQj6B9Db51rx7NU9fqu0PoLeS4BIgdYMc/QK4smwLwpm5RFrs02V/eLyEFp3FklvlNQ==}
     engines: {node: '>=20.0.0'}
 
-  '@aws-sdk/credential-providers@3.1071.0':
-    resolution: {integrity: sha512-CyujYtNK0EoKgxwkqlz3UGADDgXVhOsGudqau/tlxzLAt25cYi5o9wImIVwbO5NwGy3CqjYC/2bQp1z2lW0XfQ==}
+  '@aws-sdk/credential-providers@3.1072.0':
+    resolution: {integrity: sha512-TapaSwjVRVOV/1yEqlNRg6Co+YFnUBhYBlYZomHaY5FfbrsrtFueCBy0cDDrvr9s5wVIUkYLdsfiXeitatHfJg==}
     engines: {node: '>=20.0.0'}
 
   '@aws-sdk/middleware-flexible-checksums@3.974.32':
@@ -3334,8 +3334,8 @@ packages:
     resolution: {integrity: sha512-KMReFUr0B4t+D+OBkjR3KYqvocp2XaSzO55UcB6mgQMd3KbcE+mWTyvVV7D/zsdEbNnV6acZUutkiHQXvTr1Rw==}
     engines: {node: '>= 8'}
 
-  anynum@1.0.0:
-    resolution: {integrity: sha512-xjR9/zBVnUOP6ztMIIgShjsxui80nQUQH+5xJnvrYLs+90bF25/KJqaAi8mk+B4RDtX1Nspi6fmp4YTEts8SfA==}
+  anynum@1.0.1:
+    resolution: {integrity: sha512-N6//FLET/tXYNM/F6ABca1oH6fWB+KlTt909Le28WMDBk8oaT4vY17DCrwg2MvmuqUKt3Ni4N5dGJ/EoBgcO6A==}
 
   arg@5.0.2:
     resolution: {integrity: sha512-PYjyFOLKQ9y57JvQ6QLo8dAgNqswh8M1RMJYdQduT6xbWSgK36P/Z/v+p888pM69jMMfS8Xd8F6I1kQ/I9HUGg==}
@@ -4934,13 +4934,13 @@ packages:
   mz@2.7.0:
     resolution: {integrity: sha512-z81GNO7nnYMEhrGh9LeymoE4+Yr0Wn5McHIZMK5cfQCl+NDX08sCZgUc9/6MHni9IWuFLm1Z3HTCXu2z9fN62Q==}
 
-  nanoid@3.3.12:
-    resolution: {integrity: sha512-ZB9RH/39qpq5Vu6Y+NmUaFhQR6pp+M2Xt76XBnEwDaGcVAqhlvxrl3B2bKS5D3NH3QR76v3aSrKaF/Kiy7lEtQ==}
+  nanoid@3.3.13:
+    resolution: {integrity: sha512-sPdqC6ByMVVGvF1ynvvMo0/o+oD1VX7DaHhijt1bFgjvBkHBib4t49GoNDhf2NDta4oeUNlaGbSt5K7qjZ955Q==}
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
     hasBin: true
 
-  nanoid@5.1.11:
-    resolution: {integrity: sha512-v+KEsUv2ps74PaSKv0gHTxTCgMXOIfBEbaqa6w6ISIGC7ZsvHN4N9oJ8d4cmf0n5oTzQz2SLmThbQWhjd/8eKg==}
+  nanoid@5.1.14:
+    resolution: {integrity: sha512-5c8l8kVzqpnDPaicbEop/fV0Q1w16FmbWtVhMqugTozAwYdlIQojWH5a/M7UfziFmGdQRrUdV+EPzc9Xng3VAQ==}
     engines: {node: ^18 || >=20}
     hasBin: true
 
@@ -5973,8 +5973,8 @@ packages:
   strnum@1.1.2:
     resolution: {integrity: sha512-vrN+B7DBIoTTZjnPNewwhx6cBA/H+IS7rfW68n7XxC1y7uoiGQBxaKzqucGUgavX15dJgiGztLJ8vxuEzwqBdA==}
 
-  strnum@2.4.0:
-    resolution: {integrity: sha512-sHrVyWWdq28RbhjuJdZsA1SnGRJV6NiXbk6AXBxDOsgAcA+lmpUZCYjOdLBxkXMwis6RRe7dlZt4VlIWFVzkmg==}
+  strnum@2.4.1:
+    resolution: {integrity: sha512-M9eUSMT2dCB2cTNPG7UYj6KuK7RJR2SN2+yCV/fTW3xzTCS6EaGZ5pSMgDIjB7r8zSfTGk+dvvn9rTjpVS9Mwg==}
 
   styled-jsx@5.1.6:
     resolution: {integrity: sha512-qSVyDTeMotdvQYoHWLNGwRFJHC+i+ZvdBRYosOFgC+Wg1vx4frN2/RG/NA7SYqqvKNLf39P2LSRA2pu6n0XYZA==}
@@ -6682,7 +6682,7 @@ snapshots:
       '@smithy/types': 4.15.0
       tslib: 2.8.1
 
-  '@aws-sdk/client-api-gateway@3.1071.0':
+  '@aws-sdk/client-api-gateway@3.1072.0':
     dependencies:
       '@aws-crypto/sha256-browser': 5.2.0
       '@aws-crypto/sha256-js': 5.2.0
@@ -6696,7 +6696,7 @@ snapshots:
       '@smithy/types': 4.15.0
       tslib: 2.8.1
 
-  '@aws-sdk/client-cloudwatch-logs@3.1071.0':
+  '@aws-sdk/client-cloudwatch-logs@3.1072.0':
     dependencies:
       '@aws-crypto/sha256-browser': 5.2.0
       '@aws-crypto/sha256-js': 5.2.0
@@ -6709,7 +6709,7 @@ snapshots:
       '@smithy/types': 4.15.0
       tslib: 2.8.1
 
-  '@aws-sdk/client-cognito-identity@3.1071.0':
+  '@aws-sdk/client-cognito-identity@3.1072.0':
     dependencies:
       '@aws-crypto/sha256-browser': 5.2.0
       '@aws-crypto/sha256-js': 5.2.0
@@ -6722,7 +6722,7 @@ snapshots:
       '@smithy/types': 4.15.0
       tslib: 2.8.1
 
-  '@aws-sdk/client-ec2@3.1071.0':
+  '@aws-sdk/client-ec2@3.1072.0':
     dependencies:
       '@aws-crypto/sha256-browser': 5.2.0
       '@aws-crypto/sha256-js': 5.2.0
@@ -6736,7 +6736,7 @@ snapshots:
       '@smithy/types': 4.15.0
       tslib: 2.8.1
 
-  '@aws-sdk/client-eventbridge@3.1071.0':
+  '@aws-sdk/client-eventbridge@3.1072.0':
     dependencies:
       '@aws-crypto/sha256-browser': 5.2.0
       '@aws-crypto/sha256-js': 5.2.0
@@ -6750,7 +6750,7 @@ snapshots:
       '@smithy/types': 4.15.0
       tslib: 2.8.1
 
-  '@aws-sdk/client-iam@3.1071.0':
+  '@aws-sdk/client-iam@3.1072.0':
     dependencies:
       '@aws-crypto/sha256-browser': 5.2.0
       '@aws-crypto/sha256-js': 5.2.0
@@ -6763,7 +6763,7 @@ snapshots:
       '@smithy/types': 4.15.0
       tslib: 2.8.1
 
-  '@aws-sdk/client-kafka@3.1071.0':
+  '@aws-sdk/client-kafka@3.1072.0':
     dependencies:
       '@aws-crypto/sha256-browser': 5.2.0
       '@aws-crypto/sha256-js': 5.2.0
@@ -6776,7 +6776,7 @@ snapshots:
       '@smithy/types': 4.15.0
       tslib: 2.8.1
 
-  '@aws-sdk/client-lambda@3.1071.0':
+  '@aws-sdk/client-lambda@3.1072.0':
     dependencies:
       '@aws-crypto/sha256-browser': 5.2.0
       '@aws-crypto/sha256-js': 5.2.0
@@ -6789,7 +6789,7 @@ snapshots:
       '@smithy/types': 4.15.0
       tslib: 2.8.1
 
-  '@aws-sdk/client-s3@3.1071.0':
+  '@aws-sdk/client-s3@3.1072.0':
     dependencies:
       '@aws-crypto/sha1-browser': 5.2.0
       '@aws-crypto/sha256-browser': 5.2.0
@@ -6806,7 +6806,7 @@ snapshots:
       '@smithy/types': 4.15.0
       tslib: 2.8.1
 
-  '@aws-sdk/client-ses@3.1071.0':
+  '@aws-sdk/client-ses@3.1072.0':
     dependencies:
       '@aws-crypto/sha256-browser': 5.2.0
       '@aws-crypto/sha256-js': 5.2.0
@@ -6819,7 +6819,7 @@ snapshots:
       '@smithy/types': 4.15.0
       tslib: 2.8.1
 
-  '@aws-sdk/client-sfn@3.1071.0':
+  '@aws-sdk/client-sfn@3.1072.0':
     dependencies:
       '@aws-crypto/sha256-browser': 5.2.0
       '@aws-crypto/sha256-js': 5.2.0
@@ -6832,7 +6832,7 @@ snapshots:
       '@smithy/types': 4.15.0
       tslib: 2.8.1
 
-  '@aws-sdk/client-sns@3.1071.0':
+  '@aws-sdk/client-sns@3.1072.0':
     dependencies:
       '@aws-crypto/sha256-browser': 5.2.0
       '@aws-crypto/sha256-js': 5.2.0
@@ -6845,7 +6845,7 @@ snapshots:
       '@smithy/types': 4.15.0
       tslib: 2.8.1
 
-  '@aws-sdk/client-sqs@3.1071.0':
+  '@aws-sdk/client-sqs@3.1072.0':
     dependencies:
       '@aws-crypto/sha256-browser': 5.2.0
       '@aws-crypto/sha256-js': 5.2.0
@@ -6962,9 +6962,9 @@ snapshots:
       '@smithy/types': 4.15.0
       tslib: 2.8.1
 
-  '@aws-sdk/credential-providers@3.1071.0':
+  '@aws-sdk/credential-providers@3.1072.0':
     dependencies:
-      '@aws-sdk/client-cognito-identity': 3.1071.0
+      '@aws-sdk/client-cognito-identity': 3.1072.0
       '@aws-sdk/core': 3.974.22
       '@aws-sdk/credential-provider-cognito-identity': 3.972.47
       '@aws-sdk/credential-provider-env': 3.972.48
@@ -9860,7 +9860,7 @@ snapshots:
       normalize-path: 3.0.0
       picomatch: 2.3.2
 
-  anynum@1.0.0: {}
+  anynum@1.0.1: {}
 
   arg@5.0.2: {}
 
@@ -10916,7 +10916,7 @@ snapshots:
       '@nodable/entities': 2.2.0
       fast-xml-builder: 1.2.0
       path-expression-matcher: 1.5.0
-      strnum: 2.4.0
+      strnum: 2.4.1
 
   fastq@1.20.1:
     dependencies:
@@ -11637,9 +11637,9 @@ snapshots:
       object-assign: 4.1.1
       thenify-all: 1.6.0
 
-  nanoid@3.3.12: {}
+  nanoid@3.3.13: {}
 
-  nanoid@5.1.11: {}
+  nanoid@5.1.14: {}
 
   natural-compare@1.4.0: {}
 
@@ -12004,13 +12004,13 @@ snapshots:
 
   postcss@8.4.31:
     dependencies:
-      nanoid: 3.3.12
+      nanoid: 3.3.13
       picocolors: 1.1.1
       source-map-js: 1.2.1
 
   postcss@8.5.15:
     dependencies:
-      nanoid: 3.3.12
+      nanoid: 3.3.13
       picocolors: 1.1.1
       source-map-js: 1.2.1
 
@@ -12815,9 +12815,9 @@ snapshots:
 
   strnum@1.1.2: {}
 
-  strnum@2.4.0:
+  strnum@2.4.1:
     dependencies:
-      anynum: 1.0.0
+      anynum: 1.0.1
 
   styled-jsx@5.1.6(react@19.2.3):
     dependencies:
