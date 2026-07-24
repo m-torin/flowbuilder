@@ -69,7 +69,7 @@
     "@sentry/react": "^8.38.0",
     "@simplewebauthn/server": "^11.0.0",
     "@tabler/icons-react": "^3.22.0",
-    "@upstash/lock": "^0.2.1",
+    "@upstash/lock": "^0.3.0",
     "@upstash/ratelimit": "^2.0.4",
     "@upstash/redis": "^1.34.3",
     "@vercel/analytics": "^1.4.0",
