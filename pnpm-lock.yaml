@@ -81,7 +81,7 @@ importers:
         version: 8.6.18(@storybook/test@8.6.15(storybook@8.6.18(prettier@3.9.6)))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.6.18(prettier@3.9.6))(typescript@5.9.3)
       '@storybook/react-vite':
         specifier: ^8.4.4
-        version: 8.6.18(@storybook/test@8.6.15(storybook@8.6.18(prettier@3.9.6)))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rollup@4.63.0)(storybook@8.6.18(prettier@3.9.6))(typescript@5.9.3)(vite@6.0.3(@types/node@20.19.43)(jiti@2.4.2)(less@4.4.0)(sass@1.89.2)(stylus@0.62.0)(sugarss@5.0.0(postcss@8.5.26))(terser@5.51.0)(yaml@2.6.1))
+        version: 8.6.18(@storybook/test@8.6.15(storybook@8.6.18(prettier@3.9.6)))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rollup@4.63.0)(storybook@8.6.18(prettier@3.9.6))(typescript@5.9.3)(vite@6.0.3(@types/node@20.19.43)(jiti@2.4.2)(less@4.4.0)(sass@1.89.2)(stylus@0.62.0)(sugarss@5.0.0(postcss@8.5.26))(terser@5.51.2)(yaml@2.6.1))
       '@storybook/test':
         specifier: ^8.4.4
         version: 8.6.15(storybook@8.6.18(prettier@3.9.6))
@@ -126,46 +126,46 @@ importers:
         version: 2.11.3(@simplewebauthn/server@11.0.0)(unstorage@1.17.5(@upstash/redis@1.38.3)(@vercel/kv@3.0.0))
       '@aws-sdk/client-api-gateway':
         specifier: ^3.709.0
-        version: 3.1119.0
+        version: 3.1120.0
       '@aws-sdk/client-cloudwatch-logs':
         specifier: ^3.709.0
-        version: 3.1119.0
+        version: 3.1120.0
       '@aws-sdk/client-ec2':
         specifier: ^3.709.0
-        version: 3.1119.0
+        version: 3.1120.0
       '@aws-sdk/client-eventbridge':
         specifier: ^3.709.0
-        version: 3.1119.0
+        version: 3.1120.0
       '@aws-sdk/client-iam':
         specifier: ^3.709.0
-        version: 3.1119.0
+        version: 3.1120.0
       '@aws-sdk/client-kafka':
         specifier: ^3.709.0
-        version: 3.1119.0
+        version: 3.1120.0
       '@aws-sdk/client-lambda':
         specifier: ^3.709.0
-        version: 3.1119.0
+        version: 3.1120.0
       '@aws-sdk/client-s3':
         specifier: ^3.709.0
-        version: 3.1119.0
+        version: 3.1120.0
       '@aws-sdk/client-ses':
         specifier: ^3.709.0
-        version: 3.1119.0
+        version: 3.1120.0
       '@aws-sdk/client-sfn':
         specifier: ^3.709.0
-        version: 3.1119.0
+        version: 3.1120.0
       '@aws-sdk/client-sns':
         specifier: ^3.709.0
-        version: 3.1119.0
+        version: 3.1120.0
       '@aws-sdk/client-sqs':
         specifier: ^3.709.0
-        version: 3.1119.0
+        version: 3.1120.0
       '@aws-sdk/credential-provider-node':
         specifier: ^3.709.0
         version: 3.972.81
       '@aws-sdk/credential-providers':
         specifier: ^3.709.0
-        version: 3.1119.0
+        version: 3.1120.0
       '@flowbuilder/monaco-editor':
         specifier: workspace:^
         version: link:../../packages/monaco-editor
@@ -417,52 +417,52 @@ packages:
     resolution: {integrity: sha512-Dtu0gr4dnATZAPwEYbpCsG+MpLM7OAliy2gTepEFQwl1vZ6DL3QMH2FveMa3HLvPsOdhJsPRB3KtxVhph9T75A==}
     engines: {node: '>=20.0.0'}
 
-  '@aws-sdk/client-api-gateway@3.1119.0':
-    resolution: {integrity: sha512-a8umB5tF3VV/6OozqGAKq82hD7NWWIFCREYKunO4BGwTKpojLr/Hn1sSj5YkK9HHyp/wCnso1ATjl3jxc3kNvQ==}
+  '@aws-sdk/client-api-gateway@3.1120.0':
+    resolution: {integrity: sha512-VCbbYg3g/DDJXZSlKWcvB26VetPA24rXjAOfHuN/7W3huQL9skhJRcuuav2y3fbyC0BlMg4VzGAZce07ajKkyA==}
     engines: {node: '>=20.0.0'}
 
-  '@aws-sdk/client-cloudwatch-logs@3.1119.0':
-    resolution: {integrity: sha512-YBSTaTnxpZ43XVpZ7tP9U2KDahRVFdKuFFP5FaHFp3txm4SW/PAMgT6ewQ+cyaE0XXGjb7Qle4BCVdmwYLMvxA==}
+  '@aws-sdk/client-cloudwatch-logs@3.1120.0':
+    resolution: {integrity: sha512-PTFluwF1MQyQajf3muxGqcYBth2fRxe9QczlFZciLKFPHeNBIgnkV6qeNHoYrQ0e+YLPbr8aTtips2qtk3uChQ==}
     engines: {node: '>=20.0.0'}
 
-  '@aws-sdk/client-ec2@3.1119.0':
-    resolution: {integrity: sha512-bBoitEwXRSkWk+tNEyoVed0GCBhhT+2njZjqTKoKepgb+J0xLvW6V65YvPW7EDxCiok4Zx5fsx1Y+I1HHyf00A==}
+  '@aws-sdk/client-ec2@3.1120.0':
+    resolution: {integrity: sha512-9VKmZf+zR74WpYtEfuRKVm3KS/deIVDgZcTljpHOXgwzihBdeQOfFR/LLBSapRCjg8MumwJOOeqMnb7gmSH5Wg==}
     engines: {node: '>=20.0.0'}
 
-  '@aws-sdk/client-eventbridge@3.1119.0':
-    resolution: {integrity: sha512-dNMsQfuCIyGlXAEt1glazQ1G9i3KIOKqBlhTUJ5IXM7ApMX5BvlL30AHs7wu1fr8/m6lCDsrMVIapDTcPk2LhA==}
+  '@aws-sdk/client-eventbridge@3.1120.0':
+    resolution: {integrity: sha512-P3iFkYqQ2qbKe2PdQSHkpuuoDGk3gMrsoSgBeQR11pD7i1wK6ARBNm+dVup789ALyPOWXiJRCVkjMk+W3CTBHg==}
     engines: {node: '>=20.0.0'}
 
-  '@aws-sdk/client-iam@3.1119.0':
-    resolution: {integrity: sha512-uhj0m5J6lpur2gIW3yiVgj5iWQx5wXpBwShvkXAX1rk7OMyImxg9XDRiKestBOWDhvf0XgMmtwELZTOANvn5Fg==}
+  '@aws-sdk/client-iam@3.1120.0':
+    resolution: {integrity: sha512-w1UNruAHPJ2l6+fNsW3wBYa725ALR1FRQe+rLheeziNK3EmGK6wxTm39dgKyehPmeSXxEQYCg5gcrYq3Ew3CzQ==}
     engines: {node: '>=20.0.0'}
 
-  '@aws-sdk/client-kafka@3.1119.0':
-    resolution: {integrity: sha512-rYah/THbiGGOqXNv+kuyif88T1QAh9ND5KAlDytuy+oyelOkwjEkzFE6lnze3tMOwUtt3hl3RtdFNLFGZ4TpWA==}
+  '@aws-sdk/client-kafka@3.1120.0':
+    resolution: {integrity: sha512-Eg4gFGrkLcgKSDgkCbQ9oHsoYzBL1gUdAIM3nZSYnOxihuoxCqpIx2DoxdAhVcPcTvs8N4q+b4frSbcpapRYwQ==}
     engines: {node: '>=20.0.0'}
 
-  '@aws-sdk/client-lambda@3.1119.0':
-    resolution: {integrity: sha512-15WT5RsgueLXuufvJ9zM7n3D4jRYuMJEO9WXQ7f9zeRUHdYOPLCpdkGkNJ2Tve4Lwrur7wU6pGyjk95kzGs4qw==}
+  '@aws-sdk/client-lambda@3.1120.0':
+    resolution: {integrity: sha512-Fs2f5458ZppIPAieXQMhE4PrDJ0Z7xMGoFgyGLcsmMUkK/UD4madPjlwc8J1qR71OaTX8zl3gAzuEgVJM9x6ew==}
     engines: {node: '>=20.0.0'}
 
-  '@aws-sdk/client-s3@3.1119.0':
-    resolution: {integrity: sha512-8+UH1uBWwjbRu0ugTBhJ/cu3rL/vzf1tm9/3+xZGf1uybIO3HTF2xLJJaTKkRPvzxz8/n/w+YrwoHGZ2Q/a2Zg==}
+  '@aws-sdk/client-s3@3.1120.0':
+    resolution: {integrity: sha512-UunWgNl/U8wIlxVRyhUPqlozFkUS88UqXjAH50XfPDXaZeK9P7KVYTAh4KREVrLPQTzPxVSbQGog3gHlc/P6vg==}
     engines: {node: '>=20.0.0'}
 
-  '@aws-sdk/client-ses@3.1119.0':
-    resolution: {integrity: sha512-A1fqlDJZP/VZfyLdA+TNdHLFJ2hJ1YKmRQcv1UMvILBBHnkcjEIrTdJHuT2fwnNE+XNls6kKVn9Rx4DUXoQl7w==}
+  '@aws-sdk/client-ses@3.1120.0':
+    resolution: {integrity: sha512-uCCmUJtru8mLeHqGm+4pylzoxZJ+BWaS0bh+QDiL9vlIJfNpewRJcpLyEMM/XuSleTvmZdeXrQ2Unkoisoj8sA==}
     engines: {node: '>=20.0.0'}
 
-  '@aws-sdk/client-sfn@3.1119.0':
-    resolution: {integrity: sha512-GvjmliT03dVMkytIdNIAMQFzsMV5zmpR9zyvEvLZLab0fnwe+Tsih8YHGaotTvySn/anR+4BvWcD4EnjD4nOjA==}
+  '@aws-sdk/client-sfn@3.1120.0':
+    resolution: {integrity: sha512-EQhgv4r6sG3bGFyWJyHe9kHHpVi60NlnSS27WjPLDIMdjMLMHKRsElM3tizRkbVIW7ubkvBNzOyPgYCKb2U0hw==}
     engines: {node: '>=20.0.0'}
 
-  '@aws-sdk/client-sns@3.1119.0':
-    resolution: {integrity: sha512-/OehD/sP7CZDaxGN9+LOgziUQIArAGpNF1U2zX9vWs4CAMaSpV3bmH18E2JQ1m6ephb/ThaL6sUZBebqQKwU+w==}
+  '@aws-sdk/client-sns@3.1120.0':
+    resolution: {integrity: sha512-kqo4cacpUn7fZVZaB0GE8GmWIhcGzV8hGZsaAs26NYIdER/Gvku+eiKWdsnwoQz8N7JwI7hhWUkReLfB/sCsSw==}
     engines: {node: '>=20.0.0'}
 
-  '@aws-sdk/client-sqs@3.1119.0':
-    resolution: {integrity: sha512-UWEOBvXHWItIgCjrAWbBZQ8Masj0pNORpGP1DylA0+VIO4LHCEGXAAquTYceWjcowCKsrhY627tu1xJspdWkAg==}
+  '@aws-sdk/client-sqs@3.1120.0':
+    resolution: {integrity: sha512-5539rLlh5+bDz8fn33K/pTkGPAdHLLgR/KQcV7yxoeFfqenty6uG2oIETQ/efh+dz4ORSHQqRFBo9dzfR+oP9g==}
     engines: {node: '>=20.0.0'}
 
   '@aws-sdk/core@3.977.9':
@@ -505,8 +505,8 @@ packages:
     resolution: {integrity: sha512-d3AGyVu759PGr35mEB2s22xxlNEA5rpdxtSPJthfPFJvoQ8dt357iVPECqWfUxXp1toJAvKmbtcIYVGigaGsCA==}
     engines: {node: '>=20.0.0'}
 
-  '@aws-sdk/credential-providers@3.1119.0':
-    resolution: {integrity: sha512-iu37jZRSChvucU8pL0S0AsDceN5gbyk7snNvD6Elk8UczHdAePRKIHyGTdzQ5f/5WzoZJ11b8RJzZKfhjZJ74A==}
+  '@aws-sdk/credential-providers@3.1120.0':
+    resolution: {integrity: sha512-BTgTC9//LpoL7QT3REJaf6zgMkZZd6wd39m4FZ8sLOZ6HDixtTSHDgA3FJigjmkASUIwv6DwtP8t6p8QUo6Sow==}
     engines: {node: '>=20.0.0'}
 
   '@aws-sdk/middleware-sdk-api-gateway@3.972.29':
@@ -3036,8 +3036,8 @@ packages:
     resolution: {integrity: sha512-cDF0/Gf81QpY3xYyJKDV14Zwdmid5+uuENhjH2EqFaF0ni+yAyq/LzMaIJdhNJXZI7uLzwIlA+V7oWoyn6Curg==}
     engines: {node: ^18.18.0 || >=20.0.0}
 
-  '@ungap/structured-clone@1.3.4':
-    resolution: {integrity: sha512-JL+CF0GeLHyPWI0rXu7UnxgiuOm9UQWzadi0OYOJNhNO2q6EZElpwlgXkNkfU1PzANDHq3YcwKVZprdvS+BrbQ==}
+  '@ungap/structured-clone@1.4.0':
+    resolution: {integrity: sha512-1mEZtMKPM09vDmQt5y7YvmN2+DFTP7Tg0EWXdic8/C6VRnpb33e4ghisCIE3WZjsE2N8mf+QV1Zqh7ZFYLWInQ==}
 
   '@upstash/core-analytics@0.0.10':
     resolution: {integrity: sha512-7qJHGxpQgQr9/vmeS1PktEwvNAF7TI4iJDi8Pu2CFZ9YUGHZH4fOP5TfYlZ4aVxfopnELiE4BS4FBjyK7V1/xQ==}
@@ -6010,8 +6010,8 @@ packages:
       uglify-js:
         optional: true
 
-  terser@5.51.0:
-    resolution: {integrity: sha512-myiQ6aFnxDOjdiXdTlC8ngVccQD88uHXTx5RUQOSEnarDYgJMjDagwAQszcOusjvmf4YqWsxoD1+MY+oAJRmpw==}
+  terser@5.51.2:
+    resolution: {integrity: sha512-bWnjSNscmuI+GJze6ZupnHP8G/cTcsJF+bXCeQknk2SHQsgbNJnLrqiH9jZ2W4STPVXH2mDKKRX3iwPhc9Cn/Q==}
     engines: {node: '>=10'}
     hasBin: true
 
@@ -6559,7 +6559,7 @@ snapshots:
       '@smithy/types': 4.17.2
       tslib: 2.8.1
 
-  '@aws-sdk/client-api-gateway@3.1119.0':
+  '@aws-sdk/client-api-gateway@3.1120.0':
     dependencies:
       '@aws-sdk/core': 3.977.9
       '@aws-sdk/credential-provider-node': 3.972.81
@@ -6571,7 +6571,7 @@ snapshots:
       '@smithy/types': 4.17.2
       tslib: 2.8.1
 
-  '@aws-sdk/client-cloudwatch-logs@3.1119.0':
+  '@aws-sdk/client-cloudwatch-logs@3.1120.0':
     dependencies:
       '@aws-sdk/core': 3.977.9
       '@aws-sdk/credential-provider-node': 3.972.81
@@ -6582,7 +6582,7 @@ snapshots:
       '@smithy/types': 4.17.2
       tslib: 2.8.1
 
-  '@aws-sdk/client-ec2@3.1119.0':
+  '@aws-sdk/client-ec2@3.1120.0':
     dependencies:
       '@aws-sdk/core': 3.977.9
       '@aws-sdk/credential-provider-node': 3.972.81
@@ -6594,7 +6594,7 @@ snapshots:
       '@smithy/types': 4.17.2
       tslib: 2.8.1
 
-  '@aws-sdk/client-eventbridge@3.1119.0':
+  '@aws-sdk/client-eventbridge@3.1120.0':
     dependencies:
       '@aws-sdk/core': 3.977.9
       '@aws-sdk/credential-provider-node': 3.972.81
@@ -6606,7 +6606,7 @@ snapshots:
       '@smithy/types': 4.17.2
       tslib: 2.8.1
 
-  '@aws-sdk/client-iam@3.1119.0':
+  '@aws-sdk/client-iam@3.1120.0':
     dependencies:
       '@aws-sdk/core': 3.977.9
       '@aws-sdk/credential-provider-node': 3.972.81
@@ -6617,7 +6617,7 @@ snapshots:
       '@smithy/types': 4.17.2
       tslib: 2.8.1
 
-  '@aws-sdk/client-kafka@3.1119.0':
+  '@aws-sdk/client-kafka@3.1120.0':
     dependencies:
       '@aws-sdk/core': 3.977.9
       '@aws-sdk/credential-provider-node': 3.972.81
@@ -6628,7 +6628,7 @@ snapshots:
       '@smithy/types': 4.17.2
       tslib: 2.8.1
 
-  '@aws-sdk/client-lambda@3.1119.0':
+  '@aws-sdk/client-lambda@3.1120.0':
     dependencies:
       '@aws-sdk/core': 3.977.9
       '@aws-sdk/credential-provider-node': 3.972.81
@@ -6639,7 +6639,7 @@ snapshots:
       '@smithy/types': 4.17.2
       tslib: 2.8.1
 
-  '@aws-sdk/client-s3@3.1119.0':
+  '@aws-sdk/client-s3@3.1120.0':
     dependencies:
       '@aws-sdk/checksums': 3.1000.29
       '@aws-sdk/core': 3.977.9
@@ -6653,7 +6653,7 @@ snapshots:
       '@smithy/types': 4.17.2
       tslib: 2.8.1
 
-  '@aws-sdk/client-ses@3.1119.0':
+  '@aws-sdk/client-ses@3.1120.0':
     dependencies:
       '@aws-sdk/core': 3.977.9
       '@aws-sdk/credential-provider-node': 3.972.81
@@ -6664,7 +6664,7 @@ snapshots:
       '@smithy/types': 4.17.2
       tslib: 2.8.1
 
-  '@aws-sdk/client-sfn@3.1119.0':
+  '@aws-sdk/client-sfn@3.1120.0':
     dependencies:
       '@aws-sdk/core': 3.977.9
       '@aws-sdk/credential-provider-node': 3.972.81
@@ -6675,7 +6675,7 @@ snapshots:
       '@smithy/types': 4.17.2
       tslib: 2.8.1
 
-  '@aws-sdk/client-sns@3.1119.0':
+  '@aws-sdk/client-sns@3.1120.0':
     dependencies:
       '@aws-sdk/core': 3.977.9
       '@aws-sdk/credential-provider-node': 3.972.81
@@ -6686,7 +6686,7 @@ snapshots:
       '@smithy/types': 4.17.2
       tslib: 2.8.1
 
-  '@aws-sdk/client-sqs@3.1119.0':
+  '@aws-sdk/client-sqs@3.1120.0':
     dependencies:
       '@aws-sdk/core': 3.977.9
       '@aws-sdk/credential-provider-node': 3.972.81
@@ -6801,7 +6801,7 @@ snapshots:
       '@smithy/types': 4.17.2
       tslib: 2.8.1
 
-  '@aws-sdk/credential-providers@3.1119.0':
+  '@aws-sdk/credential-providers@3.1120.0':
     dependencies:
       '@aws-sdk/core': 3.977.9
       '@aws-sdk/credential-provider-cognito-identity': 3.972.69
@@ -7435,12 +7435,12 @@ snapshots:
       wrap-ansi: 8.1.0
       wrap-ansi-cjs: wrap-ansi@7.0.0
 
-  '@joshwooding/vite-plugin-react-docgen-typescript@0.5.0(typescript@5.9.3)(vite@6.0.3(@types/node@20.19.43)(jiti@2.4.2)(less@4.4.0)(sass@1.89.2)(stylus@0.62.0)(sugarss@5.0.0(postcss@8.5.26))(terser@5.51.0)(yaml@2.6.1))':
+  '@joshwooding/vite-plugin-react-docgen-typescript@0.5.0(typescript@5.9.3)(vite@6.0.3(@types/node@20.19.43)(jiti@2.4.2)(less@4.4.0)(sass@1.89.2)(stylus@0.62.0)(sugarss@5.0.0(postcss@8.5.26))(terser@5.51.2)(yaml@2.6.1))':
     dependencies:
       glob: 10.5.0
       magic-string: 0.27.0
       react-docgen-typescript: 2.4.0(typescript@5.9.3)
-      vite: 6.0.3(@types/node@20.19.43)(jiti@2.4.2)(less@4.4.0)(sass@1.89.2)(stylus@0.62.0)(sugarss@5.0.0(postcss@8.5.26))(terser@5.51.0)(yaml@2.6.1)
+      vite: 6.0.3(@types/node@20.19.43)(jiti@2.4.2)(less@4.4.0)(sass@1.89.2)(stylus@0.62.0)(sugarss@5.0.0(postcss@8.5.26))(terser@5.51.2)(yaml@2.6.1)
     optionalDependencies:
       typescript: 5.9.3
 
@@ -8854,13 +8854,13 @@ snapshots:
       react: 19.2.3
       react-dom: 19.2.3(react@19.2.3)
 
-  '@storybook/builder-vite@8.6.18(storybook@8.6.18(prettier@3.9.6))(vite@6.0.3(@types/node@20.19.43)(jiti@2.4.2)(less@4.4.0)(sass@1.89.2)(stylus@0.62.0)(sugarss@5.0.0(postcss@8.5.26))(terser@5.51.0)(yaml@2.6.1))':
+  '@storybook/builder-vite@8.6.18(storybook@8.6.18(prettier@3.9.6))(vite@6.0.3(@types/node@20.19.43)(jiti@2.4.2)(less@4.4.0)(sass@1.89.2)(stylus@0.62.0)(sugarss@5.0.0(postcss@8.5.26))(terser@5.51.2)(yaml@2.6.1))':
     dependencies:
       '@storybook/csf-plugin': 8.6.18(storybook@8.6.18(prettier@3.9.6))
       browser-assert: 1.2.1
       storybook: 8.6.18(prettier@3.9.6)
       ts-dedent: 2.2.0
-      vite: 6.0.3(@types/node@20.19.43)(jiti@2.4.2)(less@4.4.0)(sass@1.89.2)(stylus@0.62.0)(sugarss@5.0.0(postcss@8.5.26))(terser@5.51.0)(yaml@2.6.1)
+      vite: 6.0.3(@types/node@20.19.43)(jiti@2.4.2)(less@4.4.0)(sass@1.89.2)(stylus@0.62.0)(sugarss@5.0.0(postcss@8.5.26))(terser@5.51.2)(yaml@2.6.1)
 
   '@storybook/components@8.6.14(storybook@8.6.18(prettier@3.9.6))':
     dependencies:
@@ -8953,11 +8953,11 @@ snapshots:
       react-dom: 18.3.1(react@18.3.1)
       storybook: 8.6.18(prettier@3.9.6)
 
-  '@storybook/react-vite@8.6.18(@storybook/test@8.6.15(storybook@8.6.18(prettier@3.9.6)))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rollup@4.63.0)(storybook@8.6.18(prettier@3.9.6))(typescript@5.9.3)(vite@6.0.3(@types/node@20.19.43)(jiti@2.4.2)(less@4.4.0)(sass@1.89.2)(stylus@0.62.0)(sugarss@5.0.0(postcss@8.5.26))(terser@5.51.0)(yaml@2.6.1))':
+  '@storybook/react-vite@8.6.18(@storybook/test@8.6.15(storybook@8.6.18(prettier@3.9.6)))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rollup@4.63.0)(storybook@8.6.18(prettier@3.9.6))(typescript@5.9.3)(vite@6.0.3(@types/node@20.19.43)(jiti@2.4.2)(less@4.4.0)(sass@1.89.2)(stylus@0.62.0)(sugarss@5.0.0(postcss@8.5.26))(terser@5.51.2)(yaml@2.6.1))':
     dependencies:
-      '@joshwooding/vite-plugin-react-docgen-typescript': 0.5.0(typescript@5.9.3)(vite@6.0.3(@types/node@20.19.43)(jiti@2.4.2)(less@4.4.0)(sass@1.89.2)(stylus@0.62.0)(sugarss@5.0.0(postcss@8.5.26))(terser@5.51.0)(yaml@2.6.1))
+      '@joshwooding/vite-plugin-react-docgen-typescript': 0.5.0(typescript@5.9.3)(vite@6.0.3(@types/node@20.19.43)(jiti@2.4.2)(less@4.4.0)(sass@1.89.2)(stylus@0.62.0)(sugarss@5.0.0(postcss@8.5.26))(terser@5.51.2)(yaml@2.6.1))
       '@rollup/pluginutils': 5.3.0(rollup@4.63.0)
-      '@storybook/builder-vite': 8.6.18(storybook@8.6.18(prettier@3.9.6))(vite@6.0.3(@types/node@20.19.43)(jiti@2.4.2)(less@4.4.0)(sass@1.89.2)(stylus@0.62.0)(sugarss@5.0.0(postcss@8.5.26))(terser@5.51.0)(yaml@2.6.1))
+      '@storybook/builder-vite': 8.6.18(storybook@8.6.18(prettier@3.9.6))(vite@6.0.3(@types/node@20.19.43)(jiti@2.4.2)(less@4.4.0)(sass@1.89.2)(stylus@0.62.0)(sugarss@5.0.0(postcss@8.5.26))(terser@5.51.2)(yaml@2.6.1))
       '@storybook/react': 8.6.18(@storybook/test@8.6.15(storybook@8.6.18(prettier@3.9.6)))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(storybook@8.6.18(prettier@3.9.6))(typescript@5.9.3)
       find-up: 5.0.0
       magic-string: 0.30.21
@@ -8967,7 +8967,7 @@ snapshots:
       resolve: 1.22.12
       storybook: 8.6.18(prettier@3.9.6)
       tsconfig-paths: 4.2.0
-      vite: 6.0.3(@types/node@20.19.43)(jiti@2.4.2)(less@4.4.0)(sass@1.89.2)(stylus@0.62.0)(sugarss@5.0.0(postcss@8.5.26))(terser@5.51.0)(yaml@2.6.1)
+      vite: 6.0.3(@types/node@20.19.43)(jiti@2.4.2)(less@4.4.0)(sass@1.89.2)(stylus@0.62.0)(sugarss@5.0.0(postcss@8.5.26))(terser@5.51.2)(yaml@2.6.1)
     optionalDependencies:
       '@storybook/test': 8.6.15(storybook@8.6.18(prettier@3.9.6))
     transitivePeerDependencies:
@@ -9394,7 +9394,7 @@ snapshots:
       '@typescript-eslint/types': 7.18.0
       eslint-visitor-keys: 3.4.3
 
-  '@ungap/structured-clone@1.3.4': {}
+  '@ungap/structured-clone@1.4.0': {}
 
   '@upstash/core-analytics@0.0.10':
     dependencies:
@@ -10625,7 +10625,7 @@ snapshots:
       '@humanwhocodes/config-array': 0.13.0
       '@humanwhocodes/module-importer': 1.0.1
       '@nodelib/fs.walk': 1.2.8
-      '@ungap/structured-clone': 1.3.4
+      '@ungap/structured-clone': 1.4.0
       ajv: 6.15.0
       chalk: 4.1.2
       cross-spawn: 7.0.6
@@ -12692,12 +12692,12 @@ snapshots:
       '@jridgewell/trace-mapping': 0.3.31
       jest-worker: 27.5.1
       schema-utils: 4.3.3
-      terser: 5.51.0
+      terser: 5.51.2
       webpack: 5.97.1(postcss@8.5.26)
     optionalDependencies:
       postcss: 8.5.26
 
-  terser@5.51.0:
+  terser@5.51.2:
     dependencies:
       '@jridgewell/source-map': 0.3.11
       acorn: 8.18.0
@@ -13030,7 +13030,7 @@ snapshots:
       d3-time: 3.1.0
       d3-timer: 3.0.1
 
-  vite@6.0.3(@types/node@20.19.43)(jiti@2.4.2)(less@4.4.0)(sass@1.89.2)(stylus@0.62.0)(sugarss@5.0.0(postcss@8.5.26))(terser@5.51.0)(yaml@2.6.1):
+  vite@6.0.3(@types/node@20.19.43)(jiti@2.4.2)(less@4.4.0)(sass@1.89.2)(stylus@0.62.0)(sugarss@5.0.0(postcss@8.5.26))(terser@5.51.2)(yaml@2.6.1):
     dependencies:
       esbuild: 0.24.2
       postcss: 8.5.26
@@ -13043,7 +13043,7 @@ snapshots:
       sass: 1.89.2
       stylus: 0.62.0
       sugarss: 5.0.0(postcss@8.5.26)
-      terser: 5.51.0
+      terser: 5.51.2
       yaml: 2.6.1
 
   watchpack@2.5.2:
